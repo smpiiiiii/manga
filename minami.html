@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>お持ち帰りされるミナミ先生</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #fff5f5, #ffe0ec);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 20px
+        }
+
+        .info {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            max-width: 500px;
+            padding: 8px;
+            background: #fff;
+            border-radius: 12px;
+            border: 2px dashed #f0a0b0
+        }
+
+        .info b {
+            color: #e74c8b
+        }
+
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(231, 76, 139, 0.15);
+            border: 2px solid #f0c0d0
+        }
+
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+            border-bottom: 2px solid #f0c0d0;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card-header .ep {
+            font-size: 11px;
+            color: #fff;
+            background: #e74c8b;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+
+        .card-header h2 {
+            font-size: 14px;
+            color: #e74c8b;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #aaa
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f0d0e0;
+            aspect-ratio: 1
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            background: #e74c8b;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .b {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid #e74c8b;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 110px;
+            z-index: 10;
+            color: #333
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -10px;
+            left: 20%;
+            border-top-color: #e74c8b
+        }
+
+        .b.l::after {
+            left: -10px;
+            top: 30%;
+            border-right-color: #e74c8b
+        }
+
+        .b.r::after {
+            right: -10px;
+            top: 30%;
+            border-left-color: #e74c8b
+        }
+
+        .b.shout {
+            border-radius: 4px;
+            background: #fff0f0;
+            border-color: #e74c3c;
+            color: #c0392b;
+            font-size: 8px
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #ffb0c0;
+            color: #c06080;
+            font-size: 7px;
+            border-radius: 12px
+        }
+
+        .b.dark {
+            background: #e74c8b;
+            color: #fff;
+            border-color: #c03060
+        }
+
+        .b.blush {
+            background: #fff0f5;
+            border-color: #ff6090;
+            color: #d03060
+        }
+
+        .n {
+            position: absolute;
+            background: rgba(231, 76, 139, .8);
+            color: #fff;
+            font-size: 7px;
+            padding: 2px 5px;
+            border-radius: 8px;
+            z-index: 10
+        }
+
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 16px;
+            color: #e74c8b;
+            text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10
+        }
+
+        .card-footer {
+            padding: 4px 10px;
+            background: #fff5f8;
+            border-top: 1px solid #f0d0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #aaa
+        }
+
+        .card-footer .series {
+            color: #e74c8b;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #555;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        💕 <b>内科医ミナミ先生シリーズ</b> — スクショしてSNSに投稿してね！<br>
+        🩺 キャラ：黒ボブの内科医ミナミ ／ イケメン外科医タカハシ
+    </div>
+
+    <!-- 第1話 -->
+    <div class="card" id="ep1">
+        <div class="card-header">
+            <span class="ep">第1話</span>
+            <h2>お持ち帰りされるミナミ先生</h2>
+            <span class="tag">💕 ラブコメ回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="m1a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:95px">当直明け…<br>もう動けない…💀</div>
+                <div class="n" style="bottom:3px;right:3px">※36時間勤務後</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="m1b.png">
+                <div class="b d" style="top:4px;right:4px;max-width:100px">ミナミ先生、<br>送りますよ。<br>車出しました</div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:80px">え…タカハシ先生<br>…!?😳</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="m1c.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:12px;transform:rotate(-5deg)">ドキドキ💓</div>
+                <div class="b blush" style="top:4px;right:4px;max-width:90px">え、あの…<br>ありがとう<br>ございます…//</div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:80px">これって…<br>お持ち帰り…<br>されてる…？💕</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="m1d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:100px;font-size:7px">
+                    ちょっとコンビニ<br>寄っていい？<br>荷物持ってほしくて😊</div>
+                <div class="b shout" style="bottom:8px;left:4px;max-width:90px">荷物持ちかーーい！！💢</div>
+                <div class="sfx" style="bottom:4px;right:4px;font-size:10px;color:#e74c3c">ガクッ</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💕 内科医ミナミ先生</span>
+            <span class="lesson">🩺 お持ち帰り＝コンビニの袋</span>
+        </div>
+    </div>
+
+    <!-- 第2話 -->
+    <div class="card" id="ep2">
+        <div class="card-header">
+            <span class="ep">第2話</span>
+            <h2>当直室の壁ドン事件</h2>
+            <span class="tag">💋 お色気回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="m2a.png">
+                <div class="b shout" style="top:4px;left:4px;max-width:90px;font-size:7px">きゃあっ！！<br>すみません！！😱</div>
+                <div class="n" style="bottom:3px;right:3px">※当直室に入ったら…</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="m2b.png">
+                <div class="sfx" style="top:5px;right:5px;font-size:11px;color:#ff4080;transform:rotate(5deg)">カァァァ///
+                </div>
+                <div class="b blush" style="top:4px;left:4px;max-width:85px;font-size:7px">見てない…<br>見てない…<br>（指の隙間から見てる）
+                </div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="m2c.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:14px;color:#e74c8b;transform:rotate(-3deg)">ドンッ💕
+                </div>
+                <div class="b dark" style="top:4px;right:4px;max-width:90px;font-size:7px">ミナミ先生…<br>逃げないで<br>ください</div>
+                <div class="b blush" style="bottom:8px;left:4px;max-width:85px;font-size:7px">え…っ<br>近い…近い…<br>心臓バクバク///
+                </div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="m2d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:100px;font-size:7px">
+                    あ、後ろの<br>聴診器取りたかった<br>だけです。どうも👋</div>
+                <div class="b shout" style="bottom:8px;left:4px;max-width:90px">聴診器かーーい！！💢💢</div>
+                <div class="sfx" style="bottom:4px;right:4px;font-size:10px;color:#e74c3c">ズコーッ</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💕 内科医ミナミ先生</span>
+            <span class="lesson">💋 壁ドンの真相は医療器具回収</span>
+        </div>
+    </div>
+</body>
+
+</html>

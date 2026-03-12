@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>研修医ハルちゃん💔 飲み会の過ち編</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #1a1520 0%, #2a1a30 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 20px
+        }
+
+        .info {
+            font-size: 12px;
+            color: #ccc;
+            text-align: center;
+            max-width: 500px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.6
+        }
+
+        .info b {
+            color: #ff69b4
+        }
+
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #1e1825;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(180, 50, 120, 0.2);
+            border: 2px solid rgba(255, 105, 180, 0.3)
+        }
+
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #2a1a30, #3a2040);
+            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card-header .ep {
+            font-size: 11px;
+            color: #fff;
+            background: linear-gradient(135deg, #ff4488, #cc2266);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .card-header h2 {
+            font-size: 14px;
+            color: #ff69b4;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #888
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 105, 180, 0.15);
+            aspect-ratio: 1
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            background: linear-gradient(135deg, #ff4488, #cc2266);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .b {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1.5px solid #ff69b4;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 110px;
+            z-index: 10;
+            color: #333
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -10px;
+            left: 20%;
+            border-top-color: #ff69b4
+        }
+
+        .b.l::after {
+            left: -10px;
+            top: 30%;
+            border-right-color: #ff69b4
+        }
+
+        .b.r::after {
+            right: -10px;
+            top: 30%;
+            border-left-color: #ff69b4
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #aaa;
+            background: rgba(255, 255, 255, 0.85);
+            color: #888;
+            font-size: 7px;
+            border-radius: 12px
+        }
+
+        .b.flirt {
+            background: rgba(50, 20, 40, 0.95);
+            border-color: #ff4488;
+            color: #ffaacc;
+            border-radius: 10px
+        }
+
+        .b.flirt::after {
+            border-top-color: #ff4488
+        }
+
+        .b.panic {
+            background: #fff0f0;
+            border-color: #ff0000;
+            color: #cc0000;
+            border-radius: 4px;
+            font-size: 8px
+        }
+
+        .b.guilt {
+            background: rgba(40, 30, 50, 0.9);
+            border-color: #666;
+            color: #ccc;
+            border-radius: 6px;
+            font-size: 7px
+        }
+
+        .b.bf {
+            background: #e8f4ff;
+            border-color: #4488cc;
+            color: #336699;
+            border-radius: 50%
+        }
+
+        .b.bf::after {
+            border-top-color: #4488cc
+        }
+
+        .n {
+            position: absolute;
+            background: rgba(200, 50, 100, .85);
+            color: #fff;
+            font-size: 7px;
+            padding: 2px 5px;
+            border-radius: 8px;
+            z-index: 10
+        }
+
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 16px;
+            color: #ff69b4;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5), -1px -1px 0 rgba(0, 0, 0, 0.5);
+            z-index: 10
+        }
+
+        .card-footer {
+            padding: 6px 12px;
+            background: rgba(30, 20, 35, 0.9);
+            border-top: 1px solid rgba(255, 105, 180, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #888
+        }
+
+        .card-footer .series {
+            color: #ff69b4;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #aaa;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        🍺 <b>研修医ハルちゃん 〜飲み会の過ち編〜</b><br>
+        🩺 ハル（25）茶髪ポニテ研修医。同期のユウくん（メガネ）と付き合い中<br>
+        💜 神崎先生（32）チャラい指導医。イケメンだけど女グセが悪い
+    </div>
+
+    <div class="card" id="ep1">
+        <div class="card-header">
+            <span class="ep">🍺 禁断編</span>
+            <h2>飲み会の過ち</h2>
+            <span class="tag">🌙 夜の回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 居酒屋 -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="p1.png">
+                <div class="b flirt d" style="top:4px;left:4px;max-width:95px;font-size:7px">
+                    ハルちゃん<br>全然飲めてないよ〜<br>ほら注いであげる♪
+                </div>
+                <div class="b bf d" style="bottom:25px;right:4px;max-width:75px;font-size:7px">
+                    あの…神崎先生<br>僕が注ぎますから…
+                </div>
+                <div class="b think" style="bottom:4px;left:4px;max-width:80px">
+                    神崎先生って<br>近いな…
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※歓迎会にて</div>
+            </div>
+
+            <!-- コマ② 彼氏潰れる -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="p2.png">
+                <div class="b flirt d" style="top:4px;right:4px;max-width:90px;font-size:7px">
+                    彼氏くん潰れちゃったね<br>…ハルちゃんの<br>話もっと聞きたいな
+                </div>
+                <div class="b d" style="top:4px;left:4px;max-width:80px;font-size:7px">
+                    えへへ…♪<br>もう1杯だけ…
+                </div>
+                <div class="sfx" style="bottom:8px;left:4px;font-size:10px;color:#ff4488">
+                    zzz...💤
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※ユウくん爆睡中</div>
+            </div>
+
+            <!-- コマ③ タクシー -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="p3.png">
+                <div class="b flirt d" style="top:4px;left:4px;max-width:90px;font-size:7px">
+                    送ってくよ…<br>こっちおいで
+                </div>
+                <div class="b think" style="top:4px;right:4px;max-width:80px;font-size:7px">
+                    あれ…ユウくんは…<br>でも…酔ってて<br>よく分かんない…
+                </div>
+                <div class="sfx" style="bottom:20px;right:4px;font-size:9px;color:#ffaa44">
+                    ﾌﾟﾙﾙﾙ…📱
+                </div>
+                <div class="n" style="bottom:3px;left:3px">※彼氏から10件の着信</div>
+            </div>
+
+            <!-- コマ④ 翌朝 -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="p4.png">
+                <div class="b panic" style="top:4px;left:4px;max-width:85px;font-size:7px">
+                    あ…おはよう<br>ユウくん…<br>えっと…💦💦
+                </div>
+                <div class="b bf d" style="top:4px;right:4px;max-width:80px;font-size:7px">
+                    昨日連絡<br>つかなかったけど<br>大丈夫だった…？
+                </div>
+                <div class="b guilt" style="bottom:8px;left:4px;max-width:90px">
+                    （目を見て<br>喋れない…）
+                </div>
+                <div class="sfx" style="bottom:8px;right:4px;font-size:9px;color:#aaa;transform:rotate(-3deg)">
+                    ﾆﾔｯ😏
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※神崎先生、後ろで笑ってる</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🍺 研修医ハルちゃん 〜飲み会の過ち編〜</span>
+            <span class="lesson">🌙 指導医のタクシーには乗ってはいけない</span>
+        </div>
+    </div>
+
+    <div class="info">
+        💔 続きが見たかったらいいね＆リポストしてね！<br>
+        次回予告：<b>ユウくん、全てを察する 〜白衣についた知らない香水の匂い〜</b> 😢
+    </div>
+</body>
+
+</html>

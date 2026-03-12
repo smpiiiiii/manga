@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Renderer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            width: 500px; height: 500px; overflow: hidden;
+            background: #fff
+        }
+        .panel {
+            width: 500px; height: 500px; position: relative; overflow: hidden
+        }
+        .panel img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .panel .num {
+            position: absolute; top: 6px; right: 8px;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            color: #fff; font-size: 16px; font-weight: 900;
+            width: 30px; height: 30px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; box-shadow: 0 2px 6px rgba(232,67,147,.3)
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,.93);
+            border: 2px solid #e84393; border-radius: 16px;
+            padding: 8px 12px; font-size: 15px; font-weight: 700;
+            line-height: 1.5; text-align: center; max-width: 220px;
+            z-index: 10; color: #333; backdrop-filter: blur(3px)
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 6px solid transparent }
+        .b.d::after { bottom: -14px; left: 22%; border-top-color: #e84393 }
+        .b.heart { border-color: #ff6b81; background: rgba(255,240,245,.95); color: #c0392b }
+        .b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 13px }
+        .b.shout { border-radius: 8px; background: rgba(255,240,240,.95); border-color: #e74c3c; color: #c0392b }
+        .b.senior { background: rgba(240,248,255,.95); border-color: #3498db; color: #2c3e50 }
+        .b.senior::after { border-top-color: #3498db }
+        .b.note { background: rgba(255,255,224,.95); border-color: #f0c040; color: #8b6914; border-radius: 6px; transform: rotate(-2deg) }
+        .b.dark { background: rgba(55,71,79,.9); color: #fff; border-color: #263238 }
+        .b.dark::after { border-top-color: #263238 }
+        .b.doc { background: rgba(227,242,253,.95); border-color: #1565c0; color: #0d47a1 }
+        .b.doc::after { border-top-color: #1565c0 }
+        .b.patient { background: rgba(255,243,224,.95); border-color: #e65100; color: #bf360c }
+        .n { position: absolute; background: rgba(232,67,147,.85); color: #fff; font-size: 12px; padding: 3px 10px; border-radius: 10px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 24px; color: #e84393; text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff; z-index: 10 }
+        .hearts { position: absolute; font-size: 24px; z-index: 10 }
+        .pills { position: absolute; font-size: 22px; z-index: 10 }
+        .drops { position: absolute; font-size: 22px; z-index: 10 }
+        /* 反サロ用 */
+        .panel.hanro .num { background: linear-gradient(135deg, #546e7a, #78909c) }
+        .panel.hanro .b { border-color: #546e7a; color: #37474f }
+        .panel.hanro .n { background: rgba(69,90,100,.85) }
+        .panel.hanro .sfx { color: #c62828 }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script>
+// URLパラメータからエピソードとパネル番号を取得
+const params = new URLSearchParams(location.search);
+const ep = params.get('ep') || 'ep1';
+const panel = parseInt(params.get('p') || '1');
+
+// 各エピソードのパネルデータ
+const episodes = {
+  ep1: [
+    { img: 'ep1a.png', num: '①', items: [
+      {cls:'b heart d',style:'top:8px;left:8px;max-width:210px',text:'は〜い♡\n精神科医のみなみです！\n28歳、独身💦\nよろしくね〜♪'},
+      {cls:'hearts',style:'bottom:10px;right:10px',text:'♡♡♡'},
+      {cls:'n',style:'bottom:6px;right:6px',text:'※精神保健指定医'}
+    ]},
+    { img: 'ep1b.png', num: '②', items: [
+      {cls:'b d',style:'top:8px;left:8px;max-width:220px',text:'趣味はカフェ巡りと\nお菓子食べること♡\n…あ、カルテも\nちゃんとやってます！'},
+      {cls:'b think',style:'bottom:16px;right:8px;max-width:170px',text:'（デスク散らかりすぎ\nなのはスルーで…）'}
+    ]},
+    { img: 'ep1c.png', num: '③', items: [
+      {cls:'b d',style:'top:8px;left:8px;max-width:220px',text:'わたしの日常は\nだいたいこんな感じ♪\n笑って泣いて\n寝落ちして…💤'},
+      {cls:'n',style:'bottom:6px;right:6px',text:'※感情の起伏が激しい'}
+    ]},
+    { img: 'ep1d.png', num: '④', items: [
+      {cls:'b heart d',style:'top:8px;left:8px;max-width:220px',text:'こんなわたしだけど\nこれからよろしくね♡\nフォローしてくれたら\n嬉しいな〜！'},
+      {cls:'hearts',style:'top:12px;right:12px',text:'♡♡♡♡♡'},
+      {cls:'n',style:'bottom:6px;right:6px',text:'※次回から病院ドタバタ劇が始まります'}
+    ]}
+  ]
+};
+
+const data = episodes[ep];
+if (data && data[panel - 1]) {
+  const p = data[panel - 1];
+  const container = document.getElementById('container');
+  let html = '<div class="panel"><img src="' + p.img + '"><div class="num">' + p.num + '</div>';
+  p.items.forEach(item => {
+    html += '<div class="' + item.cls + '" style="' + item.style + '">' + item.text.replace(/\n/g, '<br>') + '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+</script>
+</body>
+</html>

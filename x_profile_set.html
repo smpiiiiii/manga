@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X プロフィールセット</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #15202b; color: #e7e9ea;
+            min-height: 100vh; padding: 16px;
+            display: flex; flex-direction: column; align-items: center; gap: 24px
+        }
+        h1 { color: #1d9bf0; font-size: 20px; text-align: center }
+        .section { width: 500px; max-width: 100%; background: #1e2732; border-radius: 16px; padding: 16px; }
+        .section h2 { color: #1d9bf0; font-size: 14px; margin-bottom: 12px; }
+        .section img { width: 100%; border-radius: 12px; margin-bottom: 8px }
+        .profile-icon img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #1d9bf0 }
+        .label { font-size: 11px; color: #8899a6; margin-bottom: 4px }
+        .save-hint { font-size: 11px; color: #1d9bf0; text-align: center; margin-top: 4px }
+        .profile-text {
+            background: #253341; border-radius: 12px; padding: 12px;
+            font-size: 13px; line-height: 1.6; white-space: pre-wrap;
+            border: 1px solid #38444d
+        }
+        .profile-text .name { font-size: 16px; font-weight: 900; color: #fff }
+        .profile-text .handle { color: #8899a6; font-size: 13px }
+        .copy-btn {
+            background: #1d9bf0; color: #fff; border: none;
+            padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            font-weight: 700; cursor: pointer; margin-top: 8px;
+            font-family: inherit
+        }
+        .copy-btn:active { background: #1a8cd8 }
+        .dl-btn {
+            display: inline-block; background: #1d9bf0; color: #fff;
+            padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            font-weight: 700; text-decoration: none; margin-top: 8px;
+            font-family: inherit; text-align: center
+        }
+        .dl-btn:active { background: #1a8cd8 }
+        @media (max-width: 520px) {
+            .section { border-radius: 12px; padding: 12px }
+            .profile-text { font-size: 12px }
+        }
+    </style>
+</head>
+<body>
+    <h1>🩺 X プロフィールセット</h1>
+
+    <!-- プロフ画像 -->
+    <div class="section profile-icon" style="text-align:center">
+        <h2>📷 プロフィール画像（400×400推奨）</h2>
+        <img src="x_profile.png">
+        <a class="dl-btn" href="/dl/profile">📥 プロフ画像をダウンロード</a>
+    </div>
+
+    <!-- ヘッダー画像 -->
+    <div class="section">
+        <h2>🖼️ ヘッダー画像（1500×500推奨）</h2>
+        <img src="x_header.png">
+        <a class="dl-btn" href="/dl/header">📥 ヘッダー画像をダウンロード</a>
+    </div>
+
+    <!-- プロフィール文 -->
+    <div class="section">
+        <h2>✍️ プロフィール文（コピペ用）</h2>
+        <div class="profile-text">
+<span class="name">ゆるふわ研修医みなみ🩺</span>
+<span class="handle">@yurufuwa_minami</span>
+
+🩺 研修医1年目のドタバタ日常4コマ
+💊 AIで描く医療マンガ
+🗳️ みなみが何科に行くかはみんなが決める！
+
+📌 毎日投稿｜スクショ&RTどうぞ♡
+🏥 白衣ぶかぶか｜名札いつも裏返し
+
+「病院あるある」で笑って
+「何科がいい？」で盛り上がろう💉
+
+#医療マンガ #ゆるふわ研修医みなみ #AI漫画
+        </div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.querySelector('.profile-text').innerText).then(()=>this.textContent='✅ コピーしました！')">📋 プロフィール文をコピー</button>
+    </div>
+
+    <!-- ハッシュタグ案 -->
+    <div class="section">
+        <h2>🏷️ 投稿用ハッシュタグ</h2>
+        <div class="profile-text" style="font-size:12px">
+#ゆるふわ女医みなみ
+#医療マンガ
+#AI漫画
+#医療あるある
+#研修医あるある
+#病院あるある
+#ドクターあるある
+#反サロ
+#ポリファーマシー
+        </div>
+    </div>
+</body>
+</html>

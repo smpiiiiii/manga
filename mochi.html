@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>もちナースのインシデント日誌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #fef6f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+        }
+
+        /* タイトル */
+        .title-area {
+            text-align: center;
+            margin: 16px 0 8px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .title-area h1 {
+            font-size: 26px;
+            font-weight: 900;
+            color: #e8739a;
+            line-height: 1.3;
+        }
+
+        .title-area .subtitle {
+            font-size: 13px;
+            color: #c0849b;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+
+        .title-area .char-intro {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fff;
+            border: 2px solid #f5c6d8;
+            border-radius: 20px;
+            padding: 4px 14px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #b07090;
+        }
+
+        /* マンガページ */
+        .manga-page {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(232, 115, 154, 0.15);
+            border: 2.5px solid #f5c6d8;
+            margin-top: 12px;
+        }
+
+        .panel {
+            position: relative;
+            border-bottom: 2.5px solid #e8d0d8;
+            overflow: hidden;
+        }
+
+        .panel:last-child {
+            border-bottom: none;
+        }
+
+        .panel img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 吹き出し */
+        .fuki {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #555;
+            border-radius: 50%;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+            max-width: 150px;
+            z-index: 10;
+            box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08);
+            color: #333;
+        }
+
+        .fuki::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+        }
+
+        .fuki.shita::after {
+            bottom: -14px;
+            left: 25%;
+            border-top-color: #555;
+        }
+
+        .fuki.hidari::after {
+            left: -14px;
+            top: 35%;
+            border-right-color: #555;
+        }
+
+        .fuki.migi::after {
+            right: -14px;
+            top: 35%;
+            border-left-color: #555;
+        }
+
+        /* 叫び */
+        .fuki.sakebi {
+            border-radius: 8px;
+            background: #fff7e0;
+            border: 2.5px solid #e74c3c;
+            color: #c0392b;
+            font-size: 13px;
+            transform: rotate(-1deg);
+        }
+
+        /* 思考 */
+        .fuki.kangae {
+            border-style: dashed;
+            border-color: #aaa;
+            color: #888;
+            font-size: 11px;
+            border-radius: 18px;
+        }
+
+        /* ナレーション */
+        .nare {
+            position: absolute;
+            background: rgba(80, 60, 70, 0.8);
+            color: #fff;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 10;
+            font-weight: 400;
+        }
+
+        /* 効果音 */
+        .giongo {
+            position: absolute;
+            font-weight: 900;
+            font-size: 28px;
+            color: #e74c3c;
+            text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10;
+            letter-spacing: 2px;
+        }
+
+        /* パネル番号 */
+        .koma {
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            background: #e8739a;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* インシデント報告書 */
+        .houkoku {
+            max-width: 500px;
+            width: 100%;
+            margin-top: 14px;
+            background: #fffff5;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .houkoku h3 {
+            font-size: 14px;
+            color: #c0392b;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 6px;
+        }
+
+        .houkoku table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .houkoku td {
+            padding: 5px 8px;
+            border: 1px solid #e8e0d8;
+            font-size: 11px;
+            vertical-align: top;
+        }
+
+        .houkoku td:first-child {
+            font-weight: 700;
+            width: 28%;
+            background: #fef3f5;
+            color: #d63384;
+        }
+
+        .hanko {
+            color: #c0392b;
+            font-size: 24px;
+            font-weight: 900;
+            transform: rotate(-12deg);
+            display: inline-block;
+            border: 3px solid #c0392b;
+            padding: 2px 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* キャラ紹介 */
+        .chara-box {
+            max-width: 500px;
+            width: 100%;
+            margin-top: 14px;
+            background: #fff;
+            border: 2px solid #f5c6d8;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .chara-box img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #f5c6d8;
+            object-fit: cover;
+        }
+
+        .chara-box .info {
+            flex: 1;
+        }
+
+        .chara-box .info h4 {
+            font-size: 14px;
+            color: #e8739a;
+            margin-bottom: 4px;
+        }
+
+        .chara-box .info p {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* フッター */
+        .footer {
+            color: #c0a0b0;
+            font-size: 11px;
+            text-align: center;
+            margin: 14px 0;
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title-area">
+        <h1>🩹 もちナースの<br>インシデント日誌</h1>
+        <div class="subtitle">第1話「きょうこそ、がんばるぞ…！」</div>
+        <div class="char-intro">🤍 もちナース ✕ 🐱 ねこ先生 の日常</div>
+    </div>
+
+    <div class="manga-page">
+        <!-- コマ1: 元気に出勤 -->
+        <div class="panel" style="height: 260px;">
+            <div class="koma">①</div>
+            <img src="mochi1.png" alt="元気に出勤" style="height: 100%;">
+            <div class="fuki shita" style="top: 8px; left: 8px;">
+                きょうこそ<br>まちがえないぞ…！
+            </div>
+            <div class="fuki kangae" style="top: 8px; right: 8px;">
+                （がんばれ<br>わたし…！🌸）
+            </div>
+            <div class="nare" style="bottom: 6px; right: 6px;">
+                新人ナース3ヶ月目のもちナース
+            </div>
+        </div>
+
+        <!-- コマ2: 転倒 -->
+        <div class="panel" style="height: 270px;">
+            <div class="koma">②</div>
+            <img src="mochi2.png" alt="転倒シーン" style="height: 100%;">
+            <div class="giongo" style="top: 12px; left: 12px; transform: rotate(-15deg);">
+                ガシャーン！！
+            </div>
+            <div class="fuki sakebi migi" style="bottom: 30px; left: 8px;">
+                ふぎゃっ！！💦<br>おくすりがー！！
+            </div>
+            <div class="nare" style="bottom: 6px; right: 6px;">
+                ※さっき宣言したばかり
+            </div>
+        </div>
+
+        <!-- コマ3: 血圧計ミス -->
+        <div class="panel" style="height: 270px;">
+            <div class="koma">③</div>
+            <img src="mochi3.png" alt="血圧計ミス" style="height: 100%;">
+            <div class="fuki shita" style="top: 8px; left: 8px; max-width: 140px;">
+                けつあつ<br>はかりますね〜♪
+            </div>
+            <div class="fuki hidari" style="top: 8px; right: 8px;">
+                …それ<br>じぶんの<br>うでだよ？😅
+            </div>
+            <div class="nare" style="bottom: 6px; left: 6px;">
+                ※患者さんの腕と間違えて自分を測定
+            </div>
+        </div>
+
+        <!-- コマ4: 報告 -->
+        <div class="panel" style="height: 280px;">
+            <div class="koma">④</div>
+            <img src="mochi4.png" alt="インシデント報告" style="height: 100%;">
+            <div class="fuki shita" style="top: 8px; right: 8px;">
+                もちナース…<br>こんげつ<br>3かいめだよ…？
+            </div>
+            <div class="fuki sakebi migi" style="bottom: 35px; left: 8px;">
+                う゛え゛え゛〜ん😭<br>ごめんなさい〜！
+            </div>
+            <div class="fuki kangae" style="bottom: 6px; right: 8px; max-width: 120px;">
+                （なきがお<br>かわいいな…🫠）
+            </div>
+        </div>
+    </div>
+
+    <!-- キャラ紹介 -->
+    <div class="chara-box">
+        <img src="mochi1.png" alt="もちナース">
+        <div class="info">
+            <h4>🤍 もちナース</h4>
+            <p>
+                まるくてふわふわな新人ナース。<br>
+                いつも一生懸命だけどドジばかり。<br>
+                得意なこと：笑顔と謝罪<br>
+                苦手なこと：それ以外ぜんぶ
+            </p>
+        </div>
+    </div>
+
+    <!-- インシデント報告書 -->
+    <div class="houkoku">
+        <h3>📋 インシデント報告書 第2026-031号</h3>
+        <table>
+            <tr>
+                <td>報告日</td>
+                <td>2026年3月7日</td>
+            </tr>
+            <tr>
+                <td>報告者</td>
+                <td>もちナース（研修3ヶ月目）</td>
+            </tr>
+            <tr>
+                <td>発生場所</td>
+                <td>3階ひがし病棟 302号室</td>
+            </tr>
+            <tr>
+                <td>事故の種類</td>
+                <td>① おくすりトレイ転倒<br>② 測定たいしょう誤認（じぶん）</td>
+            </tr>
+            <tr>
+                <td>患者への影響</td>
+                <td>なし（本人がいちばんダメージ）</td>
+            </tr>
+            <tr>
+                <td>再発防止策</td>
+                <td>「はしらない」<br>「じぶんのうでと患者さんのうでを区別する」</td>
+            </tr>
+            <tr>
+                <td>ねこ先生の<br>コメント</td>
+                <td>…がんばってください（3回目）</td>
+            </tr>
+        </table>
+        <div style="text-align: center;">
+            <span class="hanko">要かいぜん</span>
+        </div>
+    </div>
+
+    <p class="footer">
+        ♥ もちナースのインシデント日誌 — つづく？ ♥
+    </p>
+</body>
+
+</html>

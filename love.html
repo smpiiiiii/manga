@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ドジっ子研修医ハル【指導医ガチ恋編】</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #fff0f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 20px
+        }
+
+        .info {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            max-width: 500px;
+            padding: 8px;
+            background: #fff;
+            border-radius: 12px;
+            border: 2px dashed #f0a0c0
+        }
+
+        .info b {
+            color: #e74c8b
+        }
+
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(231, 76, 139, 0.15);
+            border: 2px solid #f0c0d8
+        }
+
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+            border-bottom: 2px solid #f0c0d8;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card-header .ep {
+            font-size: 11px;
+            color: #fff;
+            background: #e74c8b;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+
+        .card-header h2 {
+            font-size: 14px;
+            color: #e74c8b;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #aaa
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f0d0e0;
+            aspect-ratio: 1
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            background: #e74c8b;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .b {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid #e74c8b;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 110px;
+            z-index: 10;
+            color: #333
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -10px;
+            left: 20%;
+            border-top-color: #e74c8b
+        }
+
+        .b.l::after {
+            left: -10px;
+            top: 30%;
+            border-right-color: #e74c8b
+        }
+
+        .b.r::after {
+            right: -10px;
+            top: 30%;
+            border-left-color: #e74c8b
+        }
+
+        .b.shout {
+            border-radius: 4px;
+            background: #fff0f0;
+            border-color: #e74c3c;
+            color: #c0392b;
+            font-size: 8px
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #ccc;
+            color: #999;
+            font-size: 7px;
+            border-radius: 12px
+        }
+
+        .b.love {
+            background: #ffe0ec;
+            border-color: #ff69b4;
+            color: #d63384;
+            border-radius: 12px
+        }
+
+        .b.dark {
+            background: #555;
+            color: #fff;
+            border-color: #333
+        }
+
+        .b.heartbreak {
+            background: #f0f0f0;
+            border-color: #999;
+            color: #666;
+            border-radius: 4px
+        }
+
+        .n {
+            position: absolute;
+            background: rgba(231, 76, 139, .8);
+            color: #fff;
+            font-size: 7px;
+            padding: 2px 5px;
+            border-radius: 8px;
+            z-index: 10
+        }
+
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 16px;
+            color: #e74c8b;
+            text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10
+        }
+
+        .card-footer {
+            padding: 4px 10px;
+            background: #fef8fa;
+            border-top: 1px solid #f0d0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #aaa
+        }
+
+        .card-footer .series {
+            color: #e74c8b;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #555;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        💕 <b>ドジっ子研修医ハル 〜指導医ガチ恋編〜</b> X投稿用 — スクショして投稿してね！<br>
+        🩺 白緑カプセル＝研修医ハル ／ 紫金カプセル＝指導医・神崎先生 ／ ピンクカプセル＝看護師
+    </div>
+
+    <!-- 第1話 指導医ガチ恋 -->
+    <div class="card" id="ep1">
+        <div class="card-header">
+            <span class="ep">特別編</span>
+            <h2>指導医、ガチ恋する</h2>
+            <span class="tag">💕 恋愛回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="love1.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px;font-size:7px">
+                    え、えっと…<br>この患者さんの<br>Cre値が…0.8で…
+                </div>
+                <div class="b love" style="bottom:8px;right:4px;max-width:85px;font-size:7px">
+                    （一生懸命で<br>かわいいな…）
+                </div>
+                <div class="n" style="bottom:3px;left:3px">※カンファ中</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="love2.png">
+                <div class="b love" style="top:4px;left:4px;max-width:100px;font-size:7px">
+                    ハルちゃん、<br>ここの解釈<br>僕が教えて<br>あげようか？💕
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:80px">
+                    神崎先生って<br>ホント優しい〜
+                </div>
+                <div class="sfx" style="top:4px;right:4px;font-size:10px;color:#ff69b4">♥♥♥</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="love3.png">
+                <div class="b love" style="top:4px;right:4px;max-width:90px;font-size:7px">
+                    当直お疲れ…<br>ホットコーヒー<br>置いとくね
+                </div>
+                <div class="n" style="bottom:3px;left:3px">※AM2:00 当直室</div>
+                <div class="b think" style="bottom:25px;right:4px;max-width:80px">zzz…<br>（爆睡中）</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="love4.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px;font-size:7px">
+                    神崎先生って<br>本当に優しいっ！<br>お父さんみたい😊
+                </div>
+                <div class="sfx" style="top:4px;right:4px;font-size:14px;transform:rotate(-5deg);color:#333">
+                    ﾊﾞﾘﾊﾞﾘﾊﾞﾘ💔
+                </div>
+                <div class="b heartbreak" style="bottom:8px;right:4px;max-width:80px;font-size:7px">
+                    お…<br>お父さん…？
+                </div>
+                <div class="n" style="bottom:3px;left:3px">※享年32歳（恋愛的に）</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💕 ドジっ子研修医ハル 〜指導医ガチ恋編〜</span>
+            <span class="lesson">💔 「お父さんみたい」は最強の致死量ワード</span>
+        </div>
+    </div>
+
+    <div class="info">
+        💕 続きが見たかったらいいね＆リポストしてね！<br>
+        次回予告：<b>看護師さんにバレる指導医の片思い</b> 🏥
+    </div>
+</body>
+
+</html>

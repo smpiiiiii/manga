@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ドジっ子ナースさくらのインシデント日誌【人間ver.】</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #fef6f0 0%, #fde8ef 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #d63384;
+            text-align: center;
+            margin: 14px 0 4px;
+            line-height: 1.3
+        }
+
+        .ver {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d, #c44bff);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            vertical-align: middle
+        }
+
+        .sub {
+            font-size: 12px;
+            color: #c0849b;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 700
+        }
+
+        .tag {
+            display: inline-flex;
+            gap: 4px;
+            background: #fff;
+            border: 2px solid #f5c6d8;
+            border-radius: 16px;
+            padding: 3px 12px;
+            font-size: 11px;
+            color: #b07090;
+            margin-bottom: 6px
+        }
+
+        .episode {
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 20px
+        }
+
+        .ep-title {
+            font-size: 15px;
+            font-weight: 900;
+            color: #d63384;
+            text-align: center;
+            padding: 8px;
+            background: linear-gradient(135deg, #fff5f9, #ffeef4);
+            border-radius: 10px 10px 0 0;
+            border: 2px solid #f5c6d8;
+            border-bottom: none
+        }
+
+        .manga {
+            background: #fff;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(214, 51, 132, 0.12);
+            border: 2px solid #f5c6d8;
+            border-top: none
+        }
+
+        .panel {
+            position: relative;
+            border-bottom: 2.5px solid #333;
+            overflow: hidden
+        }
+
+        .panel:last-child {
+            border-bottom: none
+        }
+
+        .panel img {
+            width: 100%;
+            display: block;
+            object-fit: cover
+        }
+
+        .fuki {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+            max-width: 155px;
+            z-index: 10;
+            box-shadow: 1px 1px 0 rgba(0, 0, 0, .1);
+            color: #333
+        }
+
+        .fuki::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent
+        }
+
+        .fuki.shita::after {
+            bottom: -14px;
+            left: 25%;
+            border-top-color: #333
+        }
+
+        .fuki.hidari::after {
+            left: -14px;
+            top: 35%;
+            border-right-color: #333
+        }
+
+        .fuki.migi::after {
+            right: -14px;
+            top: 35%;
+            border-left-color: #333
+        }
+
+        .fuki.sakebi {
+            border-radius: 8px;
+            background: #fff7e0;
+            border: 2.5px solid #e74c3c;
+            color: #c0392b;
+            font-size: 12px;
+            transform: rotate(-1deg)
+        }
+
+        .fuki.kangae {
+            border-style: dashed;
+            border-color: #999;
+            color: #777;
+            font-size: 10px;
+            border-radius: 18px
+        }
+
+        .nare {
+            position: absolute;
+            background: rgba(0, 0, 0, .75);
+            color: #fff;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 10
+        }
+
+        .giongo {
+            position: absolute;
+            font-weight: 900;
+            font-size: 26px;
+            color: #e74c3c;
+            text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10;
+            letter-spacing: 2px
+        }
+
+        .koma {
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            background: #d63384;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .lesson {
+            max-width: 500px;
+            width: 100%;
+            background: #f0f8ff;
+            border: 2px solid #b8d4e8;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+            font-size: 12px
+        }
+
+        .lesson h4 {
+            color: #2980b9;
+            font-size: 13px;
+            margin-bottom: 6px
+        }
+
+        .lesson ul {
+            padding-left: 18px;
+            color: #555;
+            line-height: 1.7
+        }
+
+        .lesson .point {
+            color: #e74c3c;
+            font-weight: 700
+        }
+
+        .chara-row {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px
+        }
+
+        .chara-card {
+            flex: 1;
+            background: #fff;
+            border: 2px solid #f5c6d8;
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+            font-size: 10px;
+            color: #888
+        }
+
+        .chara-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #f5c6d8;
+            object-fit: cover;
+            margin-bottom: 4px
+        }
+
+        .chara-card .name {
+            font-size: 12px;
+            font-weight: 900;
+            color: #d63384
+        }
+
+        .switch {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            margin: 8px 0
+        }
+
+        .switch a {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #ff6b9d, #c44bff);
+            color: #fff;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 3px 12px rgba(214, 51, 132, 0.3);
+            transition: transform .2s
+        }
+
+        .switch a:hover {
+            transform: scale(1.05)
+        }
+
+        .footer {
+            color: #c0a0b0;
+            font-size: 11px;
+            text-align: center;
+            margin: 10px 0;
+            padding: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">🩹 ドジっ子ナースさくらの<br>インシデント日誌 <span class="ver">人間ver.</span></h1>
+    <p class="sub">新人ナース・さくらの病棟サバイバル記録</p>
+    <div class="tag">🌸 さくら ✕ 👩‍⚕️ 先輩ナース ✕ 👨‍⚕️ 猫田先生</div>
+
+    <!-- バージョン切替 -->
+    <div class="switch">
+        <a href="sakura.html">🤍 もちキャラ版を見る</a>
+    </div>
+
+    <!-- === 第1話 === -->
+    <div class="episode">
+        <div class="ep-title">第1話「インスリン、それ4単位じゃないです」</div>
+        <div class="manga">
+            <div class="panel" style="height:260px">
+                <div class="koma">①</div>
+                <img src="h1a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:145px">
+                    指示簿確認…<br>ヒューマリンR<br>朝食前 4単位、と…
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px">
+                    よし、落ち着いて<br>やれば大丈夫…！
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">②</div>
+                <img src="h1b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    え…これ<br>1目盛りいくつ？<br>4…40…？💦
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※専用シリンジと汎用シリンジを間違えている
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">③</div>
+                <img src="h1c.png" style="height:100%">
+                <div class="giongo" style="top:10px;right:10px;transform:rotate(-10deg)">ストップ！！</div>
+                <div class="fuki sakebi hidari" style="top:8px;left:6px;max-width:140px">
+                    さくらちゃん！<br>それ40単位！<br>低血糖で死ぬよ！？
+                </div>
+                <div class="fuki shita" style="bottom:20px;right:6px">
+                    えっ…？
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">④</div>
+                <img src="h1d.png" style="height:100%">
+                <div class="fuki sakebi migi" style="top:8px;left:6px;max-width:130px">
+                    すみません…<br>本当にすみません<br>😭😭😭
+                </div>
+                <div class="fuki shita" style="top:8px;right:6px;max-width:140px">
+                    慌てなくていい。<br>ダブルチェック<br>必ずしようね
+                </div>
+                <div class="nare" style="bottom:6px;left:6px">
+                    ※患者に投与する前に発見。実害なし
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">インスリン専用シリンジ</span>を必ず使う（1mL=100単位）</li>
+            <li>準備→<span class="point">ダブルチェック</span>→投与の手順を徹底</li>
+            <li>「合ってるかな？」と思ったら<span class="point">必ず先輩に確認</span></li>
+            <li>ハイリスク薬は<span class="point">10倍量間違い</span>が命に関わる</li>
+        </ul>
+    </div>
+
+    <!-- === 第2話 === -->
+    <div class="episode">
+        <div class="ep-title">第2話「で、結局何が言いたいの？」</div>
+        <div class="manga">
+            <div class="panel" style="height:260px">
+                <div class="koma">①</div>
+                <img src="h2a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    302号室の田中さん、<br>38.5℃で…<br>猫田先生に電話…💦
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px;max-width:110px">
+                    ちゃんと報告<br>しなきゃ…！
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">②</div>
+                <img src="h2b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:165px;font-size:10px">
+                    あの、田中さんなんですけど、<br>昨日の夜は36.8℃で、<br>朝は37.2℃だったんですが、<br>お昼ごはんは半分食べて、<br>それで今さっき測ったら…
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※要点に辿り着かない
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">③</div>
+                <img src="h2c.png" style="height:100%">
+                <div class="fuki sakebi shita" style="top:6px;right:6px;max-width:150px">
+                    で、結局<br>何が言いたいの？<br>忙しいんだけど！！
+                </div>
+                <div class="giongo" style="bottom:30px;left:10px;font-size:22px;transform:rotate(-5deg)">ガチャッ！</div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※電話を切られる
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">④</div>
+                <img src="h2d.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;right:6px;max-width:150px">
+                    報告はSBARで<br>整理してからね。<br>結論を最初に言うの
+                </div>
+                <div class="fuki shita" style="bottom:25px;left:6px;max-width:140px">
+                    「38.5℃の発熱です。<br>指示をください」<br>これだけでいいの…？
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※先輩がSBAR報告を伝授
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">SBAR</span>：状況→背景→評価→提案の順で報告</li>
+            <li><span class="point">結論から先に</span>言う（「38.5℃の発熱です」）</li>
+            <li>医師は忙しい。<span class="point">30秒以内</span>にまとめる意識</li>
+            <li>電話する前に<span class="point">メモに書き出して</span>から架電する</li>
+        </ul>
+    </div>
+
+    <!-- === 第3話 === -->
+    <div class="episode">
+        <div class="ep-title">第3話「田中さん…どっちの？」</div>
+        <div class="manga">
+            <div class="panel" style="height:260px">
+                <div class="koma">①</div>
+                <img src="h3a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    305号室の<br>田中さ〜ん！<br>お薬の時間で〜す♪
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※305号室は2人部屋
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">②</div>
+                <img src="h3b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:130px">
+                    田中さん、<br>降圧剤です。<br>どうぞ〜
+                </div>
+                <div class="fuki hidari" style="top:6px;right:6px;max-width:130px">
+                    あの…<br>ワシも田中<br>なんじゃが…
+                </div>
+                <div class="giongo"
+                    style="bottom:15px;left:50%;transform:translateX(-50%) rotate(-3deg);font-size:22px">
+                    えっ！？
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">③</div>
+                <img src="h3c.png" style="height:100%">
+                <div class="fuki sakebi shita" style="top:6px;left:6px;max-width:150px">
+                    フルネームと<br>生年月日で確認！<br>リストバンドも！
+                </div>
+                <div class="fuki shita" style="bottom:20px;right:6px;max-width:120px">
+                    す、すみません…<br>苗字だけで<br>渡すところでした…
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">④</div>
+                <img src="h3d.png" style="height:100%">
+                <div class="fuki sakebi migi" style="top:8px;left:6px;max-width:130px">
+                    本当にすみません<br>田中さん…！<br>（どっちの）
+                </div>
+                <div class="fuki kangae" style="bottom:10px;right:6px;max-width:130px">
+                    同姓の患者って<br>結構いるんだな…
+                </div>
+                <div class="nare" style="bottom:6px;left:6px">
+                    ※投与前に発見。実害なし
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">フルネーム＋生年月日</span>で患者確認（苗字だけは危険）</li>
+            <li><span class="point">リストバンド</span>を必ず照合する</li>
+            <li>同姓患者は思ったより多い。<span class="point">同室に同姓</span>のケースも</li>
+            <li>「名乗ってもらう」ではなく<span class="point">「お名前を教えてください」</span>と聞く</li>
+        </ul>
+    </div>
+
+    <!-- === 第4話 === -->
+    <div class="episode">
+        <div class="ep-title">第4話「その点滴、ちょっと速くない？」</div>
+        <div class="manga">
+            <div class="panel" style="height:260px">
+                <div class="koma">①</div>
+                <img src="h4a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:145px">
+                    500mLを6時間で…<br>えーっと…<br>1分あたり何滴…💦
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px;max-width:110px">
+                    計算苦手<br>なんだよな…
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">②</div>
+                <img src="h4b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:130px">
+                    よし！これで<br>大丈夫なはず…！
+                </div>
+                <div class="fuki sakebi hidari" style="bottom:20px;right:6px;max-width:140px">
+                    あの…看護師さん…<br>なんかすごい勢いで<br>落ちてるんですけど…
+                </div>
+                <div class="nare" style="bottom:6px;left:6px">
+                    ※滴下速度を大幅に間違えている
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">③</div>
+                <img src="h4c.png" style="height:100%">
+                <div class="giongo" style="top:10px;left:10px;transform:rotate(-8deg)">ダッ！！</div>
+                <div class="fuki sakebi shita" style="top:6px;right:6px;max-width:150px">
+                    止めて止めて！<br>これ1時間で<br>全部落ちるペースだよ！
+                </div>
+                <div class="fuki shita" style="bottom:20px;left:6px">
+                    えっ…<br>うそ…💦💦
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">④</div>
+                <img src="h4d.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;right:6px;max-width:155px">
+                    成人用ルートは<br>1mL＝20滴だよ。<br>計算し直してみて
+                </div>
+                <div class="fuki shita" style="bottom:25px;left:6px;max-width:140px">
+                    500÷6÷60×20…<br>約28滴/分…<br>今度こそ…！
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※先輩が滴下計算を伝授
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li>滴下速度の公式：<span class="point">総量(mL)÷時間(h)÷60×滴下数(20)</span></li>
+            <li>成人用ルート＝<span class="point">1mL=20滴</span>、小児用＝1mL=60滴</li>
+            <li>輸液ポンプ使用時も<span class="point">自然滴下で確認</span>する習慣を</li>
+            <li>速すぎる点滴は<span class="point">心不全・肺水腫</span>のリスクあり</li>
+        </ul>
+    </div>
+
+    <!-- === 第5話 === -->
+    <div class="episode">
+        <div class="ep-title">第5話「ベッド柵、上げ忘れてない？」</div>
+        <div class="manga">
+            <div class="panel" style="height:260px">
+                <div class="koma">①</div>
+                <img src="h5a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    山田さん、<br>体位変換<br>終わりましたよ〜
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px;max-width:110px">
+                    次は検温だ…<br>急がなきゃ…
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">②</div>
+                <img src="h5b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:130px">
+                    山田さ〜ん<br>また来ますね〜♪
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※ベッド柵を上げ忘れたまま退室
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">③</div>
+                <img src="h5c.png" style="height:100%">
+                <div class="giongo" style="top:10px;left:10px;transform:rotate(-8deg)">ドサッ！！</div>
+                <div class="fuki sakebi shita" style="top:6px;right:6px;max-width:140px">
+                    山田さん！<br>大丈夫ですか！？<br>誰か来て！！
+                </div>
+                <div class="nare" style="bottom:6px;left:6px">
+                    ※患者がベッドから転落
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">④</div>
+                <img src="h5d.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;right:6px;max-width:155px">
+                    転倒転落は<br>看護事故の中で<br>最も多い。<br>柵の確認を徹底して
+                </div>
+                <div class="fuki sakebi migi" style="bottom:20px;left:6px;max-width:130px">
+                    私のせいで<br>山田さんが…<br>本当にすみません…
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">離床後はベッド柵を必ず確認</span>してから退室</li>
+            <li>転倒転落は<span class="point">看護事故の約40%</span>を占める最多インシデント</li>
+            <li>高齢者は<span class="point">骨折→寝たきり→ADL低下</span>の連鎖リスク</li>
+            <li>「急いでいる時」こそ<span class="point">指差し確認</span>を忘れない</li>
+        </ul>
+    </div>
+
+    <!-- === 第6話 === -->
+    <div class="episode">
+        <div class="ep-title">第6話「聞いてないんですけど！？」</div>
+        <div class="manga">
+            <div class="panel" style="height:260px">
+                <div class="koma">①</div>
+                <img src="h6a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:150px">
+                    えっと…特変なしで…<br>あ、408号室の鈴木さんは<br>明日検査で…ふぁ〜…💤
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※夜勤明けの申し送り中
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">②</div>
+                <img src="h6b.png" style="height:100%">
+                <div class="fuki hidari" style="top:6px;right:6px;max-width:140px">
+                    ちょっと！<br>その薬！<br>私アレルギー<br>あるのよ！！
+                </div>
+                <div class="fuki shita" style="bottom:30px;left:6px;max-width:130px">
+                    えっ…！？<br>申し送りに<br>なかったのに…
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">③</div>
+                <img src="h6c.png" style="height:100%">
+                <div class="fuki sakebi shita" style="top:6px;left:6px;max-width:150px">
+                    さくらさん！<br>鈴木さんのセフェム系<br>アレルギー、<br>申し送りした！？
+                </div>
+                <div class="fuki shita" style="bottom:20px;right:6px;max-width:120px">
+                    あ…<br>言い忘れて<br>ました…😱
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma">④</div>
+                <img src="h6d.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;right:6px;max-width:155px">
+                    申し送りは<br>テンプレートを使って。<br>アレルギーは<br>最優先で伝えてね
+                </div>
+                <div class="fuki shita" style="bottom:25px;left:6px;max-width:140px">
+                    アレルギー情報は<br>命に関わる…<br>絶対に忘れない…！
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">アレルギー情報</span>は申し送りの最優先項目</li>
+            <li>申し送りは<span class="point">テンプレート化</span>して漏れを防ぐ</li>
+            <li>夜勤明けこそ<span class="point">書面ベース</span>で引き継ぐ（口頭だけは危険）</li>
+            <li><span class="point">アナフィラキシー</span>は数分で致命的になり得る</li>
+        </ul>
+    </div>
+
+    <!-- === 第7話（シリアス回） === -->
+    <div class="episode">
+        <div class="ep-title" style="background:linear-gradient(135deg,#f5f0f0,#e8e0e0);color:#555;border-color:#ccc">
+            第7話「誰も見てない時のさくら」
+        </div>
+        <div class="manga">
+            <div class="panel" style="height:270px">
+                <div class="koma" style="background:#555">①</div>
+                <img src="h7a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    佐藤さん♪<br>お薬の時間ですよ〜<br>今日もお元気そうで☺️
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px;max-width:110px">
+                    先輩が見てる…<br>ちゃんとやらなきゃ
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※同僚の前では模範的な対応
+                </div>
+            </div>
+            <div class="panel" style="height:280px;background:#1a1a2e">
+                <div class="koma" style="background:#c0392b">②</div>
+                <img src="h7b.png" style="height:100%;filter:brightness(0.9)">
+                <div class="fuki sakebi shita"
+                    style="top:6px;left:6px;max-width:155px;background:#333;color:#fff;border-color:#c0392b">
+                    ちょっと！<br>何回言ったら<br>わかるの！？<br>もう寝ててよ…！
+                </div>
+                <div class="nare" style="bottom:6px;right:6px;background:rgba(192,57,43,.9)">
+                    ※誰もいない病室で態度が豹変
+                </div>
+            </div>
+            <div class="panel" style="height:270px">
+                <div class="koma" style="background:#c0392b">③</div>
+                <img src="h7c.png" style="height:100%">
+                <div class="giongo" style="top:10px;right:10px;transform:rotate(-5deg);color:#c0392b;font-size:24px">
+                    ピタッ…</div>
+                <div class="fuki sakebi shita" style="top:6px;left:6px;max-width:140px">
+                    さくらさん…<br>今の、何…？
+                </div>
+                <div class="fuki shita" style="bottom:20px;right:6px;max-width:120px">
+                    あ……<br>先輩……
+                </div>
+                <div class="nare" style="bottom:6px;left:6px">
+                    ※先輩が全てを目撃していた
+                </div>
+            </div>
+            <div class="panel" style="height:280px">
+                <div class="koma" style="background:#555">④</div>
+                <img src="h7d.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;right:6px;max-width:160px;font-size:10px">
+                    認知症でも<br>感情は残ってる。<br>怖い、悲しいは<br>ちゃんと感じてるの。<br>あなたの態度、<br>佐藤さんは<br>覚えてなくても<br>怖かったはずだよ
+                </div>
+                <div class="fuki sakebi migi" style="bottom:20px;left:6px;max-width:130px;font-size:10px">
+                    ……最低だ<br>私……<br>看護師失格だ……
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson" style="background:#fff5f5;border-color:#e8b0b0">
+        <h4 style="color:#c0392b">⚠️ さくらの学びメモ【シリアス回】</h4>
+        <ul>
+            <li>認知症患者は<span class="point">エピソード記憶は失っても感情記憶は残る</span></li>
+            <li>「覚えてないからいい」は<span class="point">絶対に通用しない</span></li>
+            <li>人前と人前じゃない時で態度を変えるのは<span class="point">虐待の入口</span></li>
+            <li><span class="point">不適切ケア→グレーゾーン→虐待</span>はグラデーション</li>
+            <li>疲れやストレスを感じたら<span class="point">一人で抱えず相談</span>する</li>
+            <li>「認知症だから仕方ない」ではなく<span class="point">「認知症だからこそ丁寧に」</span></li>
+        </ul>
+    </div>
+
+    <!-- キャラ紹介 -->
+    <div class="chara-row">
+        <div class="chara-card">
+            <img src="h1a.png" alt="さくら">
+            <div class="name">🌸 さくら</div>
+            新人ナース3ヶ月目。<br>一生懸命だけどドジ。<br>得意：笑顔と謝罪
+        </div>
+        <div class="chara-card">
+            <img src="h1c.png" alt="先輩ナース">
+            <div class="name">👩‍⚕️ 先輩ナース</div>
+            プリセプター。<br>優しいけど指導は的確。<br>口癖：「確認した？」
+        </div>
+        <div class="chara-card">
+            <img src="h2c.png" alt="猫田先生">
+            <div class="name">👨‍⚕️ 猫田先生</div>
+            研修医2年目。<br>怒ると怖いが根は優しい。<br>口癖：「で？」
+        </div>
+    </div>
+
+    <!-- バージョン切替 -->
+    <div class="switch">
+        <a href="sakura.html">🤍 もちキャラ版を見る</a>
+    </div>
+
+    <p class="footer">♥ ドジっ子ナースさくらのインシデント日誌 — 第8話につづく？ ♥</p>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医のハプニング日記</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3, #fff1f2);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            gap: 16px
+        }
+
+        /* ── カード ── */
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 28px rgba(236, 72, 153, 0.18);
+            border: 2px solid #fbcfe8
+        }
+
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            border-bottom: 2px solid #fbcfe8;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card-header .ep {
+            font-size: 10px;
+            color: #fff;
+            background: #ec4899;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+
+        .card-header h2 {
+            font-size: 13px;
+            color: #be185d;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #f472b6
+        }
+
+        /* ── 2×2グリッド ── */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        /* ── コマ ── */
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #fce7f3;
+            aspect-ratio: 1;
+            background: #fff8fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* コマの背景画像 */
+        .cell-1 {
+            background-image: url('yurufuwa_1.png');
+        }
+
+        .cell-2 {
+            background-image: url('yurufuwa_2.png');
+        }
+
+        .cell-3 {
+            background-image: url('yurufuwa_3.png');
+        }
+
+        .cell-4 {
+            background-image: url('yurufuwa_4.png');
+        }
+
+        /* コマ番号 */
+        .num {
+            position: absolute;
+            top: 4px;
+            right: 5px;
+            background: #ec4899;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20
+        }
+
+        /* 吹き出し */
+        .b {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1.5px solid #ec4899;
+            border-radius: 50%;
+            padding: 6px 10px;
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 115px;
+            z-index: 10;
+            color: #333
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -9px;
+            left: 22%;
+            border-top-color: #ec4899
+        }
+
+        .b.dl::after {
+            bottom: -9px;
+            right: 22%;
+            border-top-color: #ec4899
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #f9a8d4;
+            color: #9d174d;
+            font-size: 7px;
+            border-radius: 12px
+        }
+
+        .b.shout {
+            border-radius: 4px;
+            background: #fff1f2;
+            border-color: #f43f5e;
+            color: #be123c
+        }
+
+        .b.dark {
+            background: rgba(236, 72, 153, 0.95);
+            color: #fff;
+            border-color: #be185d
+        }
+
+        /* SE文字 */
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 16px;
+            color: #ec4899;
+            text-shadow: 1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff;
+            z-index: 10
+        }
+
+        /* フッター */
+        .card-footer {
+            padding: 5px 12px;
+            background: #fdf2f8;
+            border-top: 1px solid #fce7f3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #f472b6
+        }
+
+        .card-footer .series {
+            color: #ec4899;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #9d174d;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">第3話</span>
+            <h2>ゆるふわ女医のハプニング日記</h2>
+            <span class="tag">💊 お色気ハプニング</span>
+        </div>
+        <div class="grid">
+
+            <!-- ① -->
+            <div class="cell cell-1">
+                <div class="num">①</div>
+                <div class="b dl" style="top:10px;right:10px;font-size:8px;">
+                    えーっと、<br>この患者さんの<br>採血データは…
+                </div>
+            </div>
+
+            <!-- ② -->
+            <div class="cell cell-2">
+                <div class="num">②</div>
+                <div class="sfx" style="top:30%;left:50%;transform:translateX(-50%);font-size:18px;color:#f43f5e">ポロッ
+                </div>
+                <div class="b think" style="top:10px;left:10px;font-size:7px;">
+                    あ、ペン<br>落としちゃった💦
+                </div>
+                <div class="sfx" style="bottom:10px;right:10px;font-size:14px;color:#fb7185">チラッ💓</div>
+            </div>
+
+            <!-- ③ -->
+            <div class="cell cell-3">
+                <div class="num">③</div>
+                <div class="sfx" style="top:10%;left:20%;font-size:24px;color:#f43f5e;">カァァッ///</div>
+                <div class="b shout" style="bottom:10px;left:50%;transform:translateX(-50%);font-size:8px;">
+                    （む、胸元が…！！<br>直視できない…！！！）
+                </div>
+            </div>
+
+            <!-- ④ -->
+            <div class="cell cell-4">
+                <div class="num">④</div>
+                <div class="b d" style="top:10px;left:10px;font-size:8px;">
+                    先生〜！<br>ペンありました！✨
+                </div>
+                <div class="b dark" style="top:10px;right:10px;font-size:7px;max-width:80px">
+                    ……<br>あ、ああ…💧
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <span class="series">🩺 ゆるふわ女医シリーズ</span>
+            <span class="lesson">💡 白衣の下のスクラブは意外とキケン</span>
+        </div>
+    </div>
+</body>
+
+</html>

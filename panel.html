@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #000 }
+body { font-family: 'Zen Maru Gothic', sans-serif }
+.p { width: 100vw; height: 100vh; position: relative; overflow: hidden }
+.p img { width: 100%; height: 100%; object-fit: cover; display: block }
+.num { position: absolute; top: 6px; right: 8px; background: linear-gradient(135deg, #e84393, #fd79a8); color: #fff; font-size: 16px; font-weight: 900; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10 }
+.b { position: absolute; background: rgba(255,255,255,.93); border: 2px solid #e84393; border-radius: 16px; padding: 8px 12px; font-size: 14px; font-weight: 700; line-height: 1.5; text-align: center; max-width: 210px; z-index: 10; color: #333 }
+.b.heart { border-color: #ff6b81; background: rgba(255,240,245,.95); color: #c0392b }
+.b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 12px }
+.n { position: absolute; background: rgba(232,67,147,.85); color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 10px; z-index: 10 }
+.sfx { position: absolute; font-weight: 900; font-size: 22px; color: #e84393; text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff; z-index: 10 }
+.hearts { position: absolute; font-size: 22px; z-index: 10 }
+</style>
+</head>
+<body></body>
+<script>
+const panels = {
+  'ep1-1': `<div class="p"><img src="ep1a.png"><div class="num">①</div>
+    <div class="b heart" style="top:8px;left:8px;max-width:200px">は〜い♡<br>研修医1年目の<br>みなみです！<br>24歳、よろしくね♪</div>
+    <div class="hearts" style="bottom:10px;right:10px">♡♡♡</div>
+    <div class="n" style="bottom:6px;right:6px">※初日から名札が裏返し</div></div>`,
+  'ep1-2': `<div class="p"><img src="ep1b.png"><div class="num">②</div>
+    <div class="b" style="top:8px;left:8px;max-width:210px">初日から<br>聴診器が絡まって<br>カルテも逆さま…💦<br>ごめんなさい！！</div>
+    <div class="b think" style="bottom:16px;right:8px;max-width:170px">（先輩に怒られる<br>未来しか見えない…）</div>
+    <div class="sfx" style="bottom:45px;left:10px;font-size:16px">ｱﾜﾜﾜ</div></div>`,
+  'ep1-3': `<div class="p"><img src="ep1c.png"><div class="num">③</div>
+    <div class="b" style="top:8px;left:8px;max-width:210px">でも絶対<br>いいお医者さんに<br>なるって決めたの！<br>勉強がんばるぞ💪</div>
+    <div class="sfx" style="bottom:14px;right:10px;font-size:18px">ﾒﾗﾒﾗ🔥</div>
+    <div class="n" style="bottom:6px;right:6px">※教科書の付箋が100枚超え</div></div>`,
+  'ep1-4': `<div class="p"><img src="ep1d.png"><div class="num">④</div>
+    <div class="b heart" style="top:8px;left:8px;max-width:210px">まだ何科に<br>行くか決めてないの<br>みんなで一緒に<br>決めてくれる？♡</div>
+    <div class="sfx" style="bottom:14px;right:12px;color:#e84393">ｷｭﾝ♡</div>
+    <div class="hearts" style="top:12px;right:12px">♡♡♡♡♡</div>
+    <div class="n" style="bottom:6px;right:6px">※何科がいい？コメントで教えて！</div></div>`
+};
+const id = new URLSearchParams(location.search).get('id') || 'ep1-1';
+document.body.innerHTML = panels[id] || '<div>Not found</div>';
+</script>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ドジっ子ナースさくらのインシデント日誌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #fef6f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #e8739a;
+            text-align: center;
+            margin: 14px 0 4px;
+            line-height: 1.3
+        }
+
+        .sub {
+            font-size: 12px;
+            color: #c0849b;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 700
+        }
+
+        .tag {
+            display: inline-flex;
+            gap: 4px;
+            background: #fff;
+            border: 2px solid #f5c6d8;
+            border-radius: 16px;
+            padding: 3px 12px;
+            font-size: 11px;
+            color: #b07090;
+            margin-bottom: 6px
+        }
+
+        .episode {
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 20px
+        }
+
+        .ep-title {
+            font-size: 15px;
+            font-weight: 900;
+            color: #d63384;
+            text-align: center;
+            padding: 8px;
+            background: linear-gradient(135deg, #fff5f9, #ffeef4);
+            border-radius: 10px 10px 0 0;
+            border: 2px solid #f5c6d8;
+            border-bottom: none
+        }
+
+        .manga {
+            background: #fff;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(232, 115, 154, 0.12);
+            border: 2px solid #f5c6d8;
+            border-top: none
+        }
+
+        .panel {
+            position: relative;
+            border-bottom: 2.5px solid #e8d0d8;
+            overflow: hidden
+        }
+
+        .panel:last-child {
+            border-bottom: none
+        }
+
+        .panel img {
+            width: 100%;
+            display: block;
+            object-fit: cover
+        }
+
+        .fuki {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #555;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+            max-width: 155px;
+            z-index: 10;
+            box-shadow: 1px 1px 0 rgba(0, 0, 0, .08);
+            color: #333
+        }
+
+        .fuki::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent
+        }
+
+        .fuki.shita::after {
+            bottom: -14px;
+            left: 25%;
+            border-top-color: #555
+        }
+
+        .fuki.hidari::after {
+            left: -14px;
+            top: 35%;
+            border-right-color: #555
+        }
+
+        .fuki.migi::after {
+            right: -14px;
+            top: 35%;
+            border-left-color: #555
+        }
+
+        .fuki.sakebi {
+            border-radius: 8px;
+            background: #fff7e0;
+            border: 2.5px solid #e74c3c;
+            color: #c0392b;
+            font-size: 12px;
+            transform: rotate(-1deg)
+        }
+
+        .fuki.kangae {
+            border-style: dashed;
+            border-color: #aaa;
+            color: #888;
+            font-size: 10px;
+            border-radius: 18px
+        }
+
+        .nare {
+            position: absolute;
+            background: rgba(80, 60, 70, .8);
+            color: #fff;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 10
+        }
+
+        .giongo {
+            position: absolute;
+            font-weight: 900;
+            font-size: 26px;
+            color: #e74c3c;
+            text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10;
+            letter-spacing: 2px
+        }
+
+        .koma {
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            background: #e8739a;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .lesson {
+            max-width: 500px;
+            width: 100%;
+            background: #f0f8ff;
+            border: 2px solid #b8d4e8;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+            font-size: 12px
+        }
+
+        .lesson h4 {
+            color: #2980b9;
+            font-size: 13px;
+            margin-bottom: 6px
+        }
+
+        .lesson ul {
+            padding-left: 18px;
+            color: #555;
+            line-height: 1.7
+        }
+
+        .lesson .point {
+            color: #e74c3c;
+            font-weight: 700
+        }
+
+        .chara-row {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px
+        }
+
+        .chara-card {
+            flex: 1;
+            background: #fff;
+            border: 2px solid #f5c6d8;
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+            font-size: 10px;
+            color: #888
+        }
+
+        .chara-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #f5c6d8;
+            object-fit: cover;
+            margin-bottom: 4px
+        }
+
+        .chara-card .name {
+            font-size: 12px;
+            font-weight: 900;
+            color: #e8739a
+        }
+
+        .footer {
+            color: #c0a0b0;
+            font-size: 11px;
+            text-align: center;
+            margin: 10px 0;
+            padding: 6px
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">🩹 ドジっ子ナースさくらの<br>インシデント日誌</h1>
+    <p class="sub">新人ナース・さくらの病棟サバイバル記録</p>
+    <div class="tag">🤍 さくら ✕ 🐱 猫田先生 ✕ 🐰 うさ先輩</div>
+
+    <!-- === 第1話 === -->
+    <div class="episode">
+        <div class="ep-title">第1話「インスリン、それ4単位じゃないです」</div>
+        <div class="manga">
+            <div class="panel" style="height:250px">
+                <div class="koma">①</div>
+                <img src="r1a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:145px">
+                    指示簿確認…<br>ヒューマリンR<br>朝食前 4単位、と…
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px">
+                    よし、落ち着いて<br>やれば大丈夫…！
+                </div>
+            </div>
+            <div class="panel" style="height:250px">
+                <div class="koma">②</div>
+                <img src="r1b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    え…これ<br>1目盛りいくつ？<br>4…40…？💦
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※専用シリンジと汎用シリンジを間違えている
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">③</div>
+                <img src="r1c.png" style="height:100%">
+                <div class="giongo" style="top:10px;right:10px;transform:rotate(-10deg)">ストップ！！</div>
+                <div class="fuki sakebi hidari" style="top:8px;left:6px;max-width:140px">
+                    さくらちゃん！<br>それ40単位！<br>死んじゃうよ！？
+                </div>
+                <div class="fuki shita" style="bottom:20px;right:6px">
+                    えっ…？
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">④</div>
+                <img src="r1d.png" style="height:100%">
+                <div class="fuki sakebi migi" style="top:8px;left:6px;max-width:130px">
+                    すみません…<br>本当にすみません<br>😭😭😭
+                </div>
+                <div class="fuki shita" style="top:8px;right:6px;max-width:130px">
+                    慌てなくていいよ。<br>ダブルチェック<br>必ずしようね
+                </div>
+                <div class="nare" style="bottom:6px;left:6px">
+                    ※患者に投与する前に発見。実害なし
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 学びコーナー -->
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">インスリン専用シリンジ</span>を必ず使う</li>
+            <li>準備→<span class="point">ダブルチェック</span>→投与の手順を徹底</li>
+            <li>「合ってるかな？」と思ったら<span class="point">必ず先輩に確認</span></li>
+        </ul>
+    </div>
+
+    <!-- === 第2話 === -->
+    <div class="episode">
+        <div class="ep-title">第2話「で、結局何が言いたいの？」</div>
+        <div class="manga">
+            <div class="panel" style="height:250px">
+                <div class="koma">①</div>
+                <img src="r2a.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:140px">
+                    302号室の田中さん、<br>38.5℃で…<br>猫田先生に電話…💦
+                </div>
+                <div class="fuki kangae" style="top:6px;right:6px;max-width:110px">
+                    ちゃんと報告<br>しなきゃ…！
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">②</div>
+                <img src="r2b.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;left:6px;max-width:165px;font-size:10px">
+                    あの、田中さんなんですけど、<br>昨日の夜は36.8℃で、<br>朝は37.2℃だったんですが、<br>お昼ごはんは半分食べて、<br>それで今さっき測ったら…
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※要点に辿り着かない
+                </div>
+            </div>
+            <div class="panel" style="height:250px">
+                <div class="koma">③</div>
+                <img src="r2c.png" style="height:100%">
+                <div class="fuki sakebi shita" style="top:6px;right:6px;max-width:150px">
+                    で、結局<br>何が言いたいの？<br>忙しいんだけど！！
+                </div>
+                <div class="giongo" style="bottom:30px;left:10px;font-size:22px;transform:rotate(-5deg)">ガチャッ！</div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※電話を切られる
+                </div>
+            </div>
+            <div class="panel" style="height:260px">
+                <div class="koma">④</div>
+                <img src="r2d.png" style="height:100%">
+                <div class="fuki shita" style="top:6px;right:6px;max-width:150px">
+                    報告はSBARで<br>整理してからね。<br>結論を最初に言うの
+                </div>
+                <div class="fuki shita" style="bottom:25px;left:6px;max-width:140px">
+                    「38.5℃の発熱です。<br>指示をください」<br>これだけでいいの…？
+                </div>
+                <div class="nare" style="bottom:6px;right:6px">
+                    ※うさ先輩がSBARを伝授
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h4>📚 さくらの学びメモ</h4>
+        <ul>
+            <li><span class="point">SBAR</span>：状況→背景→評価→提案の順で報告</li>
+            <li><span class="point">結論から先に</span>言う（「38.5℃の発熱です」）</li>
+            <li>医師は忙しい。<span class="point">30秒以内</span>にまとめる意識</li>
+            <li>電話する前に<span class="point">メモに書き出して</span>から架電する</li>
+        </ul>
+    </div>
+
+    <!-- キャラ紹介 -->
+    <div class="chara-row">
+        <div class="chara-card">
+            <img src="r1a.png" alt="さくら">
+            <div class="name">🤍 さくら</div>
+            新人ナース3ヶ月目。<br>一生懸命だけどドジ。<br>得意：笑顔と謝罪
+        </div>
+        <div class="chara-card">
+            <img src="r1c.png" alt="うさ先輩">
+            <div class="name">🐰 うさ先輩</div>
+            プリセプター。<br>優しいけど指導は的確。<br>口癖：「確認した？」
+        </div>
+        <div class="chara-card">
+            <img src="r2c.png" alt="猫田先生">
+            <div class="name">🐱 猫田先生</div>
+            研修医2年目。<br>怒ると怖いが根は優しい。<br>口癖：「で？」
+        </div>
+    </div>
+
+    <div style="max-width:500px;width:100%;text-align:center;margin:8px 0">
+        <a href="sakura_human.html"
+            style="display:inline-block;padding:8px 20px;background:linear-gradient(135deg,#ff6b9d,#c44bff);color:#fff;border-radius:20px;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 3px 12px rgba(214,51,132,0.3)">🌸
+            人間バージョンを見る</a>
+    </div>
+    <p class="footer">♥ ドジっ子ナースさくらのインシデント日誌 — 第3話につづく？ ♥</p>
+</body>
+
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医ミナミ【X投稿用】</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8f0 50%, #fdf0ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 20px
+        }
+
+        .info {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            max-width: 500px;
+            padding: 8px;
+            background: rgba(255, 255, 255, .85);
+            border-radius: 12px;
+            border: 2px dashed #f0a0c0;
+            backdrop-filter: blur(4px)
+        }
+
+        .info b {
+            color: #e84393
+        }
+
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(232, 67, 147, .15);
+            border: 2px solid #f0c0d8
+        }
+
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+            border-bottom: 2px solid #f0c0d8;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card-header .ep {
+            font-size: 11px;
+            color: #fff;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+
+        .card-header h2 {
+            font-size: 15px;
+            color: #e84393;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #bbb
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f0d0e0;
+            aspect-ratio: 1
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 1px 4px rgba(232, 67, 147, .3)
+        }
+
+        /* 吹き出し */
+        .b {
+            position: absolute;
+            background: rgba(255, 255, 255, .92);
+            border: 1.5px solid #e84393;
+            border-radius: 14px;
+            padding: 4px 7px;
+            font-size: 8.5px;
+            font-weight: 700;
+            line-height: 1.45;
+            text-align: center;
+            max-width: 115px;
+            z-index: 10;
+            color: #444;
+            backdrop-filter: blur(2px)
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -10px;
+            left: 22%;
+            border-top-color: #e84393
+        }
+
+        .b.l::after {
+            left: -10px;
+            top: 30%;
+            border-right-color: #e84393
+        }
+
+        .b.r::after {
+            right: -10px;
+            top: 30%;
+            border-left-color: #e84393
+        }
+
+        .b.heart {
+            border-color: #ff6b81;
+            background: rgba(255, 240, 245, .95);
+            color: #c0392b
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #ccc;
+            color: #999;
+            font-size: 7.5px;
+            border-radius: 14px
+        }
+
+        .b.shout {
+            border-radius: 6px;
+            background: rgba(255, 240, 240, .95);
+            border-color: #e74c3c;
+            color: #c0392b;
+            font-size: 8.5px
+        }
+
+        .b.senior {
+            background: rgba(240, 248, 255, .95);
+            border-color: #3498db;
+            color: #2c3e50
+        }
+
+        .b.senior::after {
+            border-top-color: #3498db
+        }
+
+        /* ナレーション */
+        .n {
+            position: absolute;
+            background: rgba(232, 67, 147, .8);
+            color: #fff;
+            font-size: 7px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            z-index: 10
+        }
+
+        /* 効果音 */
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 14px;
+            color: #e84393;
+            text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+            z-index: 10
+        }
+
+        /* ハートエフェクト */
+        .hearts {
+            position: absolute;
+            font-size: 16px;
+            z-index: 10;
+            animation: float 2s ease-in-out infinite;
+            opacity: 0.7
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .card-footer {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #fff5f8, #fff0f5);
+            border-top: 1px solid #f0d0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #bbb
+        }
+
+        .card-footer .series {
+            color: #e84393;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #666;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        💗 <b>ゆるふわ女医ミナミ</b> X投稿用 — スクショして投稿してね！<br>
+        🩺 ゆるふわ天然系女医のミナミ先生が繰り広げる、ちょっとドキドキな病院ライフ♡
+    </div>
+
+    <!-- 第1話 -->
+    <div class="card" id="ep1">
+        <div class="card-header">
+            <span class="ep">第1話</span>
+            <h2>距離感バグってる外来</h2>
+            <span class="tag">💗 外来回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf1a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px">
+                    今日も外来かぁ〜<br>患者さん来ないかな♡
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※ミナミ先生（28）独身</div>
+            </div>
+            <!-- コマ② -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf1b.png">
+                <div class="b heart d" style="top:4px;left:4px;max-width:105px">
+                    どうしました〜？<br>痛いところ、<br>お姉さんに<br>見せて？♡
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:85px">
+                    え…距離<br>近くない…？
+                </div>
+                <div class="sfx" style="top:3px;right:6px;font-size:11px">ドキッ</div>
+            </div>
+            <!-- コマ③ -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf1c.png">
+                <div class="b senior d" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    …南先生の外来<br>再診率が異常に<br>高いんだが
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:85px">
+                    そりゃ…<br>また来たくなるわ
+                </div>
+            </div>
+            <!-- コマ④（オチ） -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf1d.png">
+                <div class="b heart d" style="top:4px;right:4px;max-width:100px">
+                    お大事にね〜♡<br>また来てね！
+                </div>
+                <div class="hearts" style="top:10px;left:8px">♡♡♡</div>
+                <div class="b shout" style="bottom:8px;left:4px;max-width:90px;font-size:7px">
+                    「また来てね」は<br>医者が言う<br>セリフじゃない！！
+                </div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※再診率300%</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医ミナミ</span>
+            <span class="lesson">💉 診察は治療です（建前）</span>
+        </div>
+    </div>
+
+    <!-- 第2話 -->
+    <div class="card" id="ep2">
+        <div class="card-header">
+            <span class="ep">第2話</span>
+            <h2>当直中のカップ麺の背徳感</h2>
+            <span class="tag">🌙 当直回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 深夜の当直室 -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf2a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    当直4時間目…<br>もうおなか<br>ペコペコ〜💦
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※AM1:30 当直室にて</div>
+            </div>
+            <!-- コマ② カップ麺発見 -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf2b.png">
+                <div class="b heart d" style="top:4px;left:4px;max-width:105px">
+                    あっ♡<br>非常用カップ麺<br>発見〜！<br>いただきまーす♡
+                </div>
+                <div class="sfx" style="bottom:6px;right:6px;font-size:11px">ﾜｸﾜｸ♪</div>
+                <div class="hearts" style="top:8px;right:8px">♡♡</div>
+            </div>
+            <!-- コマ③ PHS鳴る -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf2c.png">
+                <div class="sfx" style="top:3px;left:5px;font-size:16px;color:#e74c3c">ﾌﾟﾙﾙﾙ!!</div>
+                <div class="b shout" style="top:4px;right:4px;max-width:100px">
+                    え゛っ!?<br>今!? 今なの!?😭
+                </div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:85px">
+                    3分待って…<br>あと3分だけ…
+                </div>
+            </div>
+            <!-- コマ④ オチ: のびた麺 -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf2d.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    …30分後…<br>わたしの麺が…<br>ふにゃふにゃに…😢
+                </div>
+                <div class="b senior d" style="top:4px;right:4px;max-width:90px;font-size:7px">
+                    あ、南先生<br>おつかれ〜♪<br>カップ麺うま！
+                </div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※上級医は要領がいい</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医ミナミ</span>
+            <span class="lesson">🍜 当直のカップ麺は3分で食べるか、永遠に食べられないか</span>
+        </div>
+    </div>
+
+    <!-- 第3話 -->
+    <div class="card" id="ep3">
+        <div class="card-header">
+            <span class="ep">第3話</span>
+            <h2>健康診断でまさかの…💦</h2>
+            <span class="tag">💗 お色気回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 朝の出勤 -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf3a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    今日は健診担当♪<br>バッチリ<br>決めてきたよ〜✨
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※朝8:00 ご機嫌</div>
+            </div>
+            <!-- コマ② 更衣室で気づく -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf3b.png">
+                <div class="sfx" style="top:3px;right:5px;font-size:14px;color:#e74c3c">ガーン!!</div>
+                <div class="b shout" style="top:4px;left:4px;max-width:110px">
+                    え…ちょっと待って<br>インナー…<br>忘れた…!?😱
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:90px;font-size:7px">
+                    白衣の下<br>何もない…<br>どうしよう…💦
+                </div>
+            </div>
+            <!-- コマ③ 健診中 -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf3c.png">
+                <div class="b heart d" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
+                    は、はい〜<br>深呼吸して<br>くださいね…♡<br>（前かがみ厳禁!!）
+                </div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:85px;font-size:7px">
+                    なんか先生<br>今日の距離感<br>おかしくない…？
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">💦💦</div>
+            </div>
+            <!-- コマ④ オチ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf3d.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    ふぅ…<br>なんとか<br>乗り切った…😮‍💨
+                </div>
+                <div class="b senior d" style="top:4px;right:4px;max-width:90px;font-size:7px">
+                    南先生〜<br>白衣のボタン<br>1個外れてるよ？
+                </div>
+                <div class="sfx" style="bottom:10px;left:10px;font-size:13px;color:#e74c3c">キャーーッ!!</div>
+                <div class="hearts" style="bottom:5px;right:5px">♡♡♡</div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※健診の再診希望が殺到</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医ミナミ</span>
+            <span class="lesson">👙 インナーは2枚持ちがプロの鉄則</span>
+        </div>
+    </div>
+
+    <!-- 第4話 -->
+    <div class="card" id="ep4">
+        <div class="card-header">
+            <span class="ep">第4話</span>
+            <h2>夜勤明けのシャワー事件💦</h2>
+            <span class="tag">🔥 お色気回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 当直明け -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf4a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    36時間勤務<br>やっと終わった…<br>もう無理…😴
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※AM6:30 限界突破</div>
+            </div>
+            <!-- コマ② シャワーへ -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf4b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:110px">
+                    帰る前に<br>シャワー浴びよ♪<br>あ〜楽しみ♡
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:85px;font-size:7px">
+                    鍵…なんか<br>ゆるいけど<br>まあいっか〜
+                </div>
+            </div>
+            <!-- コマ③ 突入事件 -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf4c.png">
+                <div class="sfx" style="top:3px;left:5px;font-size:16px;color:#e74c3c">ガチャッ!!</div>
+                <div class="b shout" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
+                    あっ…<br>す、すみませ…<br>み、南先生!?😳
+                </div>
+                <div class="b shout" style="bottom:8px;left:4px;max-width:90px">
+                    ちょ!!!!<br>見んなーーっ!!💢
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">💦💦💦</div>
+            </div>
+            <!-- コマ④ オチ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf4d.png">
+                <div class="sfx" style="top:3px;right:5px;font-size:14px;color:#e74c3c">ドカッ!!</div>
+                <div class="b shout" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    シャンプー<br>ボトル投げんの<br>やめてください!!😭
+                </div>
+                <div class="b d" style="bottom:12px;right:4px;max-width:90px;font-size:7px">
+                    ………<br>明日から<br>目合わせられない…♡
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">♡♡♡♡</div>
+                <div class="n" style="bottom:3px;left:3px;font-size:6px">※翌日から二人の距離が近くなった（気がする）</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医ミナミ</span>
+            <span class="lesson">🚿 当直室のシャワーの鍵は必ず確認すること</span>
+        </div>
+    </div>
+
+    <!-- 第5話 -->
+    <div class="card" id="ep5">
+        <div class="card-header">
+            <span class="ep">第5話</span>
+            <h2>病院忘年会のドレス事件👗</h2>
+            <span class="tag">🔥 セクシー回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 普段のミナミ -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf5a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    今日も地味に<br>カルテ処理…<br>誰にも気づかれない系女医
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※存在感ゼロ</div>
+            </div>
+            <!-- コマ② ドレスアップ -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf5b.png">
+                <div class="b heart d" style="top:4px;left:4px;max-width:110px">
+                    忘年会だし…<br>たまには<br>ちゃんとしよ♡
+                </div>
+                <div class="sfx" style="bottom:8px;right:5px;font-size:12px;color:#e74c3c">キラッ✨</div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※本気の変身タイム</div>
+            </div>
+            <!-- コマ③ 登場 -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf5c.png">
+                <div class="sfx" style="top:3px;left:5px;font-size:16px;color:#e74c3c">ザワッ…!!</div>
+                <div class="b shout" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
+                    え…あれ誰…？<br>南先生!?<br>嘘だろ…!?😳
+                </div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:85px;font-size:7px">
+                    （ドリンク<br>こぼしてるよ<br>先生たち…）
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">♡♡♡♡</div>
+            </div>
+            <!-- コマ④ オチ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf5d.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    あの…<br>そんなに<br>見ないで…///💦
+                </div>
+                <div class="b shout" style="top:4px;right:4px;max-width:90px;font-size:7px">
+                    南先生！<br>ワイン持ってきました！<br>いやオレが先！
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">♡♡♡♡♡</div>
+                <div class="n" style="bottom:3px;left:3px;font-size:6px">※翌日から外来予約が3倍に増えた</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医ミナミ</span>
+            <span class="lesson">👗 ギャップは最強の武器である</span>
+        </div>
+    </div>
+</body>
+
+</html>

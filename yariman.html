@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医のヤリマン日記</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3, #fff1f2);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 16px
+        }
+
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+            border: 2px solid #fbcfe8
+        }
+
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            border-bottom: 2px solid #fbcfe8;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card-header .ep {
+            font-size: 10px;
+            color: #fff;
+            background: #ec4899;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+
+        .card-header h2 {
+            font-size: 13px;
+            color: #be185d;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #f472b6
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #fce7f3;
+            aspect-ratio: 1
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            background: #ec4899;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .b {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid #ec4899;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 110px;
+            z-index: 10;
+            color: #333
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -10px;
+            left: 20%;
+            border-top-color: #ec4899
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #f9a8d4;
+            color: #9d174d;
+            font-size: 7px;
+            border-radius: 12px
+        }
+
+        .b.shout {
+            border-radius: 4px;
+            background: #fff1f2;
+            border-color: #f43f5e;
+            color: #be123c;
+            font-size: 8px
+        }
+
+        .b.dark {
+            background: #ec4899;
+            color: #fff;
+            border-color: #be185d
+        }
+
+        .b.blush {
+            background: #fdf2f8;
+            border-color: #f472b6;
+            color: #9d174d
+        }
+
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 14px;
+            color: #ec4899;
+            text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10
+        }
+
+        .n {
+            position: absolute;
+            background: rgba(236, 72, 153, .8);
+            color: #fff;
+            font-size: 7px;
+            padding: 2px 5px;
+            border-radius: 8px;
+            z-index: 10
+        }
+
+        .card-footer {
+            padding: 5px 12px;
+            background: #fdf2f8;
+            border-top: 1px solid #fce7f3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #f472b6
+        }
+
+        .card-footer .series {
+            color: #ec4899;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #9d174d;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">第1話</span>
+            <h2>ゆるふわ女医のヤリマン日記</h2>
+            <span class="tag">💋 大人の4コマ</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yd1.png">
+                <div class="b d" style="top:4px;left:4px;max-width:90px;font-size:7px">今日もモテちゃう〜♪<br>困っちゃうな〜💕</div>
+                <div class="n" style="bottom:3px;right:3px">※ゆるふわ女医・ハル先生(28)</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yd2.png">
+                <div class="sfx" style="top:5px;right:5px;font-size:11px;color:#f43f5e">ピコン♪ピコン♪</div>
+                <div class="b blush" style="top:4px;left:4px;max-width:95px;font-size:7px">
+                    今夜ヒマ？💕<br>明日空いてる？😘<br>週末どう？❤️</div>
+                <div class="b shout" style="bottom:8px;right:4px;max-width:85px;font-size:7px">先生！！<br>通知やばくない!?😱</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yd3.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:12px;transform:rotate(-3deg)">キラキラ✨</div>
+                <div class="b dark" style="top:4px;right:4px;max-width:90px;font-size:7px">今夜は<br>とっておきの<br>予約があるの💋
+                </div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:80px;font-size:7px">
+                    （絶対男だ…<br>毎晩違う人と…<br>やっぱりヤリ…）</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yd4.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:16px;color:#f43f5e;transform:rotate(-5deg)">モグモグ💕
+                </div>
+                <div class="b d" style="top:4px;right:4px;max-width:100px;font-size:7px">焼肉マン♪<br>やっぱ一人焼肉<br>最高〜〜！🥩✨
+                </div>
+                <div class="b shout" style="bottom:8px;left:4px;max-width:90px">ヤリマンって<br>焼肉マンかーい！！💢</div>
+                <div class="n" style="bottom:4px;right:4px">※週7で焼肉に通う女</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💋 ゆるふわ女医シリーズ</span>
+            <span class="lesson">🥩 ヤリマン＝焼肉マニア</span>
+        </div>
+    </div>
+</body>
+
+</html>

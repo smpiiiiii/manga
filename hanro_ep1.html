@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>反サロ医療マンガ 第1話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #e8eaf6 0%, #f5f5f5 50%, #eceff1 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card {
+            width: 500px; max-width: 100%; background: #fff;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(69,90,100,.2); border: 2px solid #b0bec5
+        }
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #eceff1, #cfd8dc);
+            border-bottom: 2px solid #90a4ae;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #546e7a, #78909c);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700
+        }
+        .card-header h2 { font-size: 14px; color: #37474f; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #e53935; font-weight: 700 }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #cfd8dc; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 3px; right: 4px;
+            background: linear-gradient(135deg, #546e7a, #78909c);
+            color: #fff; font-size: 9px; font-weight: 900;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; box-shadow: 0 1px 4px rgba(0,0,0,.2)
+        }
+        /* 吹き出し（社会派トーン） */
+        .b {
+            position: absolute; background: rgba(255,255,255,.92);
+            border: 1.5px solid #546e7a; border-radius: 14px;
+            padding: 4px 7px; font-size: 8.5px; font-weight: 700;
+            line-height: 1.45; text-align: center; max-width: 115px;
+            z-index: 10; color: #37474f; backdrop-filter: blur(2px)
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 4px solid transparent }
+        .b.d::after { bottom: -10px; left: 22%; border-top-color: #546e7a }
+        .b.doc { background: rgba(227,242,253,.95); border-color: #1565c0; color: #0d47a1 }
+        .b.doc::after { border-top-color: #1565c0 }
+        .b.patient { background: rgba(255,243,224,.95); border-color: #e65100; color: #bf360c }
+        .b.patient::after { border-top-color: #e65100 }
+        .b.think { border-style: dashed; border-color: #999; color: #666; font-size: 7.5px; border-radius: 14px }
+        .b.shout { border-radius: 6px; background: rgba(255,235,238,.95); border-color: #c62828; color: #b71c1c }
+        .b.dark { background: rgba(55,71,79,.9); color: #fff; border-color: #263238 }
+        .b.dark::after { border-top-color: #263238 }
+        .n { position: absolute; background: rgba(69,90,100,.85); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #c62828; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; z-index: 10 }
+        .pills { position: absolute; font-size: 14px; z-index: 10; opacity: .7 }
+        .card-footer {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #eceff1, #cfd8dc);
+            border-top: 1px solid #b0bec5;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 9px; color: #78909c; flex-wrap: wrap; gap: 4px
+        }
+        .card-footer .series { color: #c62828; font-weight: 700 }
+        .card-footer .lesson { color: #37474f; font-weight: 700 }
+        @media (max-width: 520px) {
+            body { padding: 8px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 12px }
+            .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% }
+            .b.think { font-size: 6.5px }
+            .sfx { font-size: 12px }
+            .n { font-size: 6px }
+            .cell .num { width: 16px; height: 16px; font-size: 8px }
+            .card-footer { font-size: 8px }
+        }
+        @media (max-width: 380px) {
+            .b { font-size: 6.5px; padding: 2px 4px; max-width: 52% }
+            .sfx { font-size: 10px }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="hanro1">
+        <div class="card-header">
+            <span class="ep">第1話</span>
+            <h2>「とりあえず薬出しておきますね」💊</h2>
+            <span class="tag">🔥 反サロ</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① いつもの外来 -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="hanro1a.png">
+                <div class="b doc d" style="top:4px;left:4px;max-width:110px">
+                    はいはい、<br>いつもの薬ね。<br>とりあえず<br>出しておきますね〜
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:85px;font-size:7px">
+                    （カルテ<br>ほぼ見てない…）
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※外来3分、処方30秒</div>
+            </div>
+            <!-- コマ② 薬の山 -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="hanro1b.png">
+                <div class="b patient d" style="top:4px;right:4px;max-width:105px">
+                    先生〜♪<br>今日も薬<br>もらいに来たわよ〜
+                </div>
+                <div class="sfx" style="bottom:8px;left:5px;font-size:12px">ドサッ!!</div>
+                <div class="pills" style="top:8px;left:8px">💊💊💊💊💊</div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※現在の処方：12種類</div>
+            </div>
+            <!-- コマ③ 研修医ドン引き -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="hanro1c.png">
+                <div class="sfx" style="top:3px;left:5px;font-size:14px">ｽﾞﾗｧｧｧ…!!</div>
+                <div class="b shout" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
+                    え…この患者さん<br>12種類!?<br>飲み合わせ<br>大丈夫なんですか!?😨
+                </div>
+                <div class="b dark d" style="bottom:8px;left:4px;max-width:90px;font-size:7px">
+                    大丈夫じゃないから<br>副作用止めの薬が<br>3つ入ってるんだよ
+                </div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※薬の副作用を薬で抑える無限ループ</div>
+            </div>
+            <!-- コマ④ オチ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="hanro1d.png">
+                <div class="b patient d" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    お薬手帳？<br>もう3冊目よ〜♪<br>辞書みたいでしょ？
+                </div>
+                <div class="b shout" style="top:4px;right:4px;max-width:90px;font-size:7px">
+                    薬の整理に<br>30分かかる<br>んですけど…😭
+                </div>
+                <div class="pills" style="bottom:12px;left:8px">💊💊💊💊💊💊💊</div>
+                <div class="b dark d" style="bottom:8px;right:4px;max-width:95px;font-size:6.5px">
+                    薬が増える<br>→副作用が増える<br>→また薬が増える<br>∞ 無限ループ ∞
+                </div>
+                <div class="n" style="bottom:3px;left:3px;font-size:6px">※医療費月額8万円（3割負担で2.4万）</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💊 反サロ医療マンガ</span>
+            <span class="lesson">⚠️ ポリファーマシー（多剤併用）は日本の医療の闇</span>
+        </div>
+    </div>
+</body>
+</html>
+

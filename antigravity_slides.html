@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Antigravity ができること</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Noto Sans JP', sans-serif }
+        .slides { width: 100%; height: 100%; position: relative }
+        .slide {
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 32px 24px; text-align: center; opacity: 0; transition: opacity .5s;
+            pointer-events: none
+        }
+        .slide.active { opacity: 1; pointer-events: auto }
+        /* スライド共通 */
+        .slide h1 { font-size: 28px; font-weight: 900; margin-bottom: 16px; line-height: 1.4 }
+        .slide h2 { font-size: 20px; font-weight: 700; margin-bottom: 12px; line-height: 1.4 }
+        .slide p { font-size: 14px; line-height: 1.8; max-width: 400px; color: rgba(255,255,255,.85) }
+        .slide .emoji { font-size: 48px; margin-bottom: 16px }
+        .slide ul { text-align: left; font-size: 14px; line-height: 2; list-style: none; max-width: 340px }
+        .slide ul li::before { content: '✅ '; }
+        .slide .tag { display: inline-block; background: rgba(255,255,255,.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; margin: 3px; backdrop-filter: blur(5px) }
+        /* カラーテーマ */
+        .s1 { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff }
+        .s2 { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); color: #fff }
+        .s3 { background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77); color: #fff }
+        .s4 { background: linear-gradient(135deg, #1b1b2f, #162447, #1f4068); color: #fff }
+        .s5 { background: linear-gradient(135deg, #0c0c1d, #1a1a3e, #2d2d6e); color: #fff }
+        .s6 { background: linear-gradient(135deg, #141e30, #243b55); color: #fff }
+        .s7 { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff }
+        .s8 { background: linear-gradient(135deg, #1f1c2c, #928dab); color: #fff }
+        .s9 { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff }
+        .s10 { background: linear-gradient(135deg, #000428, #004e92); color: #fff }
+        /* ハイライト */
+        .hl { color: #64ffda }
+        .hl2 { color: #ff6b9d }
+        .hl3 { color: #ffd93d }
+        /* グリッド */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 350px; margin-top: 12px }
+        .grid-item {
+            background: rgba(255,255,255,.08); border-radius: 12px; padding: 14px 10px;
+            border: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(5px)
+        }
+        .grid-item .icon { font-size: 28px; margin-bottom: 6px }
+        .grid-item .label { font-size: 11px; font-weight: 700; color: #64ffda }
+        .grid-item .desc { font-size: 10px; color: rgba(255,255,255,.7); margin-top: 4px }
+        /* ナビ */
+        .nav {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 6px; z-index: 100
+        }
+        .nav .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,.3); cursor: pointer; transition: all .3s
+        }
+        .nav .dot.active { background: #64ffda; width: 24px; border-radius: 4px }
+        .page-num {
+            position: fixed; top: 12px; right: 16px; font-size: 11px;
+            color: rgba(255,255,255,.4); z-index: 100
+        }
+        .swipe-hint {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            font-size: 10px; color: rgba(255,255,255,.3); z-index: 100
+        }
+        @media (max-width: 400px) {
+            .slide h1 { font-size: 22px }
+            .slide h2 { font-size: 17px }
+            .slide p { font-size: 12px }
+            .slide ul { font-size: 12px }
+            .grid-item { padding: 10px 8px }
+        }
+    </style>
+</head>
+<body>
+<div class="slides" id="slides">
+
+    <!-- Slide 1: タイトル -->
+    <div class="slide s1 active">
+        <div class="emoji">🚀</div>
+        <h1><span class="hl">Antigravity</span><br>ができること</h1>
+        <p>AIペアプログラミングで<br>開発を10倍速にする次世代ツール</p>
+    </div>
+
+    <!-- Slide 2: 概要 -->
+    <div class="slide s2">
+        <div class="emoji">🤖</div>
+        <h2>Antigravityとは？</h2>
+        <p>Google DeepMindが開発した<br><span class="hl">AIコーディングアシスタント</span></p>
+        <br>
+        <p>コードを書くだけじゃない。<br>考えて、調べて、実行して、<br><span class="hl2">完成まで全部やる。</span></p>
+    </div>
+
+    <!-- Slide 3: コード生成 -->
+    <div class="slide s3">
+        <h2>💻 コード生成・編集</h2>
+        <div class="grid">
+            <div class="grid-item">
+                <div class="icon">⚡</div>
+                <div class="label">自動コーディング</div>
+                <div class="desc">指示するだけでコードを生成・修正</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">🐛</div>
+                <div class="label">バグ修正</div>
+                <div class="desc">エラーを検出して自動で直す</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">📁</div>
+                <div class="label">ファイル操作</div>
+                <div class="desc">作成・編集・検索・一括変更</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">🔍</div>
+                <div class="label">コード理解</div>
+                <div class="desc">既存コードの分析・説明</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Web開発 -->
+    <div class="slide s4">
+        <h2>🌐 Webアプリ開発</h2>
+        <div class="grid">
+            <div class="grid-item">
+                <div class="icon">🎨</div>
+                <div class="label">UI/UXデザイン</div>
+                <div class="desc">モダンで美しいデザインを自動生成</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">📱</div>
+                <div class="label">レスポンシブ</div>
+                <div class="desc">スマホ対応のサイトを一発で</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">🖼️</div>
+                <div class="label">画像生成</div>
+                <div class="desc">AIでイラスト・アイコンを作成</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">🌍</div>
+                <div class="label">デプロイ</div>
+                <div class="desc">ローカルサーバー＋公開トンネル</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: ブラウザ操作 -->
+    <div class="slide s5">
+        <h2>🖥️ ブラウザ自動操作</h2>
+        <ul>
+            <li>Webページの自動スクリーンショット</li>
+            <li>フォーム入力・ボタンクリック</li>
+            <li>Webスクレイピング・データ収集</li>
+            <li>動作のビデオ録画</li>
+            <li>DOM解析・要素検出</li>
+        </ul>
+    </div>
+
+    <!-- Slide 6: ターミナル -->
+    <div class="slide s6">
+        <h2>⚙️ ターミナル・システム操作</h2>
+        <ul>
+            <li>コマンド実行（npm, git, node...）</li>
+            <li>サーバー起動・管理</li>
+            <li>ファイル管理・一括処理</li>
+            <li>プロセス監視・ポート管理</li>
+            <li>外部ツール連携（cloudflared等）</li>
+        </ul>
+    </div>
+
+    <!-- Slide 7: コンテンツ制作 -->
+    <div class="slide s7">
+        <h2>🎨 コンテンツ制作</h2>
+        <div class="grid">
+            <div class="grid-item">
+                <div class="icon">📖</div>
+                <div class="label">AIマンガ</div>
+                <div class="desc">イラスト生成→セリフ→配信まで</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">📝</div>
+                <div class="label">文章生成</div>
+                <div class="desc">プロフ文・投稿文・企画書</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">🎯</div>
+                <div class="label">SNS戦略</div>
+                <div class="desc">投稿スケジュール・ハッシュタグ</div>
+            </div>
+            <div class="grid-item">
+                <div class="icon">📊</div>
+                <div class="label">分析・リサーチ</div>
+                <div class="desc">Web検索・競合分析・トレンド</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Discord Bot -->
+    <div class="slide s8">
+        <h2>🤖 Bot・自動化</h2>
+        <ul>
+            <li>Discord Bot開発・運用</li>
+            <li>定期実行スクリプト</li>
+            <li>API連携・データ処理</li>
+            <li>ワークフロー自動化</li>
+            <li>監視・アラートシステム</li>
+        </ul>
+    </div>
+
+    <!-- Slide 9: 実績 -->
+    <div class="slide s9">
+        <h2><span class="hl3">📌</span> 今日やったこと</h2>
+        <ul style="list-style:none">
+            <li>🎨 AIマンガ「ゆるふわ研修医みなみ」制作</li>
+            <li>📱 スマホ対応のマンガ配信サイト構築</li>
+            <li>🌐 cloudflaredでインターネット公開</li>
+            <li>🖼️ X用プロフ画像・ヘッダー生成</li>
+            <li>✍️ プロフィール文・投稿テンプレ作成</li>
+            <li>📥 セリフ入り画像の個別ダウンロード</li>
+            <li>📂 フォルダ構造・ファイル管理</li>
+        </ul>
+    </div>
+
+    <!-- Slide 10: まとめ -->
+    <div class="slide s10">
+        <div class="emoji">✨</div>
+        <h1><span class="hl">言うだけで、</span><br><span class="hl2">全部やる。</span></h1>
+        <br>
+        <p>コードもデザインも画像もBotも<br>Antigravityが全部まとめてやります。</p>
+        <br>
+        <div>
+            <span class="tag">💻 コーディング</span>
+            <span class="tag">🎨 デザイン</span>
+            <span class="tag">🖼️ 画像生成</span>
+            <span class="tag">🌐 デプロイ</span>
+            <span class="tag">🤖 Bot開発</span>
+            <span class="tag">📊 分析</span>
+        </div>
+    </div>
+</div>
+
+<div class="page-num" id="pageNum">1 / 10</div>
+<div class="nav" id="nav"></div>
+<div class="swipe-hint">← スワイプで次へ →</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const nav = document.getElementById('nav');
+const pageNum = document.getElementById('pageNum');
+
+// ドット作成
+slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    nav.appendChild(dot);
+});
+
+function goTo(n) {
+    slides[current].classList.remove('active');
+    nav.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    nav.children[current].classList.add('active');
+    pageNum.textContent = (current + 1) + ' / ' + slides.length;
+}
+
+// スワイプ対応
+let startX = 0;
+document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+        if (diff > 0 && current < slides.length - 1) goTo(current + 1);
+        if (diff < 0 && current > 0) goTo(current - 1);
+    }
+});
+// キーボード
+document.addEventListener('keydown', e => {
+    if ((e.key === 'ArrowRight' || e.key === ' ') && current < slides.length - 1) goTo(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+});
+// クリック
+document.addEventListener('click', e => {
+    if (e.target.closest('.nav')) return;
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.6 && current < slides.length - 1) goTo(current + 1);
+    if (x < 0.4 && current > 0) goTo(current - 1);
+});
+</script>
+</body>
+</html>

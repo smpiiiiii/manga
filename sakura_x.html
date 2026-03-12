@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ドジっ子ナースさくら X投稿用</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 24px
+        }
+
+        .info {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            max-width: 500px;
+            padding: 8px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #ddd
+        }
+
+        .info b {
+            color: #d63384
+        }
+
+        /* 4コマカード */
+        .card {
+            width: 500px;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #ffeef4, #fff5f9);
+            border-bottom: 2px solid #f0c0d0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header .ep {
+            font-size: 11px;
+            color: #fff;
+            background: #d63384;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+
+        .card-header .ep.dark {
+            background: #555
+        }
+
+        .card-header h2 {
+            font-size: 14px;
+            color: #d63384;
+            font-weight: 900;
+            flex: 1
+        }
+
+        .card-header h2.dark {
+            color: #555
+        }
+
+        .card-header .tag {
+            font-size: 10px;
+            color: #aaa
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr
+        }
+
+        .cell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #222;
+            aspect-ratio: 1
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            background: #d63384;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10
+        }
+
+        .cell .num.dark {
+            background: #555
+        }
+
+        .cell .num.red {
+            background: #c0392b
+        }
+
+        /* 吹き出し */
+        .b {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid #333;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 110px;
+            z-index: 10;
+            color: #333
+        }
+
+        .b::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent
+        }
+
+        .b.d::after {
+            bottom: -10px;
+            left: 20%;
+            border-top-color: #333
+        }
+
+        .b.l::after {
+            left: -10px;
+            top: 30%;
+            border-right-color: #333
+        }
+
+        .b.r::after {
+            right: -10px;
+            top: 30%;
+            border-left-color: #333
+        }
+
+        .b.shout {
+            border-radius: 4px;
+            background: #fff7e0;
+            border-color: #e74c3c;
+            color: #c0392b;
+            font-size: 8px
+        }
+
+        .b.think {
+            border-style: dashed;
+            border-color: #999;
+            color: #888;
+            font-size: 7px;
+            border-radius: 12px
+        }
+
+        .b.dark {
+            background: #333;
+            color: #fff;
+            border-color: #c0392b
+        }
+
+        .n {
+            position: absolute;
+            background: rgba(0, 0, 0, .75);
+            color: #fff;
+            font-size: 7px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            z-index: 10
+        }
+
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 16px;
+            color: #e74c3c;
+            text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff;
+            z-index: 10
+        }
+
+        /* フッター */
+        .card-footer {
+            padding: 4px 10px;
+            background: #fafafa;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #aaa
+        }
+
+        .card-footer .series {
+            color: #d63384;
+            font-weight: 700
+        }
+
+        .card-footer .lesson {
+            color: #555;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        📱 <b>X投稿用</b>：各カードを長押し保存 or スクリーンショットして投稿してね！<br>
+        推奨サイズ：1:1（スクショでOK）
+    </div>
+    <div style="display:flex;gap:8px;font-size:12px">
+        <a href="sakura_mochi_x.html"
+            style="padding:6px 16px;border-radius:16px;text-decoration:none;font-weight:700;background:#fff;color:#d63384;border:1px solid #d63384">🍡
+            もちキャラ版</a>
+        <a href="sakura_x.html"
+            style="padding:6px 16px;border-radius:16px;text-decoration:none;font-weight:700;background:#d63384;color:#fff">👩
+            人間版</a>
+    </div>
+
+    <!-- ========== 第1話 ========== -->
+    <div class="card" id="ep1">
+        <div class="card-header">
+            <span class="ep">第1話</span>
+            <h2>インスリン、それ4単位じゃないです</h2>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="h1a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px">指示簿確認…<br>ヒューマリンR<br>4単位、と…</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="h1b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:90px">え…これ<br>1目盛りいくつ？<br>4…40…？💦</div>
+                <div class="n" style="bottom:3px;right:3px">※シリンジ間違い</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="h1c.png">
+                <div class="sfx" style="top:5px;right:5px;transform:rotate(-8deg);font-size:14px">ストップ！！</div>
+                <div class="b shout l" style="top:4px;left:4px;max-width:100px">それ40単位！<br>低血糖で<br>死んじゃうよ！？</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="h1d.png">
+                <div class="b shout r" style="top:4px;left:4px;max-width:90px">すみません…<br>😭😭😭</div>
+                <div class="b d" style="top:4px;right:4px;max-width:100px">ダブルチェック<br>必ずしようね</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson">📚 ハイリスク薬は10倍量間違いが命に関わる</span>
+        </div>
+    </div>
+
+    <!-- ========== 第2話 ========== -->
+    <div class="card" id="ep2">
+        <div class="card-header">
+            <span class="ep">第2話</span>
+            <h2>で、結局何が言いたいの？</h2>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="h2a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">302号室の田中さん<br>38.5℃で…<br>先生に電話…💦</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="h2b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:110px;font-size:7px">
+                    あの、昨日の夜は<br>36.8℃で、朝は<br>37.2℃だったん<br>ですが…</div>
+                <div class="n" style="bottom:3px;right:3px">※要点に辿り着かない</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="h2c.png">
+                <div class="b shout d" style="top:4px;right:4px;max-width:100px">で、結局<br>何が言いたいの？<br>忙しいんだけど！</div>
+                <div class="sfx" style="bottom:8px;left:5px;font-size:13px">ガチャッ！</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="h2d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:105px">報告はSBARで<br>結論を最初に<br>言うの</div>
+                <div class="b d" style="bottom:8px;left:4px;max-width:95px">「38.5℃の発熱です」<br>これだけで<br>いいの…？</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson">📚 結論→背景→評価→提案（SBAR）</span>
+        </div>
+    </div>
+
+    <!-- ========== 第3話 ========== -->
+    <div class="card" id="ep3">
+        <div class="card-header">
+            <span class="ep">第3話</span>
+            <h2>田中さん…どっちの？</h2>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="h3a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px">305号室の<br>田中さ〜ん！<br>お薬で〜す♪</div>
+                <div class="n" style="bottom:3px;right:3px">※2人部屋</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="h3b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:85px">田中さん、<br>降圧剤です</div>
+                <div class="b l" style="top:4px;right:4px;max-width:85px">ワシも<br>田中なんじゃが</div>
+                <div class="sfx" style="bottom:8px;left:40%;font-size:13px">えっ！？</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="h3c.png">
+                <div class="b shout d" style="top:4px;left:4px;max-width:105px">フルネームと<br>生年月日で確認！<br>リストバンドも！</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="h3d.png">
+                <div class="b shout r" style="top:4px;left:4px;max-width:100px">すみません<br>田中さん…！<br>（どっちの）</div>
+                <div class="n" style="bottom:3px;right:3px">※投与前に発見</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson">📚 フルネーム＋生年月日＋リストバンド</span>
+        </div>
+    </div>
+
+    <!-- ========== 第4話 ========== -->
+    <div class="card" id="ep4">
+        <div class="card-header">
+            <span class="ep">第4話</span>
+            <h2>その点滴、ちょっと速くない？</h2>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="h4a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px">500mLを6時間…<br>1分あたり<br>何滴…？💦</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="h4b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:85px">よし！<br>大丈夫なはず！</div>
+                <div class="b shout l" style="bottom:8px;right:4px;max-width:100px">看護師さん…<br>すごい勢いで<br>落ちてます…</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="h4c.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:14px;transform:rotate(-8deg)">ダッ！！</div>
+                <div class="b shout d" style="top:4px;right:4px;max-width:105px">止めて！<br>1時間で全部<br>落ちるペースだよ！</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="h4d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:100px">成人用ルートは<br>1mL＝20滴。<br>計算し直して</div>
+                <div class="b d" style="bottom:8px;left:4px;max-width:100px">500÷6÷60×20<br>≒28滴/分…<br>今度こそ！</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson">📚 速すぎる点滴→心不全・肺水腫のリスク</span>
+        </div>
+    </div>
+
+    <!-- ========== 第5話 ========== -->
+    <div class="card" id="ep5">
+        <div class="card-header">
+            <span class="ep">第5話</span>
+            <h2>ベッド柵、上げ忘れてない？</h2>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="h5a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:95px">山田さん、<br>体位変換<br>終わりました〜</div>
+                <div class="b think" style="top:4px;right:4px;max-width:80px">次は検温…<br>急がなきゃ</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="h5b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:90px">また来ますね♪</div>
+                <div class="n" style="bottom:3px;right:3px">※柵を上げ忘れて退室</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="h5c.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:14px;transform:rotate(-8deg)">ドサッ！！</div>
+                <div class="b shout d" style="top:4px;right:4px;max-width:100px">山田さん！<br>大丈夫ですか！？</div>
+                <div class="n" style="bottom:3px;left:3px">※ベッドから転落</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="h5d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:105px">転倒転落は<br>看護事故で最多。<br>柵の確認を徹底して</div>
+                <div class="b shout r" style="bottom:8px;left:4px;max-width:95px">私のせいで<br>山田さんが…</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson">📚 転倒転落は看護事故の約40%</span>
+        </div>
+    </div>
+
+    <!-- ========== 第6話 ========== -->
+    <div class="card" id="ep6">
+        <div class="card-header">
+            <span class="ep">第6話</span>
+            <h2>聞いてないんですけど！？</h2>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="h6a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:110px;font-size:7px">
+                    特変なしで…<br>408の鈴木さんは<br>明日検査で…ふぁ〜💤</div>
+                <div class="n" style="bottom:3px;right:3px">※夜勤明けの申し送り</div>
+            </div>
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="h6b.png">
+                <div class="b shout l" style="top:4px;right:4px;max-width:95px">ちょっと！<br>その薬！<br>アレルギー<br>あるのよ！！</div>
+            </div>
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="h6c.png">
+                <div class="b shout d" style="top:4px;left:4px;max-width:105px">セフェム系<br>アレルギー、<br>申し送りした！？</div>
+                <div class="b d" style="bottom:8px;right:4px;max-width:80px">言い忘れて<br>ました…😱</div>
+            </div>
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="h6d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:105px">申し送りは<br>テンプレで。<br>アレルギーは<br>最優先で伝えて</div>
+                <div class="b d" style="bottom:8px;left:4px;max-width:100px">アレルギー情報は<br>命に関わる…</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson">📚 アナフィラキシーは数分で致命的</span>
+        </div>
+    </div>
+
+    <!-- ========== 第7話（シリアス回） ========== -->
+    <div class="card" id="ep7">
+        <div class="card-header" style="background:linear-gradient(135deg,#f0eded,#e5e0e0);border-color:#ccc">
+            <span class="ep dark">第7話</span>
+            <h2 class="dark">誰も見てない時のさくら</h2>
+            <span class="tag">⚠️ シリアス回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num dark">①</div>
+                <img src="h7a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:95px">佐藤さん♪<br>お薬の時間<br>ですよ〜☺️</div>
+                <div class="n" style="bottom:3px;right:3px">※同僚の前では模範的</div>
+            </div>
+            <div class="cell" style="background:#1a1a2e">
+                <div class="num red">②</div>
+                <img src="h7b.png" style="filter:brightness(0.9)">
+                <div class="b dark d" style="top:4px;left:4px;max-width:105px">何回言ったら<br>わかるの！？<br>もう寝ててよ…！</div>
+                <div class="n" style="bottom:3px;right:3px;background:rgba(192,57,43,.9)">※態度が豹変</div>
+            </div>
+            <div class="cell">
+                <div class="num red">③</div>
+                <img src="h7c.png">
+                <div class="b shout d" style="top:4px;left:4px;max-width:95px">さくらさん…<br>今の、何…？</div>
+                <div class="b d" style="bottom:8px;right:4px;max-width:75px">あ……<br>先輩……</div>
+                <div class="n" style="bottom:3px;left:3px">※全て目撃されていた</div>
+            </div>
+            <div class="cell">
+                <div class="num dark">④</div>
+                <img src="h7d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:110px;font-size:7px">
+                    認知症でも<br>感情は残ってる。<br>怖い、悲しいは<br>ちゃんと感じてるの</div>
+                <div class="b shout r" style="bottom:8px;left:4px;max-width:85px;font-size:7px">……最低だ<br>私……</div>
+            </div>
+        </div>
+        <div class="card-footer" style="background:#f5f0f0;border-color:#ddd">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson" style="color:#c0392b">⚠️ 不適切ケアは虐待の入口</span>
+        </div>
+    </div>
+    <!-- ========== 第8話（恋愛回） ========== -->
+    <div class="card" id="ep8">
+        <div class="card-header" style="background:linear-gradient(135deg,#ffe0f0,#ffd0e8);border-color:#f0a0c0">
+            <span class="ep" style="background:#e91e90">第8話</span>
+            <h2 style="color:#e91e90">先生、昨日の夜は…♡</h2>
+            <span class="tag">💘 恋愛回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num" style="background:#e91e90">①</div>
+                <img src="h8a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px">さくらちゃん♪<br>今日も可愛いね<br>コーヒーどうぞ</div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:80px">かっこいい…<br>♡♡♡</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e91e90">②</div>
+                <img src="h8b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:95px">えへへ…<br>先生って<br>おもしろ〜い♪</div>
+                <div class="n" style="bottom:3px;right:3px">※飲み会で急接近</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e91e90">③</div>
+                <img src="h8c.png">
+                <div class="sfx" style="top:5px;right:5px;transform:rotate(-5deg);font-size:14px;color:#e91e90">ハッ！？
+                </div>
+                <div class="b shout d" style="top:4px;left:4px;max-width:100px;border-color:#e91e90;color:#e91e90">
+                    ここ…どこ…？<br>え…？<br>昨日の記憶が…💦</div>
+                <div class="n" style="bottom:3px;right:3px;background:rgba(233,30,144,.8)">※翌朝、見知らぬ部屋</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e91e90">④</div>
+                <img src="h8d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:105px;font-size:7px">あれ？もう次の<br>ターゲット…？<br>私って一体…
+                </div>
+                <div class="b dark d"
+                    style="bottom:8px;left:4px;max-width:95px;font-size:7px;background:#555;border-color:#555">
+                    遊ばれた<br>だけだった…<br>最悪…😇</div>
+                <div class="n" style="bottom:3px;right:3px">※別のナースに乗り換え済み</div>
+            </div>
+        </div>
+        <div class="card-footer" style="background:#fff5f9;border-color:#f0c0d0">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson" style="color:#e91e90">💔 病棟恋愛は火傷のもと</span>
+        </div>
+    </div>
+    <!-- ========== 第9話（スキャンダル回） ========== -->
+    <div class="card" id="ep9">
+        <div class="card-header" style="background:linear-gradient(135deg,#ffe0f0,#ffd0e8);border-color:#f0a0c0">
+            <span class="ep" style="background:#e91e90">第9話</span>
+            <h2 style="color:#e91e90">見ちゃった…医局長の秘密</h2>
+            <span class="tag">🤫 スキャンダル回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num" style="background:#e91e90">①</div>
+                <img src="h9a.png">
+                <div class="sfx" style="top:5px;right:5px;font-size:14px;transform:rotate(-5deg);color:#e91e90">！！！
+                </div>
+                <div class="b shout d" style="top:4px;left:4px;max-width:100px;border-color:#e91e90;color:#e91e90">
+                    え…<br>医局長と<br>MRさん…！？</div>
+                <div class="n" style="bottom:3px;right:3px">※医局のドアを開けてしまった</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e91e90">②</div>
+                <img src="h9b.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:14px;transform:rotate(-10deg)">ガシャーン！！</div>
+                <div class="b d" style="bottom:8px;right:4px;max-width:95px">逃げなきゃ…<br>見なかった<br>見なかった…💦</div>
+                <div class="n" style="bottom:3px;left:3px">※カートに激突して大音響</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e91e90">③</div>
+                <img src="h9c.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px;font-size:7px">
+                    さくらくん…<br>これ高級スイーツ🎁<br>あとシフト希望も<br>なんでも聞くから…ね？</div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:80px">なんで私が<br>こんな目に…</div>
+                <div class="n" style="bottom:3px;left:3px">※口止め工作が始まる</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e91e90">④</div>
+                <img src="h9d.png">
+                <div class="sfx" style="top:5px;left:5px;font-size:14px;transform:rotate(-8deg)">ズバッ！！</div>
+                <div class="b shout l" style="top:4px;right:4px;max-width:105px;border-color:#e91e90;color:#e91e90">
+                    あなたが<br>不倫相手の<br>看護師さん！？</div>
+                <div class="b shout r" style="bottom:8px;left:4px;max-width:95px">違います！<br>違いますーー！<br>😭😭😭</div>
+                <div class="n" style="bottom:3px;right:3px;background:rgba(233,30,144,.8)">※奥さん乗り込み。完全にとばっちり</div>
+            </div>
+        </div>
+        <div class="card-footer" style="background:#fff5f9;border-color:#f0c0d0">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson" style="color:#e91e90">🤫 知らない方が幸せなこともある</span>
+        </div>
+    </div>
+    <!-- ========== 第10話（夜勤あるある） ========== -->
+    <div class="card" id="ep10">
+        <div class="card-header" style="background:linear-gradient(135deg,#e8e0f8,#d8d0f0);border-color:#b8a0d8">
+            <span class="ep" style="background:#6c3fa0">第10話</span>
+            <h2 style="color:#6c3fa0">ナースコール、鳴り止まない夜</h2>
+            <span class="tag">🌙 夜勤回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num" style="background:#6c3fa0">①</div>
+                <img src="h10a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:95px">深夜2時か…<br>今のところ<br>静かだな…☕</div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:80px">フラグ立てた<br>気がする…</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#6c3fa0">②</div>
+                <img src="h10b.png">
+                <div class="sfx" style="top:5px;right:5px;font-size:12px;transform:rotate(-5deg);color:#6c3fa0">ピピピピピピ！！
+                </div>
+                <div class="b shout d" style="top:4px;left:4px;max-width:100px">301！305！<br>308！同時に…！<br>体が足りない！！</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#6c3fa0">③</div>
+                <img src="h10c.png">
+                <div class="b d" style="top:4px;right:4px;max-width:100px;font-size:7px">看護師さん、<br>リモコン取って♪<br>あと、お茶も♪
+                </div>
+                <div class="b dark d"
+                    style="bottom:8px;left:4px;max-width:85px;background:#6c3fa0;border-color:#6c3fa0;font-size:7px">
+                    （魂が<br>抜けていく音）</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#6c3fa0">④</div>
+                <img src="h10d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:100px">おはよう！<br>夜勤お疲れ〜♪</div>
+                <div class="b dark d"
+                    style="bottom:8px;left:4px;max-width:95px;background:#333;border-color:#333;font-size:7px">
+                    ………<br>（もう何も<br>聞こえない）</div>
+                <div class="n" style="bottom:3px;right:3px">※ゾンビ状態で朝を迎える</div>
+            </div>
+        </div>
+        <div class="card-footer" style="background:#f5f0ff;border-color:#d0c0e8">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson" style="color:#6c3fa0">🌙 「静かだね」は夜勤最大の禁句</span>
+        </div>
+    </div>
+    <!-- ========== 第11話（お局回） ========== -->
+    <div class="card" id="ep11">
+        <div class="card-header" style="background:linear-gradient(135deg,#f0eded,#e5e0e0);border-color:#ccc">
+            <span class="ep dark">第11話</span>
+            <h2 class="dark">お局ナースの洗礼</h2>
+            <span class="tag">⚠️ 人間関係回</span>
+        </div>
+        <div class="grid">
+            <div class="cell">
+                <div class="num dark">①</div>
+                <img src="h11a.png">
+                <div class="b shout d" style="top:4px;left:4px;max-width:105px">あなた何年目？<br>こんなことも<br>できないの？</div>
+                <div class="n" style="bottom:3px;right:3px">※お局の黒田さん登場</div>
+            </div>
+            <div class="cell">
+                <div class="num dark">②</div>
+                <img src="h11b.png">
+                <div class="b shout d" style="top:4px;left:4px;max-width:105px;font-size:7px">
+                    これ違う！<br>何回教えたら<br>わかるの！？<br>使えないわね…</div>
+                <div class="n" style="bottom:3px;right:3px">※物品庫で詰められる</div>
+            </div>
+            <div class="cell">
+                <div class="num dark">③</div>
+                <img src="h11c.png">
+                <div class="b d" style="top:4px;left:4px;max-width:100px;font-size:7px">もうやめたい…<br>私、看護師<br>向いてないのかな…
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※トイレで泣く</div>
+            </div>
+            <div class="cell">
+                <div class="num" style="background:#e67e22">④</div>
+                <img src="h11d.png">
+                <div class="b d" style="top:4px;right:4px;max-width:110px;font-size:7px">
+                    あの人は<br>あの人のやり方。<br>あなたはあなた。<br>辞めないで、<br>一緒に頑張ろう</div>
+                <div class="b d" style="bottom:8px;left:4px;max-width:90px">先輩…<br>ありがとう<br>ございます…😭</div>
+            </div>
+        </div>
+        <div class="card-footer" style="background:#f5f0f0;border-color:#ddd">
+            <span class="series">🩹 ドジっ子ナースさくらのインシデント日誌</span>
+            <span class="lesson" style="color:#555">💪 辛い時は一人で抱えないで</span>
+        </div>
+    </div>
+</body>
+
+</html>

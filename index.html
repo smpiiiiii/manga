@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏖️ ビーチでドタバタ！ — AIマンガ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .manga-title {
+            color: #fff;
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            margin: 16px 0;
+            text-shadow: 2px 2px 8px rgba(255, 100, 150, 0.5);
+            background: linear-gradient(135deg, #ff6b9d, #c44bff, #4bb8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .manga-subtitle {
+            color: #aaa;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .manga-page {
+            max-width: 600px;
+            width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel {
+            position: relative;
+            border-bottom: 3px solid #000;
+            overflow: hidden;
+        }
+
+        .panel:last-child {
+            border-bottom: none;
+        }
+
+        .panel img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 吹き出し */
+        .speech {
+            position: absolute;
+            background: #fff;
+            border: 2.5px solid #000;
+            border-radius: 50%;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 180px;
+            z-index: 10;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .speech::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+        }
+
+        /* 下向きしっぽ */
+        .speech.tail-down::after {
+            bottom: -18px;
+            left: 30%;
+            border-top-color: #000;
+        }
+
+        /* 左向きしっぽ */
+        .speech.tail-left::after {
+            left: -18px;
+            top: 40%;
+            border-right-color: #000;
+        }
+
+        /* 右向きしっぽ */
+        .speech.tail-right::after {
+            right: -18px;
+            top: 40%;
+            border-left-color: #000;
+        }
+
+        /* 叫び吹き出し */
+        .speech.shout {
+            border-radius: 8px;
+            background: #fff200;
+            border-width: 3px;
+            font-size: 15px;
+            transform: rotate(-2deg);
+        }
+
+        /* 思考吹き出し */
+        .speech.think {
+            border-style: dashed;
+            border-color: #666;
+            color: #555;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+        /* 効果音 */
+        .sfx {
+            position: absolute;
+            font-weight: 900;
+            font-size: 36px;
+            color: #fff;
+            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+            z-index: 10;
+            transform: rotate(-15deg);
+            letter-spacing: 4px;
+        }
+
+        /* パネル番号 */
+        .panel-num {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            background: #000;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* フッター */
+        .manga-footer {
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+            margin: 16px 0;
+            padding: 8px;
+        }
+
+        .manga-footer span {
+            color: #ff6b9d;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="manga-title">🏖️ ビーチでドタバタ！</h1>
+    <p class="manga-subtitle">第1話 「日焼け止めの悲劇」</p>
+
+    <div class="manga-page">
+        <!-- パネル1: ビーチ到着 -->
+        <div class="panel" style="height: 280px;">
+            <div class="panel-num">1</div>
+            <img src="panel1.png" alt="ビーチ到着" style="height: 100%; object-fit: cover;">
+            <div class="speech tail-down" style="top: 8px; left: 10px;">
+                海だー！✨<br>めっちゃキレイ！
+            </div>
+            <div class="speech think tail-left" style="top: 12px; right: 10px; left: auto;">
+                荷物重い…<br>でもミナの水着<br>見れるし…💕
+            </div>
+        </div>
+
+        <!-- パネル2: ずっこけ -->
+        <div class="panel" style="height: 280px;">
+            <div class="panel-num">2</div>
+            <img src="panel2.png" alt="ずっこけシーン" style="height: 100%; object-fit: cover;">
+            <div class="speech tail-down" style="top: 8px; right: 10px; left: auto;">
+                ミナ、日焼け止め<br>塗ってあげるよ😏
+            </div>
+            <div class="speech shout tail-right" style="bottom: 20px; left: 10px;">
+                あっ！？<br>ビーチボールッ！！
+            </div>
+        </div>
+
+        <!-- パネル3: 水しぶき -->
+        <div class="panel" style="height: 280px;">
+            <div class="panel-num">3</div>
+            <img src="panel3.png" alt="水しぶきシーン" style="height: 100%; object-fit: cover;">
+            <div class="sfx" style="top: 20px; left: 20px;">バッシャーン！！</div>
+            <div class="speech shout" style="bottom: 15px; right: 10px; left: auto;">
+                きゃーーッ！！<br>冷たいッ！！💦
+            </div>
+        </div>
+
+        <!-- パネル4: ドキドキオチ -->
+        <div class="panel" style="height: 300px;">
+            <div class="panel-num">4</div>
+            <img src="panel4.png" alt="ドキドキオチ" style="height: 100%; object-fit: cover;">
+            <div class="speech tail-down" style="top: 8px; right: 10px; left: auto;">
+                ごめん！<br>ほんとごめん！🙏
+            </div>
+            <div class="speech tail-left" style="bottom: 30px; left: 10px; max-width: 200px;">
+                …もう😤<br>お詫びにアイス<br>3個ね！！
+            </div>
+            <div class="speech think" style="bottom: 8px; right: 10px; left: auto; font-size: 11px;">
+                …でも濡れた髪<br>めっちゃ可愛い…🫠
+            </div>
+        </div>
+    </div>
+
+    <p class="manga-footer">
+        <span>♥</span> AI Generated Manga — つづく？ <span>♥</span>
+    </p>
+</body>
+
+</html>
