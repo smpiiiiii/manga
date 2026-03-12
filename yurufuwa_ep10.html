@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医みなみ 第10話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card {
+            width: 500px; max-width: 100%; background: #1e1e30;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(100,100,255,.15); border: 2px solid #3a3a5c
+        }
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #1a1a3e, #2a2a4e);
+            border-bottom: 2px solid #3a3a5c;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700
+        }
+        .card-header h2 { font-size: 15px; color: #a29bfe; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #2a2a4e; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 3px; right: 4px;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: #fff; font-size: 9px; font-weight: 900;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; box-shadow: 0 1px 4px rgba(108,92,231,.3)
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,.92);
+            border: 1.5px solid #6c5ce7; border-radius: 14px;
+            padding: 4px 7px; font-size: 8.5px; font-weight: 700;
+            line-height: 1.45; text-align: center; max-width: 115px;
+            z-index: 10; color: #444; backdrop-filter: blur(2px)
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 4px solid transparent }
+        .b.d::after { bottom: -10px; left: 22%; border-top-color: #6c5ce7 }
+        .b.think { border-style: dashed; border-color: #888; color: #999; font-size: 7.5px; border-radius: 14px }
+        .b.shout { border-radius: 6px; background: rgba(255,240,240,.95); border-color: #e74c3c; color: #c0392b }
+        .b.nurse { background: rgba(240,255,240,.95); border-color: #27ae60; color: #2c3e50 }
+        .b.nurse::after { border-top-color: #27ae60 }
+        .b.despair { background: rgba(255,255,255,.95); border-color: #e84393; color: #c0392b; border-radius: 6px }
+        .n { position: absolute; background: rgba(108,92,231,.8); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #a29bfe; text-shadow: 1px 1px 0 #111, -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111; z-index: 10 }
+        .phone-ring { position: absolute; font-size: 16px; z-index: 10; animation: shake .3s ease-in-out infinite; opacity: .9 }
+        @keyframes shake { 0%,100% { transform: rotate(0deg) } 25% { transform: rotate(-10deg) } 75% { transform: rotate(10deg) } }
+        .zzz { position: absolute; font-size: 14px; z-index: 10; animation: float 2s ease-in-out infinite; opacity: .7 }
+        @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+        .card-footer {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #1a1a3e, #2a2a4e);
+            border-top: 1px solid #3a3a5c;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 9px; color: #888; flex-wrap: wrap; gap: 4px
+        }
+        .card-footer .series { color: #a29bfe; font-weight: 700 }
+        .card-footer .lesson { color: #ccc; font-weight: 700 }
+        @media (max-width: 520px) {
+            body { padding: 8px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% }
+            .b.think { font-size: 6.5px }
+            .sfx { font-size: 12px }
+            .n { font-size: 6px }
+            .cell .num { width: 16px; height: 16px; font-size: 8px }
+            .card-footer { font-size: 8px }
+        }
+        @media (max-width: 380px) {
+            .b { font-size: 6.5px; padding: 2px 4px; max-width: 52% }
+            .sfx { font-size: 10px }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep10">
+        <div class="card-header">
+            <span class="ep">第10話</span>
+            <h2>当直コール地獄📱💀</h2>
+            <span class="tag">🌙 当直あるある</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① やっと寝れる…！ -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf10a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    やっと…<br>寝れる…<br>おやすみ世界…💤
+                </div>
+                <div class="zzz" style="top:6px;right:8px">💤💤</div>
+                <div class="n" style="bottom:3px;right:3px">※AM1:30 当直室にてようやく就寝</div>
+            </div>
+            <!-- コマ② 看護師からの電話 -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf10b.png">
+                <div class="phone-ring" style="top:3px;left:5px">📱💥</div>
+                <div class="sfx" style="top:4px;right:4px;font-size:12px;color:#e74c3c">ﾌﾟﾙﾙﾙ!!</div>
+                <div class="b nurse d" style="bottom:28px;right:4px;max-width:110px;font-size:7.5px">
+                    先生すみませ〜ん<br>○○さんの眠剤<br>いつものでいいですか？
+                </div>
+                <div class="b think" style="bottom:6px;left:4px;max-width:95px;font-size:7px">
+                    （カルテに…<br>書いてあるだろ…!!）
+                </div>
+            </div>
+            <!-- コマ③ 再び寝ようとする -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf10c.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    はぁ…<br>もういいや…<br>今度こそ…寝る…
+                </div>
+                <div class="zzz" style="bottom:8px;right:8px">😴💤</div>
+                <div class="n" style="bottom:3px;right:3px">※AM1:33 再入眠チャレンジ</div>
+            </div>
+            <!-- コマ④ オチ: またコール -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf10d.png">
+                <div class="phone-ring" style="top:3px;left:5px">📱📱📱</div>
+                <div class="sfx" style="top:4px;right:4px;font-size:16px;color:#e74c3c">ﾌﾟﾙﾙﾙ!!!</div>
+                <div class="b despair" style="top:30px;left:4px;max-width:110px;font-size:8px">
+                    ！？！？<br>もう！！<br>5分！！<br>たった5分！！😭
+                </div>
+                <div class="b nurse" style="bottom:10px;right:4px;max-width:110px;font-size:7px">
+                    先生〜<br>さっきの患者さんの<br>お薬の場所が<br>わからなくて…🥺
+                </div>
+                <div class="n" style="bottom:3px;left:3px;font-size:6px">※AM1:35 当直医の夜は長い…</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🌙 ゆるふわ女医みなみ</span>
+            <span class="lesson">📱 当直の敵は病気じゃなくてコール</span>
+        </div>
+    </div>
+</body>
+</html>
