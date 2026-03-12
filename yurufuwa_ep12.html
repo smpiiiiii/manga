@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医みなみ 第12話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #2d1b69 0%, #1a1a2e 50%, #0d0d1a 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card {
+            width: 500px; max-width: 100%; background: #1e1e30;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(232,67,147,.2); border: 2px solid #e84393
+        }
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #2d1b4e, #1a1a3e);
+            border-bottom: 2px solid #e84393;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #e84393, #c0392b);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700
+        }
+        .card-header h2 { font-size: 15px; color: #fd79a8; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #3a2a4e; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 3px; right: 4px;
+            background: linear-gradient(135deg, #e84393, #c0392b);
+            color: #fff; font-size: 9px; font-weight: 900;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; box-shadow: 0 1px 4px rgba(232,67,147,.3)
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,.92);
+            border: 1.5px solid #e84393; border-radius: 14px;
+            padding: 4px 7px; font-size: 8.5px; font-weight: 700;
+            line-height: 1.45; text-align: center; max-width: 115px;
+            z-index: 10; color: #444; backdrop-filter: blur(2px)
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 4px solid transparent }
+        .b.d::after { bottom: -10px; left: 22%; border-top-color: #e84393 }
+        .b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 7.5px; border-radius: 14px }
+        .b.shout { border-radius: 6px; background: rgba(255,240,240,.95); border-color: #e74c3c; color: #c0392b }
+        .b.senior { background: rgba(240,248,255,.95); border-color: #2980b9; color: #2c3e50 }
+        .b.senior::after { border-top-color: #2980b9 }
+        .b.heart { border-color: #ff6b81; background: rgba(255,240,245,.95); color: #c0392b }
+        .b.cold { background: rgba(220,230,255,.95); border-color: #2c3e50; color: #1a1a2e; border-radius: 6px }
+        .b.phone { background: rgba(200,255,200,.95); border-color: #27ae60; color: #1a5a1a; border-radius: 8px; font-family: monospace }
+        .n { position: absolute; background: rgba(232,67,147,.8); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #e84393; text-shadow: 1px 1px 0 #111, -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111; z-index: 10 }
+        .hearts { position: absolute; font-size: 16px; z-index: 10; animation: float 2s ease-in-out infinite; opacity: .7 }
+        @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+        .crack { position: absolute; font-size: 22px; z-index: 10; animation: shatter .5s ease-in-out infinite }
+        @keyframes shatter { 0%,100% { transform: scale(1) } 50% { transform: scale(1.1) } }
+        .card-footer {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #2d1b4e, #1a1a3e);
+            border-top: 1px solid #e84393;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 9px; color: #888; flex-wrap: wrap; gap: 4px
+        }
+        .card-footer .series { color: #fd79a8; font-weight: 700 }
+        .card-footer .lesson { color: #ccc; font-weight: 700 }
+        @media (max-width: 520px) {
+            body { padding: 8px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% }
+            .b.think { font-size: 6.5px }
+            .sfx { font-size: 12px }
+            .n { font-size: 6px }
+            .cell .num { width: 16px; height: 16px; font-size: 8px }
+            .card-footer { font-size: 8px }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep12">
+        <div class="card-header">
+            <span class="ep">第12話</span>
+            <h2>スマホの通知📱💔</h2>
+            <span class="tag">💔 ドロドロ回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① デート中のキラキラみなみ -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf12a.png">
+                <div class="b senior d" style="top:4px;left:4px;max-width:105px">
+                    みなみちゃん<br>今日ほんとかわいいね
+                </div>
+                <div class="b heart" style="bottom:8px;right:4px;max-width:90px;font-size:7.5px">
+                    えへへ…♡<br>高橋先輩って<br>ほんと優しい…
+                </div>
+                <div class="hearts" style="top:6px;right:6px">♡♡♡</div>
+                <div class="n" style="bottom:3px;left:3px">※外科の高橋先輩(32) イケメン枠</div>
+            </div>
+            <!-- コマ② ホテルへ向かう -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf12b.png">
+                <div class="b senior d" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
+                    もうちょっと<br>一緒にいたいな…<br>いい？
+                </div>
+                <div class="b think" style="bottom:8px;left:4px;max-width:95px;font-size:7px">
+                    （やばい…<br>心臓もたない…<br>でも…いっか♡）
+                </div>
+                <div class="sfx" style="bottom:5px;right:5px;font-size:10px;color:#fd79a8">ﾄﾞｷﾄﾞｷ…♡</div>
+            </div>
+            <!-- コマ③ スマホの通知を見てしまう -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf12c.png">
+                <div class="b phone" style="top:4px;left:4px;max-width:110px;font-size:7.5px">
+                    📱💬<br>「まなみ💕」<br>『今日何時に帰る〜？<br>ごはん作って<br>待ってるよ♡』
+                </div>
+                <div class="crack" style="top:5px;right:5px">💔</div>
+                <div class="sfx" style="bottom:10px;right:5px;font-size:16px;color:#c0392b">ﾋﾟｷｯ</div>
+                <div class="b shout" style="bottom:6px;left:4px;max-width:95px;font-size:8px">
+                    …まなみ…？<br>……誰？
+                </div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※先輩のスマホにLINE通知が…</div>
+            </div>
+            <!-- コマ④ オチ: 完全に冷めたみなみ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf12d.png">
+                <div class="b cold" style="top:4px;left:4px;max-width:115px;font-size:8px">
+                    先輩。<br>「まなみちゃん」が<br>ごはん作って<br>待ってるそうですよ🙂<br>お先にどうぞ。
+                </div>
+                <div class="sfx" style="top:4px;right:4px;font-size:14px;color:#6c5ce7">ｽｯ…</div>
+                <div class="b senior" style="bottom:10px;right:4px;max-width:100px;font-size:7px">
+                    あ…待って…<br>違うんだ…<br>あれは…その…💦
+                </div>
+                <div class="n" style="bottom:3px;left:3px;font-size:6px">※みなみはタクシーで帰った。二度と二人で飲みに行くことはなかった。</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💔 ゆるふわ女医みなみ</span>
+            <span class="lesson">📱 スマホの通知は消しとけ</span>
+        </div>
+    </div>
+</body>
+</html>
