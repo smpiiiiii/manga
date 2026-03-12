@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医みなみ 第4話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8f0 50%, #fdf0ff 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card {
+            width: 500px; max-width: 100%; background: #fff;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(232,67,147,.15); border: 2px solid #f0c0d8
+        }
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+            border-bottom: 2px solid #f0c0d8;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700
+        }
+        .card-header h2 { font-size: 15px; color: #e84393; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #bbb }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #f0d0e0; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 3px; right: 4px;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            color: #fff; font-size: 9px; font-weight: 900;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; box-shadow: 0 1px 4px rgba(232,67,147,.3)
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,.92);
+            border: 1.5px solid #e84393; border-radius: 14px;
+            padding: 4px 7px; font-size: 8.5px; font-weight: 700;
+            line-height: 1.45; text-align: center; max-width: 115px;
+            z-index: 10; color: #444; backdrop-filter: blur(2px)
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 4px solid transparent }
+        .b.d::after { bottom: -10px; left: 22%; border-top-color: #e84393 }
+        .b.heart { border-color: #ff6b81; background: rgba(255,240,245,.95); color: #c0392b }
+        .b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 7.5px; border-radius: 14px }
+        .b.shout { border-radius: 6px; background: rgba(255,240,240,.95); border-color: #e74c3c; color: #c0392b }
+        .n { position: absolute; background: rgba(232,67,147,.8); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #e84393; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; z-index: 10 }
+        .hearts { position: absolute; font-size: 16px; z-index: 10; animation: float 2s ease-in-out infinite; opacity: .7 }
+        @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+        .card-footer {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #fff5f8, #fff0f5);
+            border-top: 1px solid #f0d0e0;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 9px; color: #bbb; flex-wrap: wrap; gap: 4px
+        }
+        .card-footer .series { color: #e84393; font-weight: 700 }
+        .card-footer .lesson { color: #666; font-weight: 700 }
+        @media (max-width: 520px) {
+            body { padding: 8px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% }
+            .b.think { font-size: 6.5px }
+            .sfx { font-size: 12px }
+            .n { font-size: 8px }
+            .cell .num { width: 16px; height: 16px; font-size: 8px }
+            .card-footer { font-size: 8px }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep4">
+        <div class="card-header">
+            <span class="ep">第4話</span>
+            <h2>夜勤明けのシャワー事件💦</h2>
+            <span class="tag">🔥 お色気回</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 当直明け -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf4a.png">
+                <div class="b d" style="top:4px;left:4px;max-width:105px">
+                    36時間勤務<br>やっと終わった…<br>もう無理…😴
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※AM6:30 限界突破</div>
+            </div>
+            <!-- コマ② シャワーへ -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf4b.png">
+                <div class="b d" style="top:4px;left:4px;max-width:110px">
+                    帰る前に<br>シャワー浴びよ♪<br>あ〜楽しみ♡
+                </div>
+                <div class="b think" style="bottom:8px;right:4px;max-width:85px;font-size:7px">
+                    鍵…なんか<br>ゆるいけど<br>まあいっか〜
+                </div>
+            </div>
+            <!-- コマ③ 突入事件 -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf4c.png">
+                <div class="sfx" style="top:3px;left:5px;font-size:16px;color:#e74c3c">ガチャッ!!</div>
+                <div class="b shout" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
+                    あっ…<br>す、すみませ…<br>み、南先生!?😳
+                </div>
+                <div class="b shout" style="bottom:8px;left:4px;max-width:90px">
+                    ちょ!!!!<br>見んなーーっ!!💢
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">💦💦💦</div>
+            </div>
+            <!-- コマ④ オチ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf4d.png">
+                <div class="sfx" style="top:3px;right:5px;font-size:14px;color:#e74c3c">ドカッ!!</div>
+                <div class="b shout" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    シャンプー<br>ボトル投げんの<br>やめてください!!😭
+                </div>
+                <div class="b d" style="bottom:12px;right:4px;max-width:90px;font-size:7px">
+                    ………<br>明日から<br>目合わせられない…♡
+                </div>
+                <div class="hearts" style="bottom:5px;right:5px">♡♡♡♡</div>
+                <div class="n" style="bottom:3px;left:3px;font-size:9px">※翌日から二人の距離が近くなった（気がする）</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医ミナミ</span>
+            <span class="lesson">🚿 当直室のシャワーの鍵は必ず確認すること</span>
+        </div>
+    </div>
+</body>
+</html>
