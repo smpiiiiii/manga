@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆるふわ女医みなみ 第11話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8f0 50%, #fdf0ff 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card {
+            width: 500px; max-width: 100%; background: #fff;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(232,67,147,.15); border: 2px solid #f0c0d8
+        }
+        .card-header {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+            border-bottom: 2px solid #f0c0d8;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700
+        }
+        .card-header h2 { font-size: 15px; color: #e84393; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #bbb }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #f0d0e0; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 3px; right: 4px;
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            color: #fff; font-size: 9px; font-weight: 900;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; box-shadow: 0 1px 4px rgba(232,67,147,.3)
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,.92);
+            border: 1.5px solid #e84393; border-radius: 14px;
+            padding: 4px 7px; font-size: 8.5px; font-weight: 700;
+            line-height: 1.45; text-align: center; max-width: 115px;
+            z-index: 10; color: #444; backdrop-filter: blur(2px)
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 4px solid transparent }
+        .b.d::after { bottom: -10px; left: 22%; border-top-color: #e84393 }
+        .b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 7.5px; border-radius: 14px }
+        .b.shout { border-radius: 6px; background: rgba(255,240,240,.95); border-color: #e74c3c; color: #c0392b }
+        .b.senior { background: rgba(240,248,255,.95); border-color: #2c3e50; color: #2c3e50 }
+        .b.senior::after { border-top-color: #2c3e50 }
+        .b.cold { background: rgba(230,240,255,.95); border-color: #6c5ce7; color: #2c3e50; border-radius: 6px }
+        .n { position: absolute; background: rgba(232,67,147,.8); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #e84393; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; z-index: 10 }
+        .ring { position: absolute; font-size: 20px; z-index: 10; animation: sparkle 1s ease-in-out infinite }
+        @keyframes sparkle { 0%,100% { opacity: 1 } 50% { opacity: .5 } }
+        .card-footer {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #fff5f8, #fff0f5);
+            border-top: 1px solid #f0d0e0;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 9px; color: #bbb; flex-wrap: wrap; gap: 4px
+        }
+        .card-footer .series { color: #e84393; font-weight: 700 }
+        .card-footer .lesson { color: #666; font-weight: 700 }
+        @media (max-width: 520px) {
+            body { padding: 8px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% }
+            .b.think { font-size: 6.5px }
+            .sfx { font-size: 12px }
+            .n { font-size: 6px }
+            .cell .num { width: 16px; height: 16px; font-size: 8px }
+            .card-footer { font-size: 8px }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep11">
+        <div class="card-header">
+            <span class="ep">第11話</span>
+            <h2>指導医のヤバい距離感💍</h2>
+            <span class="tag">⚠️ 病院あるある</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 廊下で声をかけてくる指導医 -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="yf11a.png">
+                <div class="b senior d" style="top:4px;left:4px;max-width:110px">
+                    みなみ先生<br>最近頑張ってるね〜<br>ちょっと相談<br>乗ろうか？😊
+                </div>
+                <div class="b think" style="bottom:6px;right:4px;max-width:90px;font-size:7px">
+                    （田中先生…<br>距離近くない…？）
+                </div>
+                <div class="n" style="bottom:3px;left:3px">※外科の田中指導医(42) 既婚</div>
+            </div>
+            <!-- コマ② 壁ドンっぽく迫ってくる -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="yf11b.png">
+                <div class="b senior d" style="top:4px;right:4px;max-width:110px;font-size:7.5px">
+                    今度さ〜<br>二人で飲み<br>行かない？<br>いい店知ってるよ♪
+                </div>
+                <div class="sfx" style="bottom:10px;left:5px;font-size:11px;color:#e74c3c">ｸﾞｲｯ</div>
+                <div class="b shout" style="bottom:6px;right:4px;max-width:85px;font-size:7px">
+                    え…ちょ…<br>近い近い近い!!
+                </div>
+            </div>
+            <!-- コマ③ 結婚指輪に気づく -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="yf11c.png">
+                <div class="ring" style="top:8px;left:8px">💍✨</div>
+                <div class="sfx" style="top:5px;right:5px;font-size:16px;color:#c0392b">ｷﾗｰﾝ</div>
+                <div class="b think" style="bottom:10px;left:4px;max-width:100px;font-size:8px">
+                    ………。<br>その左手の<br>指輪は何ですか？
+                </div>
+                <div class="n" style="bottom:3px;right:3px;font-size:6px">※みなみの目が据わった瞬間</div>
+            </div>
+            <!-- コマ④ オチ: バッサリ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="yf11d.png">
+                <div class="b cold" style="top:4px;left:4px;max-width:110px;font-size:8px">
+                    先生。<br>奥さんと<br>お子さんの写真<br>デスクに飾ってますよね？🙂
+                </div>
+                <div class="sfx" style="top:4px;right:5px;font-size:14px;color:#6c5ce7">ﾊﾞｯｻﾘ</div>
+                <div class="b senior" style="bottom:10px;right:4px;max-width:100px;font-size:7px">
+                    あ…いや…<br>その…ﾊﾊﾊ…<br>冗談だよ冗談💦💦
+                </div>
+                <div class="n" style="bottom:3px;left:3px;font-size:6px">※翌日から田中先生の態度が急に丁寧になった</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💗 ゆるふわ女医みなみ</span>
+            <span class="lesson">💍 ゆるふわだけど舐めたらアカン</span>
+        </div>
+    </div>
+</body>
+</html>
