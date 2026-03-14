@@ -67,6 +67,8 @@
         @keyframes clink { 0%,100% { transform: rotate(0deg) } 50% { transform: rotate(8deg) } }
         .sweat { position: absolute; font-size: 18px; z-index: 10; animation: drip 1s ease-in-out infinite }
         @keyframes drip { 0%,100% { transform: translateY(0); opacity: 1 } 50% { transform: translateY(3px); opacity: .6 } }
+        @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+        .mask { position: absolute; background: #fff; z-index: 5; border-radius: 4px }
         .card-footer {
             padding: 6px 12px;
             background: linear-gradient(135deg, #2d1b1e, #3e2a1a);
@@ -111,6 +113,8 @@
             <div class="cell">
                 <div class="num">②</div>
                 <img src="yf13b.png">
+                <div class="mask" style="top:28%;right:2px;width:42%;height:35%"></div>
+                <div class="mask" style="bottom:18%;left:5%;width:48%;height:22%"></div>
                 <div class="b guy d" style="top:4px;right:4px;max-width:100px;font-size:7.5px">
                     へ〜！お医者さん!?<br>マジで!?<br>じゃあちょっと<br>聞いていい？😁
                 </div>
@@ -123,6 +127,9 @@
             <div class="cell">
                 <div class="num">③</div>
                 <img src="yf13c.png">
+                <div class="mask" style="top:0;left:25%;width:30%;height:30%"></div>
+                <div class="mask" style="bottom:5%;left:0;width:35%;height:35%"></div>
+                <div class="mask" style="bottom:5%;right:0;width:35%;height:40%"></div>
                 <div class="b guy d" style="top:4px;left:4px;max-width:100px;font-size:7px">
                     最近さ〜<br>背中がバキバキで〜<br>これヘルニア？
                 </div>
@@ -139,6 +146,8 @@
             <div class="cell">
                 <div class="num">④</div>
                 <img src="yf13d.png">
+                <div class="mask" style="top:0;right:0;width:30%;height:25%"></div>
+                <div class="mask" style="bottom:15%;right:0;width:45%;height:30%"></div>
                 <div class="b cold" style="top:4px;left:4px;max-width:115px;font-size:8px">
                     あの…<br>ここ合コンですよね？<br>問診ご希望の方は<br>外来の予約を<br>お願いします🙂
                 </div>
