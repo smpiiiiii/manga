@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>研修医ハルちゃん🔥 ケンジの元カノが乗り込んできた</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #1a1015 0%, #2a1520 50%, #150a10 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 12px
+        }
+        .info {
+            font-size: 12px; color: #ccc; text-align: center;
+            max-width: 500px; padding: 10px 12px;
+            background: rgba(255,255,255,0.05); border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1); line-height: 1.6
+        }
+        .info b { color: #ff6644 }
+        .card {
+            width: 500px; max-width: 100%; background: #1e1820;
+            border-radius: 14px; overflow: hidden;
+            box-shadow: 0 4px 30px rgba(255,80,40,0.15);
+            border: 2px solid rgba(255,80,40,0.3)
+        }
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #2a1515, #3a2018);
+            border-bottom: 2px solid rgba(255,80,40,0.3);
+            display: flex; align-items: center; gap: 8px
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #ff4422, #cc2211);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700; white-space: nowrap
+        }
+        .card-header h2 { font-size: 14px; color: #ff6644; font-weight: 900; flex: 1 }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .cell { position: relative; overflow: hidden; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 6px; right: 8px;
+            background: linear-gradient(135deg, #ff4422, #cc2211);
+            color: #fff; font-size: 12px; font-weight: 900;
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,0.95);
+            border: 2px solid #ff6644; border-radius: 14px;
+            padding: 6px 10px; font-size: 12px; font-weight: 700;
+            line-height: 1.4; text-align: center; max-width: 45%;
+            z-index: 10; color: #333
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 5px solid transparent }
+        .b.d::after { bottom: -12px; left: 20%; border-top-color: #ff6644 }
+        .b.think {
+            border-style: dashed; border-color: #aaa;
+            background: rgba(255,255,255,0.85); color: #888;
+            font-size: 10px; border-radius: 12px
+        }
+        .b.exgf {
+            background: rgba(255,235,230,0.95); border-color: #dd3300;
+            color: #882200; border-radius: 6px
+        }
+        .b.exgf::after { border-top-color: #dd3300 }
+        .b.cold {
+            background: rgba(220,230,245,0.95); border-color: #445588;
+            color: #223355; border-radius: 6px
+        }
+        .b.panic {
+            background: #fff0f0; border-color: #ff0000;
+            color: #cc0000; border-radius: 4px
+        }
+        .b.shock {
+            background: rgba(255,255,220,0.95); border-color: #cc8800;
+            color: #885500; border-radius: 8px
+        }
+        .b.unity {
+            background: rgba(255,240,240,0.95); border-color: #cc4444;
+            color: #882222; border-radius: 10px
+        }
+        .n {
+            position: absolute; background: rgba(200,50,30,.85);
+            color: #fff; font-size: 11px; padding: 4px 10px;
+            border-radius: 8px; z-index: 10
+        }
+        .sfx {
+            position: absolute; font-weight: 900; font-size: 16px;
+            color: #ff6644;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.5);
+            z-index: 10
+        }
+        .card-footer {
+            padding: 6px 12px;
+            background: rgba(30,18,15,0.9);
+            border-top: 1px solid rgba(255,80,40,0.3);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; color: #888
+        }
+        .card-footer .series { color: #ff6644; font-weight: 700 }
+        .card-footer .lesson { color: #aaa; font-weight: 700 }
+        .fire { position: absolute; font-size: 16px; z-index: 10; animation: burn 0.8s ease-in-out infinite }
+        @keyframes burn { 0%,100% { transform: scale(1) translateY(0) } 50% { transform: scale(1.1) translateY(-3px) } }
+        @media (max-width: 520px) {
+            body { padding: 8px; gap: 10px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 10px; padding: 4px 7px }
+            .b.think { font-size: 9px }
+            .sfx { font-size: 14px }
+            .n { font-size: 9px }
+            .info { font-size: 11px }
+            .card-footer { font-size: 9px }
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        🔥 <b>研修医ハルちゃん 〜親友の彼氏編⑤〜</b><br>
+        前回のあらすじ：許そうとしてくれたミキに最悪のタイミングでケンジのLINEを見られ、完全に見切りをつけられたハル。そこに新たな登場人物——
+    </div>
+
+    <!-- コマ① 病院に見知らぬ美女が乗り込んでくる -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🔥 禁断編⑦</span>
+            <h2>ケンジの元カノ🔥</h2>
+            <span class="tag">😈 全員被害者で全員加害者</span>
+        </div>
+        <div class="cell">
+            <div class="num">①</div>
+            <img src="bf5_1.png">
+            <div class="b exgf d" style="top:5%;right:4%;max-width:44%">
+                「橋本ハル」って<br>研修医<br>どこにいるの？
+            </div>
+            <div class="b think" style="bottom:15%;left:4%;max-width:42%">
+                （え…誰…？<br>なんであたしの<br>名前知ってるの…？）
+            </div>
+            <div class="fire" style="top:6%;left:6%">🔥</div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:13px;color:#dd3300">ｶﾂ ｶﾂ ｶﾂ…</div>
+            <div class="n" style="bottom:4px;left:4px">※受付が困惑するレベルの迫力</div>
+        </div>
+    </div>
+
+    <!-- コマ② 元カノ・リサがハルを問い詰める -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🔥 禁断編⑦</span>
+            <h2>ケンジの元カノ🔥</h2>
+        </div>
+        <div class="cell">
+            <div class="num">②</div>
+            <img src="bf5_2.png">
+            <div class="b exgf d" style="top:5%;right:4%;max-width:44%">
+                あんたが<br>ケンジの新しい女？<br>私の3年返してよ<br>ケンジは私と<br>付き合いながら<br>ミキって女と<br>二股してたの
+            </div>
+            <div class="b panic" style="bottom:15%;left:4%;max-width:42%">
+                え…<br>二股…？<br>ミキの前にも…？
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:14px;color:#cc0000">ｶﾞﾀｯ</div>
+            <div class="n" style="bottom:4px;left:4px">※リサ（27）ケンジの元カノ。3年付き合ってた</div>
+        </div>
+    </div>
+
+    <!-- コマ③ ミキも鉢合わせ→三つ巴 -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🔥 禁断編⑦</span>
+            <h2>ケンジの元カノ🔥</h2>
+        </div>
+        <div class="cell">
+            <div class="num">③</div>
+            <img src="bf5_3.png">
+            <div class="b cold" style="top:5%;left:4%;max-width:42%">
+                …何の騒ぎ？<br>ハル…この人誰？
+            </div>
+            <div class="b exgf" style="top:5%;right:4%;max-width:44%">
+                あんたがミキ？<br>…あはは<br>3人ともケンジに<br>騙されてたのね
+            </div>
+            <div class="b shock" style="bottom:15%;left:4%;max-width:44%">
+                （え…ケンジ…<br>元カノとも<br>まだ繋がって…？<br>全員…二股…!?）
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:12px;color:#cc8800">ｻﾞﾜ…ｻﾞﾜ…</div>
+            <div class="n" style="bottom:4px;left:4px">※廊下が修羅場と化した</div>
+        </div>
+    </div>
+
+    <!-- コマ④ 3人でケンジのマッチングアプリ発見 -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🔥 禁断編⑦</span>
+            <h2>ケンジの元カノ🔥</h2>
+        </div>
+        <div class="cell">
+            <div class="num">④</div>
+            <img src="bf5_4.png">
+            <div class="b exgf" style="top:5%;right:4%;max-width:44%">
+                見てこれ<br>ケンジの<br>マッチングアプリ<br>まだ「募集中」だよ
+            </div>
+            <div class="b unity" style="top:5%;left:4%;max-width:42%">
+                …は？<br>あいつ全員と<br>同時進行…？<br>ふざけんなよ…
+            </div>
+            <div class="b shock" style="bottom:15%;left:4%;max-width:44%">
+                （私たち全員<br>被害者だった…<br>…敵は最初から<br>ケンジだけだった）
+            </div>
+            <div class="fire" style="bottom:8%;right:8%">🔥🔥🔥</div>
+            <div class="n" style="bottom:4px;left:4px">※3人の怒りの矛先がケンジに向いた</div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🔥 研修医ハルちゃん 〜親友の彼氏編⑤〜</span>
+            <span class="lesson">🔥 全員被害者で全員加害者、でも本当のクズは一人だけだった</span>
+        </div>
+    </div>
+
+    <div class="info">
+        😈 続きが見たかったらいいね＆リポストしてね！<br>
+        次回予告：<b>3人でケンジの家に乗り込む 〜修羅場は終わらない〜</b> 🔥🔥🔥
+    </div>
+</body>
+</html>
