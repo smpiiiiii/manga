@@ -12,7 +12,7 @@
             background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #0f0a1a 100%);
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
-            padding: 12px; gap: 16px
+            padding: 12px; gap: 12px
         }
         .card {
             width: 500px; max-width: 100%; background: #1e1e30;
@@ -32,128 +32,144 @@
         }
         .card-header h2 { font-size: 15px; color: #fd79a8; font-weight: 900; flex: 1; min-width: 120px }
         .card-header .tag { font-size: 10px; color: #888 }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
-        .cell { position: relative; overflow: hidden; border: 1px solid #3a1a2e; aspect-ratio: 1 }
+        .cell { position: relative; overflow: hidden; aspect-ratio: 1 }
         .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
         .cell .num {
-            position: absolute; top: 3px; right: 4px;
+            position: absolute; top: 6px; right: 8px;
             background: linear-gradient(135deg, #e84393, #fd79a8);
-            color: #fff; font-size: 9px; font-weight: 900;
-            width: 18px; height: 18px; border-radius: 50%;
+            color: #fff; font-size: 12px; font-weight: 900;
+            width: 24px; height: 24px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             z-index: 10; box-shadow: 0 1px 4px rgba(232,67,147,.3)
         }
         .b {
             position: absolute; background: rgba(255,255,255,.92);
-            border: 1.5px solid #e84393; border-radius: 14px;
-            padding: 4px 7px; font-size: 8.5px; font-weight: 700;
-            line-height: 1.45; text-align: center; max-width: 115px;
+            border: 2px solid #e84393; border-radius: 14px;
+            padding: 6px 10px; font-size: 12px; font-weight: 700;
+            line-height: 1.45; text-align: center; max-width: 45%;
             z-index: 10; color: #444; backdrop-filter: blur(2px)
         }
-        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 4px solid transparent }
-        .b.d::after { bottom: -10px; left: 22%; border-top-color: #e84393 }
-        .b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 7.5px; border-radius: 14px }
-        .b.shout { border-radius: 6px; background: rgba(255,240,240,.95); border-color: #e74c3c; color: #c0392b }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 5px solid transparent }
+        .b.d::after { bottom: -12px; left: 22%; border-top-color: #e84393 }
+        .b.think { border-style: dashed; border-color: #ccc; color: #999; font-size: 10px; border-radius: 14px }
         .b.guy { background: rgba(230,240,255,.95); border-color: #2980b9; color: #2c3e50 }
         .b.guy::after { border-top-color: #2980b9 }
         .b.sparkle { border-color: #e84393; background: rgba(255,240,250,.95); color: #c0392b }
         .b.warm { border-color: #ff9f43; background: rgba(255,250,240,.95); color: #8B4513 }
         .b.love { border-color: #e84393; background: rgba(255,230,240,.95); color: #c0392b; border-radius: 16px }
-        .n { position: absolute; background: rgba(232,67,147,.8); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 8px; z-index: 10 }
-        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #fd79a8; text-shadow: 1px 1px 0 #111, -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111; z-index: 10 }
-        .heart { position: absolute; font-size: 16px; z-index: 10; animation: pulse 1s ease-in-out infinite }
+        .n { position: absolute; background: rgba(232,67,147,.8); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 16px; color: #fd79a8; text-shadow: 1px 1px 0 #111, -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111; z-index: 10 }
+        .heart { position: absolute; font-size: 20px; z-index: 10; animation: pulse 1s ease-in-out infinite }
         @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.2) } }
-        .float { position: absolute; font-size: 14px; z-index: 10; animation: float 2s ease-in-out infinite }
+        .float { position: absolute; font-size: 18px; z-index: 10; animation: float 2s ease-in-out infinite }
         @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
-        .sparkle-anim { position: absolute; font-size: 12px; z-index: 10; animation: sparkle 1.5s ease-in-out infinite }
+        .sparkle-anim { position: absolute; font-size: 14px; z-index: 10; animation: sparkle 1.5s ease-in-out infinite }
         @keyframes sparkle { 0%,100% { opacity: 1; transform: scale(1) } 50% { opacity: .5; transform: scale(.8) } }
         .card-footer {
             padding: 6px 12px;
             background: linear-gradient(135deg, #2d1b2e, #3e1a2a);
             border-top: 1px solid #ff6b9d;
             display: flex; justify-content: space-between; align-items: center;
-            font-size: 9px; color: #888; flex-wrap: wrap; gap: 4px
+            font-size: 10px; color: #888; flex-wrap: wrap; gap: 4px
         }
         .card-footer .series { color: #fd79a8; font-weight: 700 }
         .card-footer .lesson { color: #ccc; font-weight: 700 }
         @media (max-width: 520px) {
-            body { padding: 8px }
+            body { padding: 8px; gap: 10px }
             .card { border-radius: 12px }
             .card-header h2 { font-size: 13px }
-            .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% }
-            .b.think { font-size: 6.5px }
-            .sfx { font-size: 12px }
-            .n { font-size: 8px }
-            .cell .num { width: 16px; height: 16px; font-size: 8px }
-            .card-footer { font-size: 8px }
+            .b { font-size: 10px; padding: 4px 7px }
+            .b.think { font-size: 9px }
+            .sfx { font-size: 14px }
+            .n { font-size: 9px }
+            .card-footer { font-size: 9px }
         }
     </style>
 </head>
 <body>
-    <div class="card" id="ep14">
+    <!-- コマ① 高橋先生の家の前でドキドキ -->
+    <div class="card">
         <div class="card-header">
             <span class="ep">第14話</span>
             <h2>初めてのお泊り🏠💕</h2>
             <span class="tag">🌙 ドキドキ初お泊り</span>
         </div>
-        <div class="grid">
-            <!-- コマ① 高橋先生の家の前でドキドキ -->
-            <div class="cell">
-                <div class="num">①</div>
-                <img src="yf14a.png">
-                <div class="b love d" style="top:4px;left:4px;max-width:110px">
-                    いよいよ…<br>高橋センセイの<br>おうちに…！💕
-                </div>
-                <div class="b think" style="bottom:22px;left:4px;max-width:100px;font-size:7px">
-                    （心臓うるさすぎて<br>インターホン<br>押せない…）
-                </div>
-                <div class="heart" style="top:5px;right:5px">💓</div>
-                <div class="sfx" style="bottom:5px;right:5px;font-size:10px;color:#e84393">ﾄﾞｷﾄﾞｷ…</div>
-                <div class="n" style="bottom:3px;left:3px">※当直室じゃない、普通のお泊り</div>
+        <div class="cell">
+            <div class="num">①</div>
+            <img src="yf14a.png">
+            <div class="b love d" style="bottom:38%;right:4%;max-width:42%">
+                いよいよ…<br>高橋センセイの<br>おうちに…！💕
             </div>
-            <!-- コマ② おしゃれな部屋に感動 -->
-            <div class="cell">
-                <div class="num">②</div>
-                <img src="yf14b.png">
-                <div class="b sparkle d" style="top:4px;left:4px;max-width:110px">
-                    え…めっちゃ<br>おしゃれ…✨<br>しかもいい匂い…！
-                </div>
-                <div class="b guy d" style="bottom:22px;right:4px;max-width:100px;font-size:7.5px">
-                    散らかってるけど<br>まぁ上がって😊
-                </div>
-                <div class="sparkle-anim" style="top:5px;right:5px">✨🏠✨</div>
-                <div class="b think" style="bottom:5px;left:4px;max-width:95px;font-size:6.5px">
-                    （散らかってる…？<br>どこが…？？）
-                </div>
+            <div class="b think" style="bottom:8%;right:4%;max-width:40%;font-size:10px">
+                （心臓うるさすぎて<br>インターホン<br>押せない…）
             </div>
-            <!-- コマ③ 高橋先生が手料理を作ってくれる -->
-            <div class="cell">
-                <div class="num">③</div>
-                <img src="yf14c.png">
-                <div class="b guy d" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
-                    せっかくだから<br>パスタ作るよ🍝<br>座ってて
-                </div>
-                <div class="b love" style="top:4px;right:4px;max-width:105px;font-size:8px">
-                    エプロン姿<br>カッコよすぎて<br>直視できない…💕
-                </div>
-                <div class="float" style="bottom:25px;right:5px">🍝💕</div>
-                <div class="sfx" style="bottom:5px;left:5px;font-size:11px;color:#ff9f43">ｼﾞｭｰｯ</div>
-                <div class="n" style="bottom:3px;left:3px;font-size:8px">※高橋先生 料理男子だった</div>
+            <div class="heart" style="top:8px;right:8px">💓</div>
+            <div class="sfx" style="bottom:8px;left:8px;font-size:13px;color:#e84393">ﾄﾞｷﾄﾞｷ…</div>
+            <div class="n" style="bottom:4px;left:4px">※当直室じゃない、普通のお泊り</div>
+        </div>
+    </div>
+
+    <!-- コマ② おしゃれな部屋に感動 -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">第14話</span>
+            <h2>初めてのお泊り🏠💕</h2>
+        </div>
+        <div class="cell">
+            <div class="num">②</div>
+            <img src="yf14b.png">
+            <div class="b sparkle d" style="top:5%;left:4%;max-width:42%">
+                え…めっちゃ<br>おしゃれ…✨<br>しかもいい匂い…！
             </div>
-            <!-- コマ④ オチ: ソファで寝落ちしたみなみ -->
-            <div class="cell">
-                <div class="num">④</div>
-                <img src="yf14d.png">
-                <div class="b warm" style="top:4px;right:4px;max-width:115px;font-size:7.5px">
-                    …寝ちゃったか😊<br>当直明けなのに<br>無理するから…
-                </div>
-                <div class="b think" style="top:4px;left:4px;max-width:100px;font-size:7px;border-color:#fd79a8;color:#e84393">
-                    （…あったかい…<br>ここ…当直室より<br>ずっと安心する…）
-                </div>
-                <div class="heart" style="bottom:25px;left:8px">💕</div>
-                <div class="float" style="bottom:25px;right:8px">😴💤</div>
-                <div class="n" style="bottom:3px;left:3px;font-size:9px">※次の朝、二人でモーニング作るのはまた今度</div>
+            <div class="b guy d" style="bottom:18%;right:4%;max-width:40%">
+                散らかってるけど<br>まぁ上がって😊
             </div>
+            <div class="sparkle-anim" style="top:8px;right:8px">✨🏠✨</div>
+            <div class="b think" style="bottom:4%;left:4%;max-width:40%;font-size:9px">
+                （散らかってる…？<br>どこが…？？）
+            </div>
+        </div>
+    </div>
+
+    <!-- コマ③ 高橋先生が手料理を作ってくれる -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">第14話</span>
+            <h2>初めてのお泊り🏠💕</h2>
+        </div>
+        <div class="cell">
+            <div class="num">③</div>
+            <img src="yf14c.png">
+            <div class="b guy d" style="top:5%;right:4%;max-width:42%">
+                せっかくだから<br>パスタ作るよ🍝<br>座ってて
+            </div>
+            <div class="b love" style="bottom:18%;right:4%;max-width:42%">
+                エプロン姿<br>カッコよすぎて<br>直視できない…💕
+            </div>
+            <div class="float" style="bottom:8%;left:8px">🍝💕</div>
+            <div class="sfx" style="bottom:8px;left:8px;font-size:13px;color:#ff9f43">ｼﾞｭｰｯ</div>
+            <div class="n" style="bottom:4px;left:4px">※高橋先生 料理男子だった</div>
+        </div>
+    </div>
+
+    <!-- コマ④ オチ: ソファで寝落ちしたみなみ -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">第14話</span>
+            <h2>初めてのお泊り🏠💕</h2>
+        </div>
+        <div class="cell">
+            <div class="num">④</div>
+            <img src="yf14d.png">
+            <div class="b warm" style="top:5%;right:4%;max-width:44%">
+                …寝ちゃったか😊<br>当直明けなのに<br>無理するから…
+            </div>
+            <div class="b think" style="bottom:18%;left:4%;max-width:42%;border-color:#fd79a8;color:#e84393">
+                （…あったかい…<br>ここ…当直室より<br>ずっと安心する…）
+            </div>
+            <div class="heart" style="bottom:8%;left:8px">💕</div>
+            <div class="float" style="bottom:8%;right:8px">😴💤</div>
+            <div class="n" style="bottom:4px;left:4px">※次の朝、二人でモーニング作るのはまた今度</div>
         </div>
         <div class="card-footer">
             <span class="series">💕 ゆるふわ女医みなみ</span>
