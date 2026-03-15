@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>研修医ハルちゃん💔 3ヶ月後の屋上</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #1a1520 0%, #2a2030 50%, #1a1020 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 12px
+        }
+        .info {
+            font-size: 12px; color: #ccc; text-align: center;
+            max-width: 500px; padding: 10px 12px;
+            background: rgba(255,255,255,0.05); border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1); line-height: 1.6
+        }
+        .info b { color: #ffaa44 }
+        .card {
+            width: 500px; max-width: 100%; background: #1e1e28;
+            border-radius: 14px; overflow: hidden;
+            box-shadow: 0 4px 30px rgba(255,170,68,0.15);
+            border: 2px solid rgba(255,170,68,0.3)
+        }
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #2a2018, #3a2820);
+            border-bottom: 2px solid rgba(255,170,68,0.3);
+            display: flex; align-items: center; gap: 8px
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #ff8844, #cc6622);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700; white-space: nowrap
+        }
+        .card-header h2 { font-size: 14px; color: #ffaa44; font-weight: 900; flex: 1 }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .cell { position: relative; overflow: hidden; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 6px; right: 8px;
+            background: linear-gradient(135deg, #ff8844, #cc6622);
+            color: #fff; font-size: 12px; font-weight: 900;
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,0.95);
+            border: 2px solid #ffaa44; border-radius: 14px;
+            padding: 6px 10px; font-size: 12px; font-weight: 700;
+            line-height: 1.4; text-align: center; max-width: 45%;
+            z-index: 10; color: #333
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 5px solid transparent }
+        .b.d::after { bottom: -12px; left: 20%; border-top-color: #ffaa44 }
+        .b.think {
+            border-style: dashed; border-color: #aaa;
+            background: rgba(255,255,255,0.85); color: #888;
+            font-size: 10px; border-radius: 12px
+        }
+        .b.cry {
+            background: rgba(230,240,255,0.95); border-color: #4488cc;
+            color: #224466; border-radius: 14px
+        }
+        .b.cry::after { border-top-color: #4488cc }
+        .b.guilt {
+            background: rgba(40,35,50,0.9); border-color: #666;
+            color: #ccc; border-radius: 6px
+        }
+        .b.warm {
+            background: rgba(255,250,235,0.95); border-color: #ee9933;
+            color: #885522; border-radius: 14px
+        }
+        .b.warm::after { border-top-color: #ee9933 }
+        .b.relief {
+            background: rgba(240,255,240,0.95); border-color: #66aa66;
+            color: #336633; border-radius: 14px
+        }
+        .n {
+            position: absolute; background: rgba(200,130,50,.85);
+            color: #fff; font-size: 11px; padding: 4px 10px;
+            border-radius: 8px; z-index: 10
+        }
+        .sfx {
+            position: absolute; font-weight: 900; font-size: 16px;
+            color: #ffaa44;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.5);
+            z-index: 10
+        }
+        .card-footer {
+            padding: 6px 12px;
+            background: rgba(30,25,20,0.9);
+            border-top: 1px solid rgba(255,170,68,0.3);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; color: #888
+        }
+        .card-footer .series { color: #ffaa44; font-weight: 700 }
+        .card-footer .lesson { color: #aaa; font-weight: 700 }
+        .tear { position: absolute; font-size: 18px; z-index: 10; animation: tearfall 1.5s ease-in infinite }
+        @keyframes tearfall { 0% { transform: translateY(0); opacity: 1 } 100% { transform: translateY(10px); opacity: 0 } }
+        @media (max-width: 520px) {
+            body { padding: 8px; gap: 10px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 10px; padding: 4px 7px }
+            .b.think { font-size: 9px }
+            .sfx { font-size: 14px }
+            .n { font-size: 9px }
+            .info { font-size: 11px }
+            .card-footer { font-size: 9px }
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        🌅 <b>研修医ハルちゃん 〜親友の彼氏編④〜</b><br>
+        前回のあらすじ：ケンジのスマホからLINE履歴がバレ、ミキに問い詰められたハル。ミキにブロックされ、全てを失った3ヶ月後——
+    </div>
+
+    <!-- コマ① 3ヶ月後、屋上で一人のハル -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🌅 禁断編⑥</span>
+            <h2>3ヶ月後の屋上😭</h2>
+            <span class="tag">🌅 先に泣いたのはミキだった</span>
+        </div>
+        <div class="cell">
+            <div class="num">①</div>
+            <img src="bf4_1.png">
+            <div class="b guilt" style="top:5%;right:4%;max-width:44%">
+                3ヶ月…<br>ミキと話してない…<br>食堂も一人…
+            </div>
+            <div class="b think" style="bottom:15%;left:4%;max-width:42%">
+                （ケンジとは<br>あの日から切った…<br>でも遅すぎた…）
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:12px;color:#888">…ﾌｩ</div>
+            <div class="n" style="bottom:4px;left:4px">※毎日ここに来るのが日課になった</div>
+        </div>
+    </div>
+
+    <!-- コマ② 背後にミキが現れる -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🌅 禁断編⑥</span>
+            <h2>3ヶ月後の屋上😭</h2>
+        </div>
+        <div class="cell">
+            <div class="num">②</div>
+            <img src="bf4_2.png">
+            <div class="b cry d" style="top:5%;left:4%;max-width:42%">
+                …ハル
+            </div>
+            <div class="b think" style="top:5%;right:4%;max-width:44%">
+                （え…？<br>ミキ…！？<br>なんでここに…）
+            </div>
+            <div class="sfx" style="bottom:6%;left:6%;font-size:15px;color:#cc6622">ﾋﾞｸｯ…！</div>
+            <div class="n" style="bottom:4px;left:4px">※ミキの目が真っ赤だった</div>
+        </div>
+    </div>
+
+    <!-- コマ③ ミキが泣きながらハルの胸を叩く -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🌅 禁断編⑥</span>
+            <h2>3ヶ月後の屋上😭</h2>
+        </div>
+        <div class="cell">
+            <div class="num">③</div>
+            <img src="bf4_3.png">
+            <div class="b cry d" style="top:5%;left:4%;max-width:44%">
+                バカ…っ！<br>なんで言って<br>くれなかったの…！<br>ケンジなんかより<br>ハルが大事に<br>決まってんじゃん…！
+            </div>
+            <div class="b warm" style="bottom:15%;right:4%;max-width:42%">
+                ミキ…<br>ごめん…っ<br>ごめんなさい…！
+            </div>
+            <div class="tear" style="top:40%;left:30%">💧</div>
+            <div class="tear" style="top:45%;right:25%">💧</div>
+            <div class="sfx" style="bottom:6%;left:6%;font-size:12px;color:#4488cc">ﾎﾞﾛﾎﾞﾛ…</div>
+            <div class="n" style="bottom:4px;left:4px">※先に泣いたのは、ミキの方だった</div>
+        </div>
+    </div>
+
+    <!-- コマ④ 缶コーヒーを分け合う二人 -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">🌅 禁断編⑥</span>
+            <h2>3ヶ月後の屋上😭</h2>
+        </div>
+        <div class="cell">
+            <div class="num">④</div>
+            <img src="bf4_4.png">
+            <div class="b relief" style="top:5%;right:4%;max-width:44%">
+                …許したわけじゃ<br>ないからね<br>…バカ
+            </div>
+            <div class="b warm" style="top:5%;left:4%;max-width:42%">
+                うん…<br>一生かけて<br>返すから…
+            </div>
+            <div class="b think" style="bottom:15%;right:4%;max-width:42%;border-color:#ee9933;color:#885522">
+                （この缶コーヒー<br>今まで飲んだ中で<br>一番あったかい…）
+            </div>
+            <div class="sfx" style="bottom:6%;left:6%;font-size:11px;color:#ee9933">ﾌﾟｼｭ…☕</div>
+            <div class="n" style="bottom:4px;left:4px">※いつもの二人に、少しずつ戻っていく</div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🌅 研修医ハルちゃん 〜親友の彼氏編④ 完結〜</span>
+            <span class="lesson">☕ 本当の親友は「許す」じゃなく「離れられない」</span>
+        </div>
+    </div>
+
+    <div class="info">
+        😭 親友の彼氏編 — 完結 —<br>
+        <b>友情も恋も、壊すのは一瞬。でも繋がりは、そう簡単に消えない。</b>
+    </div>
+</body>
+</html>
