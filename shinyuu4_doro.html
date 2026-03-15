@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>研修医ハルちゃん💔 3ヶ月後の屋上【ドロドロ版】</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #1a1520 0%, #2a2030 50%, #1a1020 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 12px
+        }
+        .info {
+            font-size: 12px; color: #ccc; text-align: center;
+            max-width: 500px; padding: 10px 12px;
+            background: rgba(255,255,255,0.05); border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1); line-height: 1.6
+        }
+        .info b { color: #ff4466 }
+        .card {
+            width: 500px; max-width: 100%; background: #1e1e28;
+            border-radius: 14px; overflow: hidden;
+            box-shadow: 0 4px 30px rgba(255,60,80,0.15);
+            border: 2px solid rgba(255,60,80,0.3)
+        }
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #2a1520, #3a2028);
+            border-bottom: 2px solid rgba(255,60,80,0.3);
+            display: flex; align-items: center; gap: 8px
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #cc2244, #991133);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700; white-space: nowrap
+        }
+        .card-header h2 { font-size: 14px; color: #ff4466; font-weight: 900; flex: 1 }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .cell { position: relative; overflow: hidden; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 6px; right: 8px;
+            background: linear-gradient(135deg, #cc2244, #991133);
+            color: #fff; font-size: 12px; font-weight: 900;
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,0.95);
+            border: 2px solid #ff4466; border-radius: 14px;
+            padding: 6px 10px; font-size: 12px; font-weight: 700;
+            line-height: 1.4; text-align: center; max-width: 45%;
+            z-index: 10; color: #333
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 5px solid transparent }
+        .b.d::after { bottom: -12px; left: 20%; border-top-color: #ff4466 }
+        .b.think {
+            border-style: dashed; border-color: #aaa;
+            background: rgba(255,255,255,0.85); color: #888;
+            font-size: 10px; border-radius: 12px
+        }
+        .b.guilt {
+            background: rgba(40,30,50,0.9); border-color: #666;
+            color: #ccc; border-radius: 6px
+        }
+        .b.cold {
+            background: rgba(220,230,245,0.95); border-color: #445588;
+            color: #223355; border-radius: 6px
+        }
+        .b.cold::after { border-top-color: #445588 }
+        .b.panic {
+            background: #fff0f0; border-color: #ff0000;
+            color: #cc0000; border-radius: 4px
+        }
+        .b.despair {
+            background: rgba(20,15,30,0.9); border-color: #444;
+            color: #999; border-radius: 6px; font-style: italic
+        }
+        .line-notif {
+            position: absolute; z-index: 10;
+            background: rgba(0,0,0,0.85); border: 2px solid #06c755;
+            border-radius: 12px; padding: 8px 12px;
+            backdrop-filter: blur(4px)
+        }
+        .line-notif .app { font-size: 9px; color: #06c755; font-weight: 900; margin-bottom: 2px }
+        .line-notif .name { font-size: 11px; color: #fff; font-weight: 700 }
+        .line-notif .msg { font-size: 10px; color: #ccc; margin-top: 2px }
+        .line-notif .time { font-size: 8px; color: #888; margin-top: 2px; text-align: right }
+        .sns-post {
+            position: absolute; z-index: 10;
+            background: rgba(255,255,255,0.95); border: 2px solid #e1306c;
+            border-radius: 10px; padding: 6px 10px
+        }
+        .sns-post .user { font-size: 9px; color: #e1306c; font-weight: 900 }
+        .sns-post .caption { font-size: 10px; color: #333; font-weight: 700; margin-top: 2px }
+        .sns-post .likes { font-size: 8px; color: #888; margin-top: 2px }
+        .n {
+            position: absolute; background: rgba(200,30,60,.85);
+            color: #fff; font-size: 11px; padding: 4px 10px;
+            border-radius: 8px; z-index: 10
+        }
+        .sfx {
+            position: absolute; font-weight: 900; font-size: 16px;
+            color: #ff4466;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.5);
+            z-index: 10
+        }
+        .card-footer {
+            padding: 6px 12px;
+            background: rgba(30,20,25,0.9);
+            border-top: 1px solid rgba(255,60,80,0.3);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; color: #888
+        }
+        .card-footer .series { color: #ff4466; font-weight: 700 }
+        .card-footer .lesson { color: #aaa; font-weight: 700 }
+        .glow { animation: glow 1.5s ease-in-out infinite }
+        @keyframes glow { 0%,100% { box-shadow: 0 0 8px rgba(6,199,85,0.4) } 50% { box-shadow: 0 0 20px rgba(6,199,85,0.8) } }
+        .tear { position: absolute; font-size: 18px; z-index: 10; animation: tearfall 1.5s ease-in infinite }
+        @keyframes tearfall { 0% { transform: translateY(0); opacity: 1 } 100% { transform: translateY(10px); opacity: 0 } }
+        @media (max-width: 520px) {
+            body { padding: 8px; gap: 10px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 10px; padding: 4px 7px }
+            .b.think { font-size: 9px }
+            .sfx { font-size: 14px }
+            .n { font-size: 9px }
+            .info { font-size: 11px }
+            .card-footer { font-size: 9px }
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        💔 <b>研修医ハルちゃん 〜親友の彼氏編④ ドロドロ版〜</b><br>
+        前回のあらすじ：LINEの証拠を見せられ、ミキにブロックされたハル。全てを失った3ヶ月後——
+    </div>
+
+    <!-- コマ① ケンジからLINE -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">💔 禁断編⑥</span>
+            <h2>3ヶ月後の屋上💔</h2>
+            <span class="tag">😈 まだ終わらない</span>
+        </div>
+        <div class="cell">
+            <div class="num">①</div>
+            <img src="bf4d_1.png">
+            <div class="line-notif glow" style="top:5%;right:4%;max-width:44%">
+                <div class="app">📱 LINE</div>
+                <div class="name">ケンジ</div>
+                <div class="msg">ミキと別れた。<br>やっぱりハルしか<br>いないって気づいた</div>
+                <div class="time">17:42</div>
+            </div>
+            <div class="b think" style="bottom:15%;left:4%;max-width:42%">
+                （は…？<br>今さら何…？<br>ブロックしたはず<br>なのに…）
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:13px;color:#06c755">ﾌﾞｰ…📱</div>
+            <div class="n" style="bottom:4px;left:4px">※ケンジ、番号変えて送ってきた</div>
+        </div>
+    </div>
+
+    <!-- コマ② ミキが画面を見てしまう -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">💔 禁断編⑥</span>
+            <h2>3ヶ月後の屋上💔</h2>
+        </div>
+        <div class="cell">
+            <div class="num">②</div>
+            <img src="bf4d_2.png">
+            <div class="b cold d" style="top:5%;left:4%;max-width:44%">
+                ハル…<br>許そうと思って<br>探してたのに…<br>…まだやってたんだ
+            </div>
+            <div class="b panic" style="bottom:15%;right:4%;max-width:42%">
+                ち、違うの…！<br>これはケンジが<br>勝手に…！
+            </div>
+            <div class="tear" style="top:35%;left:25%">💧</div>
+            <div class="sfx" style="bottom:6%;left:6%;font-size:14px;color:#cc2244">ｻｯ…</div>
+            <div class="n" style="bottom:4px;left:4px">※最悪のタイミングで画面を見られた</div>
+        </div>
+    </div>
+
+    <!-- コマ③ ミキが冷たく去る -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">💔 禁断編⑥</span>
+            <h2>3ヶ月後の屋上💔</h2>
+        </div>
+        <div class="cell">
+            <div class="num">③</div>
+            <img src="bf4d_3.png">
+            <div class="b cold" style="top:5%;right:4%;max-width:44%">
+                …もういい<br>あんたもケンジも<br>お似合いだよ<br>お幸せにね
+            </div>
+            <div class="b panic" style="bottom:15%;left:4%;max-width:42%">
+                待って…！<br>ミキ…！<br>お願いだから…！
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:13px;color:#445588">ｽﾀｯ ｽﾀｯ ｽﾀｯ…</div>
+            <div class="n" style="bottom:4px;left:4px">※ミキは振り返らなかった</div>
+        </div>
+    </div>
+
+    <!-- コマ④ ミキのSNSにイケメンドクター -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">💔 禁断編⑥</span>
+            <h2>3ヶ月後の屋上💔</h2>
+        </div>
+        <div class="cell">
+            <div class="num">④</div>
+            <img src="bf4d_4.png">
+            <div class="sns-post" style="top:5%;right:4%;max-width:44%">
+                <div class="user">🩺 @miki_nurse_life</div>
+                <div class="caption">新しい彼💕<br>循環器科のセンセイ🥰<br>もう過去は振り返らない✌️</div>
+                <div class="likes">❤️ 234 いいね</div>
+            </div>
+            <div class="b despair" style="bottom:15%;left:4%;max-width:44%">
+                （…ミキはもう<br>前に進んでる…<br>私だけがまだ<br>あの日にいる…）
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:11px;color:#666">ｼﾞﾜｯ…</div>
+            <div class="n" style="bottom:4px;left:4px">※そしてケンジからまたLINEが光る</div>
+        </div>
+        <div class="card-footer">
+            <span class="series">💔 研修医ハルちゃん 〜親友の彼氏編④ ドロドロ版〜</span>
+            <span class="lesson">📱 最悪のタイミングは、いつも向こうからやってくる</span>
+        </div>
+    </div>
+
+    <div class="info">
+        😈 続きが見たかったらいいね＆リポストしてね！<br>
+        次回予告：<b>ケンジの元カノが乗り込んできた 〜全員被害者で全員加害者〜</b> 🔥
+    </div>
+</body>
+</html>
