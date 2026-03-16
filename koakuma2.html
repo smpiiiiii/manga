@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>😈 小悪魔ハル先生② 〜だってミキには似合わないもん〜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #15081a 0%, #25102a 50%, #0a0510 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 12px
+        }
+        .info {
+            font-size: 12px; color: #ccc; text-align: center;
+            max-width: 500px; padding: 10px 12px;
+            background: rgba(255,255,255,0.05); border-radius: 14px;
+            border: 1px solid rgba(180,80,200,0.2); line-height: 1.6
+        }
+        .info b { color: #cc66ff }
+        .info a { color: #cc66ff; text-decoration: none }
+        .card {
+            width: 500px; max-width: 100%; background: #1a1424;
+            border-radius: 14px; overflow: hidden;
+            box-shadow: 0 4px 30px rgba(180,80,200,0.2);
+            border: 2px solid rgba(180,80,200,0.3)
+        }
+        .card-header {
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #201530, #301840);
+            border-bottom: 2px solid rgba(180,80,200,0.3);
+            display: flex; align-items: center; gap: 8px
+        }
+        .card-header .ep {
+            font-size: 11px; color: #fff;
+            background: linear-gradient(135deg, #9933cc, #6622aa);
+            padding: 2px 10px; border-radius: 10px; font-weight: 700; white-space: nowrap
+        }
+        .card-header h2 { font-size: 14px; color: #cc66ff; font-weight: 900; flex: 1 }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .cell { position: relative; overflow: hidden; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num {
+            position: absolute; top: 6px; right: 8px;
+            background: linear-gradient(135deg, #9933cc, #6622aa);
+            color: #fff; font-size: 12px; font-weight: 900;
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10
+        }
+        .b {
+            position: absolute; background: rgba(255,255,255,0.95);
+            border: 2px solid #cc66ff; border-radius: 14px;
+            padding: 6px 10px; font-size: 12px; font-weight: 700;
+            line-height: 1.4; text-align: center; max-width: 45%;
+            z-index: 10; color: #333
+        }
+        .b::after { content: ''; position: absolute; width: 0; height: 0; border: 5px solid transparent }
+        .b.d::after { bottom: -12px; left: 20%; border-top-color: #cc66ff }
+        .b.devil {
+            background: rgba(40,20,50,0.92); border-color: #cc66ff;
+            color: #ddaaff; border-radius: 8px
+        }
+        .b.devil::after { border-top-color: #cc66ff }
+        .b.think {
+            border-style: dashed; border-color: #aaa;
+            background: rgba(255,255,255,0.85); color: #888;
+            font-size: 10px; border-radius: 12px
+        }
+        .b.friend {
+            background: #fff8e0; border-color: #ffaa00;
+            color: #cc7700; border-radius: 50%
+        }
+        .b.friend::after { border-top-color: #ffaa00 }
+        .b.target {
+            background: rgba(230,240,255,0.95); border-color: #4466cc;
+            color: #224488; border-radius: 10px
+        }
+        .b.target::after { border-top-color: #4466cc }
+        .b.smirk {
+            background: rgba(50,20,60,0.95); border-color: #ff44aa;
+            color: #ffaadd; border-radius: 6px; font-style: italic
+        }
+        .n {
+            position: absolute; background: rgba(120,40,160,.85);
+            color: #fff; font-size: 11px; padding: 4px 10px;
+            border-radius: 8px; z-index: 10
+        }
+        .sfx {
+            position: absolute; font-weight: 900; font-size: 16px;
+            color: #cc66ff;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.5);
+            z-index: 10
+        }
+        .card-footer {
+            padding: 6px 12px;
+            background: rgba(25,15,30,0.9);
+            border-top: 1px solid rgba(180,80,200,0.3);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; color: #888
+        }
+        .card-footer .series { color: #cc66ff; font-weight: 700 }
+        .card-footer .lesson { color: #aaa; font-weight: 700 }
+        .sparkle { position: absolute; font-size: 14px; z-index: 10; animation: sparkle 1s ease-in-out infinite }
+        @keyframes sparkle { 0%,100% { opacity: 1; transform: scale(1) } 50% { opacity: 0.5; transform: scale(1.3) } }
+        @media (max-width: 520px) {
+            body { padding: 8px; gap: 10px }
+            .card { border-radius: 12px }
+            .card-header h2 { font-size: 13px }
+            .b { font-size: 10px; padding: 4px 7px }
+            .b.think { font-size: 9px }
+            .sfx { font-size: 14px }
+            .n { font-size: 9px }
+            .info { font-size: 11px }
+            .card-footer { font-size: 9px }
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        😈 <b>小悪魔ハル先生② 〜だってミキには似合わないもん〜</b><br>
+        ※前回、友達の彼氏ケンジのLINEをゲットしたハル。今度はミキのデート服まで奪いにかかる…！<br>
+        <a href="koakuma.html"><b>◀ 前回：「友達の彼氏、もらうね💜」</b></a>
+    </div>
+
+    <!-- コマ① ミキとショッピング、ケンジの好みを探る -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">😈 小悪魔②</span>
+            <h2>だってミキには似合わないもん💜</h2>
+            <span class="tag">😈 計算ショッピング</span>
+        </div>
+        <div class="cell">
+            <div class="num">①</div>
+            <img src="koakuma2_1.png">
+            <div class="b friend d" style="top:5%;right:4%;max-width:44%">
+                ハル〜！<br>今度ケンジとの<br>デートに着て行く<br>ワンピ探してるの💕
+            </div>
+            <div class="b devil" style="bottom:15%;left:4%;max-width:44%">
+                （へぇ…<br>デート服を<br>一緒に選ぶとか…<br>情報収集日和💜）
+            </div>
+            <div class="sparkle" style="top:45%;left:50%">✨</div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:12px;color:#9933cc">ﾆﾔﾘ…</div>
+            <div class="n" style="bottom:4px;left:4px">※小悪魔は「相談」という名の偵察を歓迎する</div>
+        </div>
+    </div>
+
+    <!-- コマ② 店員を味方につけてミキの候補を潰す -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">😈 小悪魔②</span>
+            <h2>だってミキには似合わないもん💜</h2>
+        </div>
+        <div class="cell">
+            <div class="num">②</div>
+            <img src="koakuma2_2.png">
+            <div class="b d" style="top:5%;right:4%;max-width:44%">
+                すみません〜<br>友達に似合う服<br>探してるんですけど…<br>あ、地味めの方が<br>いいかなって♡
+            </div>
+            <div class="b think" style="top:5%;left:4%;max-width:40%">
+                （ミキに<br>「似合う」と言って<br>ダサい方を<br>選ばせる作戦…）
+            </div>
+            <div class="b smirk" style="bottom:15%;left:4%;max-width:44%">
+                （可愛いワンピは<br>全部先に<br>試着しちゃお♡）
+            </div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:13px;color:#ff44aa">ｺｿｯ…♡</div>
+            <div class="n" style="bottom:4px;left:4px">※店員すら味方につける小悪魔テクニック</div>
+        </div>
+    </div>
+
+    <!-- コマ③ 同じワンピを試着して完全勝利 -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">😈 小悪魔②</span>
+            <h2>だってミキには似合わないもん💜</h2>
+        </div>
+        <div class="cell">
+            <div class="num">③</div>
+            <img src="koakuma2_3.png">
+            <div class="b devil d" style="top:5%;left:4%;max-width:44%">
+                ミキ〜！<br>これ着てみたら<br>すっごく<br>可愛かった！<br>…って言えない💜
+            </div>
+            <div class="b friend" style="top:5%;right:4%;max-width:42%">
+                え〜<br>ハルばっかり<br>ずるい〜！<br>それ私も<br>着たかった😤
+            </div>
+            <div class="b smirk" style="bottom:15%;right:4%;max-width:44%">
+                （だってミキには<br>似合わないもん…<br>これ着てケンジに<br>会うの私だから♡）
+            </div>
+            <div class="sparkle" style="bottom:25%;left:15%">✨</div>
+            <div class="sparkle" style="top:35%;right:45%">✨</div>
+            <div class="sfx" style="bottom:6%;left:6%;font-size:11px;color:#cc66ff">ﾌﾌﾝ…♡</div>
+            <div class="n" style="bottom:4px;left:4px">※同じ試着室で格の違いを見せつける</div>
+        </div>
+    </div>
+
+    <!-- コマ④ 帰り道、ケンジに写真を送信 -->
+    <div class="card">
+        <div class="card-header">
+            <span class="ep">😈 小悪魔②</span>
+            <h2>だってミキには似合わないもん💜</h2>
+        </div>
+        <div class="cell">
+            <div class="num">④</div>
+            <img src="koakuma2_4.png">
+            <div class="b friend" style="top:5%;right:4%;max-width:44%">
+                今日は<br>楽しかったね！<br>あ、ケンジから<br>LINE来てる💕
+            </div>
+            <div class="b devil" style="top:5%;left:4%;max-width:44%">
+                （それ…私が<br>試着写真送った<br>返事だよ？♡<br>「超似合う」<br>だってさ💜）
+            </div>
+            <div class="b smirk" style="bottom:15%;left:4%;max-width:44%">
+                ミキの彼氏って<br>マメだね〜♡<br>…私にもね💜
+            </div>
+            <div class="sparkle" style="bottom:25%;right:15%">✨</div>
+            <div class="sfx" style="bottom:6%;right:6%;font-size:12px;color:#ff44aa">ﾌﾌﾌﾌ…♡</div>
+            <div class="n" style="bottom:4px;left:4px">※ミキのデート服選びが完全に裏目に</div>
+        </div>
+        <div class="card-footer">
+            <span class="series">😈 小悪魔ハル先生②</span>
+            <span class="lesson">💜 「似合わないもん」は最強の独占宣言</span>
+        </div>
+    </div>
+
+    <div class="info">
+        😈 続きが見たかったらいいね＆リポストしてね！<br>
+        次回予告：<b>「ケンジさん、ミキより私の方が楽しいでしょ？💜」〜小悪魔の罠〜</b><br>
+        <a href="koakuma.html"><b>◀ 第1話を読む</b></a> ｜ <a href="gallery.html"><b>📖 全作品ギャラリーへ ▶</b></a>
+    </div>
+</body>
+</html>
