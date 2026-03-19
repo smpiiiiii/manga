@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>有能研修医ユウト 第7話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body { font-family: 'Zen Maru Gothic', sans-serif; background: linear-gradient(135deg, #0a0a1a 0%, #1a1a0a 50%, #0d0d1a 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 12px; gap: 16px }
+        .card { width: 500px; max-width: 100%; background: #151515; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(200,170,50,.15); border: 2px solid #d4a017 }
+        .card-header { padding: 10px 14px; background: linear-gradient(135deg, #1a1a10, #151510); border-bottom: 2px solid #d4a017; display: flex; align-items: center; gap: 8px; flex-wrap: wrap }
+        .card-header .ep { font-size: 11px; color: #fff; background: linear-gradient(135deg, #d4a017, #f1c40f); padding: 2px 10px; border-radius: 10px; font-weight: 700 }
+        .card-header h2 { font-size: 15px; color: #f1c40f; font-weight: 900; flex: 1 }
+        .card-header .tag { font-size: 10px; color: #666 }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #2a2a20; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num { position: absolute; top: 3px; right: 4px; background: linear-gradient(135deg, #d4a017, #f1c40f); color: #fff; font-size: 9px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10 }
+        .b { position: absolute; background: rgba(20,20,15,.88); border: 1.5px solid #d4a017; border-radius: 12px; padding: 4px 7px; font-size: 8.5px; font-weight: 700; line-height: 1.45; text-align: center; max-width: 115px; z-index: 10; color: #ddd; backdrop-filter: blur(4px) }
+        .b.think { border-style: dashed; border-color: #555; color: #999; font-size: 7.5px }
+        .b.family { background: rgba(40,30,15,.92); border-color: #f1c40f; color: #ffe680 }
+        .b.cool { background: rgba(20,20,25,.92); border-color: #6c5ce7; color: #a29bfe }
+        .n { position: absolute; background: rgba(212,160,23,.7); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #f1c40f; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; z-index: 10 }
+        .card-footer { padding: 6px 12px; background: linear-gradient(135deg, #1a1a10, #151510); border-top: 1px solid #d4a017; display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: #555; flex-wrap: wrap; gap: 4px }
+        .card-footer .series { color: #f1c40f; font-weight: 700 }
+        .card-footer .lesson { color: #888; font-weight: 700 }
+        .nav { width:500px; max-width:100%; display:flex; justify-content:space-between; align-items:center; padding:8px 0; font-size:12px; font-weight:700 }
+        .nav a { text-decoration:none }
+        @media (max-width: 520px) { body { padding: 8px } .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% } }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep7">
+        <div class="card-header">
+            <span class="ep">第7話</span>
+            <h2>患者の娘さん🏥💛</h2>
+            <span class="tag">🖤 有能研修医シリーズ</span>
+        </div>
+        <div class="grid">
+            <div class="cell"><div class="num">①</div><img src="yuuto7a.png">
+                <div class="b cool" style="bottom:4px;left:4px;max-width:100px;font-size:7.5px">お父様の経過は<br>順調です。<br>ご安心ください</div>
+                <div class="b family" style="bottom:4px;right:4px;max-width:85px;font-size:7px">（この先生…<br>すごく丁寧に<br>説明してくれる…<br>優しい人…）</div>
+                <div class="n" style="top:3px;left:3px">※患者の娘 あかね(24)</div>
+            </div>
+            <div class="cell"><div class="num">②</div><img src="yuuto7b.png">
+                <div class="b cool" style="bottom:4px;left:4px;max-width:95px;font-size:7.5px">…泣かなくて<br>大丈夫ですよ。<br>俺たちが<br>ちゃんと診てますから</div>
+                <div class="b family" style="bottom:4px;right:4px;max-width:85px;font-size:7px">先生…<br>ありがとう…<br>ここに来ると<br>安心する…</div>
+                <div class="sfx" style="top:5px;right:5px;font-size:10px;color:#f1c40f">ｼﾞｰﾝ…</div>
+                <div class="n" style="top:3px;left:3px">※深夜の待合室</div>
+            </div>
+            <div class="cell"><div class="num">③</div><img src="yuuto7c.png">
+                <div class="b cool" style="bottom:4px;left:4px;max-width:100px;font-size:7.5px">…ご飯、<br>ちゃんと食べてますか？<br>付き添いの方が<br>倒れたら困ります</div>
+                <div class="b family" style="bottom:4px;right:4px;max-width:85px;font-size:7px">（先生と二人で<br>こんな遅くにラーメン…<br>なんか…デートみたい…）</div>
+                <div class="sfx" style="top:5px;left:5px;font-size:10px">🍜…</div>
+                <div class="n" style="top:3px;right:3px">※深夜のラーメン屋</div>
+            </div>
+            <div class="cell"><div class="num">④</div><img src="yuuto7d.png">
+                <div class="b think" style="bottom:4px;right:4px;max-width:110px">（翌朝の回診。<br>あかねさんが横にいる。<br>「お父様、順調ですよ」<br>…それだけ。<br>主治医の顔で、通す）</div>
+                <div class="sfx" style="top:5px;left:5px;font-size:10px;color:#a29bfe">ｽｯ…</div>
+                <div class="n" style="top:3px;left:3px">※回診中は完璧な主治医</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">🖤 有能研修医ユウト</span>
+            <span class="lesson">🏥 白衣の信頼感は最強の武器</span>
+        </div>
+    </div>
+    <div class="nav">
+        <a href="yuuto_ep6.html" style="color:#666">← 第6話</a>
+        <a href="gallery.html" style="color:#f1c40f">ギャラリーに戻る →</a>
+    </div>
+</body>
+</html>
