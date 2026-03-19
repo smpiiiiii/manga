@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>チャラ研修医リョウ 第4話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card { width: 500px; max-width: 100%; background: #1e1e30; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,150,255,.2); border: 2px solid #0080ff }
+        .card-header { padding: 10px 14px; background: linear-gradient(135deg, #1a2a4e, #0d1b3e); border-bottom: 2px solid #0080ff; display: flex; align-items: center; gap: 8px; flex-wrap: wrap }
+        .card-header .ep { font-size: 11px; color: #fff; background: linear-gradient(135deg, #0080ff, #00c6ff); padding: 2px 10px; border-radius: 10px; font-weight: 700 }
+        .card-header h2 { font-size: 15px; color: #00c6ff; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #2a3a5e; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num { position: absolute; top: 3px; right: 4px; background: linear-gradient(135deg, #0080ff, #00c6ff); color: #fff; font-size: 9px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10 }
+        .b { position: absolute; background: rgba(255,255,255,.92); border: 1.5px solid #0080ff; border-radius: 14px; padding: 4px 7px; font-size: 8.5px; font-weight: 700; line-height: 1.45; text-align: center; max-width: 115px; z-index: 10; color: #333; backdrop-filter: blur(2px) }
+        .b.think { border-style: dashed; border-color: #aaa; color: #888; font-size: 7.5px }
+        .b.shout { border-radius: 6px; background: rgba(255,230,230,.95); border-color: #e74c3c; color: #c0392b }
+        .b.girl { background: rgba(255,240,245,.95); border-color: #ff6b81; color: #c0392b }
+        .b.smug { background: rgba(230,240,255,.95); border-color: #0080ff; color: #1a3a6e }
+        .b.dark { background: rgba(40,40,60,.95); border-color: #ff4040; color: #ff8080; border-radius: 6px }
+        .n { position: absolute; background: rgba(0,128,255,.8); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #00c6ff; text-shadow: 1px 1px 0 #111, -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111; z-index: 10 }
+        .cover { position:absolute; z-index:10; display:flex; align-items:center; justify-content:center; font-weight:900; text-align:center }
+        .card-footer { padding: 6px 12px; background: linear-gradient(135deg, #1a2a4e, #0d1b3e); border-top: 1px solid #0080ff; display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: #888; flex-wrap: wrap; gap: 4px }
+        .card-footer .series { color: #00c6ff; font-weight: 700 }
+        .card-footer .lesson { color: #ccc; font-weight: 700 }
+        @media (max-width: 520px) { body { padding: 8px } .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% } .sfx { font-size: 12px } .n { font-size: 8px } .card-footer { font-size: 8px } }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep4">
+        <div class="card-header">
+            <span class="ep">第4話</span>
+            <h2>同期の女研修医も…💔</h2>
+            <span class="tag">😎 チャラ研修医シリーズ</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 勉強会デート -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="ryou4a.png">
+                <div class="b smug" style="bottom:35%;right:4px;max-width:100px;font-size:7.5px">
+                    国試対策一緒にやらない？<br>俺のノート見せるよ😊
+                </div>
+                <div class="b girl" style="bottom:4px;left:4px;max-width:85px;font-size:7px">
+                    え…リョウくんの<br>ノートめっちゃ<br>まとまってる…♡
+                </div>
+                <div class="n" style="bottom:3px;right:3px">※同期の美咲(研修医)</div>
+            </div>
+            <!-- コマ② ジャケット作戦 -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="ryou4b.png">
+                <div class="b smug" style="bottom:35%;left:4px;max-width:95px;font-size:7.5px">
+                    寒くない？<br>これ着なよ😉
+                </div>
+                <div class="b girl" style="bottom:4px;right:4px;max-width:90px;font-size:7px">
+                    リョウくんの匂い…<br>やばい…心臓…//♡
+                </div>
+                <div class="sfx" style="top:5px;right:5px;font-size:10px;color:#ff6b81">ﾄﾞｷﾄﾞｷ♡</div>
+                <div class="n" style="bottom:3px;left:3px">※同期のひなた(研修医)</div>
+            </div>
+            <!-- コマ③ 二股 -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="ryou4c.png">
+                <div class="b think" style="top:4px;left:4px;max-width:105px;color:#0080ff">
+                    （美咲とひなた<br>両方いい感じ♪<br>同期だからバレないよね…<br>…たぶん）
+                </div>
+                <div class="sfx" style="bottom:8px;right:5px;font-size:12px;color:#00c6ff">ﾆﾔﾘ😏</div>
+                <div class="n" style="bottom:3px;left:3px">※バレないと思っている男</div>
+            </div>
+            <!-- コマ④ オチ -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="ryou4d.png">
+                <div class="b shout" style="top:4px;left:4px;max-width:95px;font-size:7.5px">
+                    リョウ！！<br>私たち同期LINEグループ<br>あるの知らないの？💢
+                </div>
+                <div class="b shout" style="bottom:30px;right:4px;max-width:95px;font-size:7.5px">
+                    全く同じセリフ<br>スクショ回ってきたよ💢💢
+                </div>
+                <div class="sfx" style="bottom:5px;left:5px;font-size:14px;color:#ff4040">ｵﾜﾀ…</div>
+                <div class="n" style="bottom:3px;left:3px">※同期の結束力を甘く見た男</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">😎 チャラ研修医リョウ</span>
+            <span class="lesson">📱 同期LINEグループの存在を忘れるな</span>
+        </div>
+    </div>
+</body>
+</html>

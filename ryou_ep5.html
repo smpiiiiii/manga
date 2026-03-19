@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>チャラ研修医リョウ 第5話</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 12px; gap: 16px
+        }
+        .card { width: 500px; max-width: 100%; background: #1e1e30; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,150,255,.2); border: 2px solid #0080ff }
+        .card-header { padding: 10px 14px; background: linear-gradient(135deg, #1a2a4e, #0d1b3e); border-bottom: 2px solid #0080ff; display: flex; align-items: center; gap: 8px; flex-wrap: wrap }
+        .card-header .ep { font-size: 11px; color: #fff; background: linear-gradient(135deg, #e84393, #fd79a8); padding: 2px 10px; border-radius: 10px; font-weight: 700 }
+        .card-header h2 { font-size: 15px; color: #fd79a8; font-weight: 900; flex: 1; min-width: 120px }
+        .card-header .tag { font-size: 10px; color: #888 }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr }
+        .cell { position: relative; overflow: hidden; border: 1px solid #2a3a5e; aspect-ratio: 1 }
+        .cell img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .cell .num { position: absolute; top: 3px; right: 4px; background: linear-gradient(135deg, #e84393, #fd79a8); color: #fff; font-size: 9px; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10 }
+        .b { position: absolute; background: rgba(255,255,255,.92); border: 1.5px solid #e84393; border-radius: 14px; padding: 4px 7px; font-size: 8.5px; font-weight: 700; line-height: 1.45; text-align: center; max-width: 115px; z-index: 10; color: #333; backdrop-filter: blur(2px) }
+        .b.think { border-style: dashed; border-color: #aaa; color: #888; font-size: 7.5px }
+        .b.shout { border-radius: 6px; background: rgba(255,230,230,.95); border-color: #e74c3c; color: #c0392b }
+        .b.smug { background: rgba(230,240,255,.95); border-color: #0080ff; color: #1a3a6e }
+        .b.boss { background: rgba(50,20,50,.95); border-color: #e84393; color: #ff80c0; border-radius: 8px }
+        .b.dark { background: rgba(40,40,60,.95); border-color: #ff4040; color: #ff8080; border-radius: 6px }
+        .n { position: absolute; background: rgba(232,67,147,.8); color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 8px; z-index: 10 }
+        .sfx { position: absolute; font-weight: 900; font-size: 14px; color: #fd79a8; text-shadow: 1px 1px 0 #111, -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111; z-index: 10 }
+        .cover { position:absolute; z-index:10; display:flex; align-items:center; justify-content:center; font-weight:900; text-align:center }
+        .card-footer { padding: 6px 12px; background: linear-gradient(135deg, #1a2a4e, #0d1b3e); border-top: 1px solid #e84393; display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: #888; flex-wrap: wrap; gap: 4px }
+        .card-footer .series { color: #fd79a8; font-weight: 700 }
+        .card-footer .lesson { color: #ccc; font-weight: 700 }
+        @media (max-width: 520px) { body { padding: 8px } .b { font-size: 7.5px; padding: 3px 5px; max-width: 48% } .sfx { font-size: 12px } .n { font-size: 8px } .card-footer { font-size: 8px } }
+    </style>
+</head>
+<body>
+    <div class="card" id="ep5">
+        <div class="card-header">
+            <span class="ep">第5話</span>
+            <h2>ラスボス・指導医の先生👩‍⚕️💋</h2>
+            <span class="tag">😎 チャラ研修医シリーズ</span>
+        </div>
+        <div class="grid">
+            <!-- コマ① 指導医に挑む -->
+            <div class="cell">
+                <div class="num">①</div>
+                <img src="ryou5a.png">
+                <div class="b smug" style="bottom:35%;left:4px;max-width:100px;font-size:7.5px">
+                    桜庭先生って<br>いつもキレイですよね…<br>僕、尊敬してます✨
+                </div>
+                <div class="b boss" style="bottom:4px;right:4px;max-width:90px;font-size:7px">
+                    …ふーん。<br>あなたが噂の<br>チャラ研修医ね🙄
+                </div>
+                <div class="n" style="bottom:3px;left:3px">※指導医 桜庭先生(35) 最強の女</div>
+            </div>
+            <!-- コマ② いつもの手が通用しない -->
+            <div class="cell">
+                <div class="num">②</div>
+                <img src="ryou5b.png">
+                <div class="b smug" style="bottom:35%;right:4px;max-width:95px;font-size:7.5px">
+                    コーヒー<br>お持ちしました…！<br>いつもお疲れさまです☕
+                </div>
+                <div class="b boss" style="bottom:4px;left:4px;max-width:95px;font-size:7px">
+                    あら、ありがと。<br>でも私ブラック派。<br>調査不足ね💅
+                </div>
+                <div class="sfx" style="top:5px;left:5px;font-size:10px;color:#ff4040">ｸﾞｻｯ</div>
+                <div class="n" style="bottom:3px;right:3px">※カフェラテ戦法、効かず</div>
+            </div>
+            <!-- コマ③ 逆に攻められる -->
+            <div class="cell">
+                <div class="num">③</div>
+                <img src="ryou5c.png">
+                <div class="b boss" style="bottom:35%;left:4px;max-width:100px;font-size:7.5px">
+                    リョウくん♡<br>今度二人で<br>飲みに行かない？<br>…教えてあげたいこと<br>あるの🥰
+                </div>
+                <div class="b shout" style="bottom:4px;right:4px;max-width:90px;font-size:7.5px">
+                    え…っ<br>俺が攻められてる…!?<br>心臓バクバク…///💦
+                </div>
+                <div class="sfx" style="top:5px;right:5px;font-size:12px;color:#e84393">ﾄﾞｷﾄﾞｷ…</div>
+                <div class="n" style="bottom:3px;left:3px">※ハンターがハントされる瞬間</div>
+            </div>
+            <!-- コマ④ オチ: 完全敗北 -->
+            <div class="cell">
+                <div class="num">④</div>
+                <img src="ryou5d.png">
+                <div class="b boss" style="top:4px;left:4px;max-width:100px;font-size:7.5px">
+                    冗談よ♡<br>あなたレベルじゃ<br>私は落とせないわ。<br>まず論文5本書いて<br>出直しなさい💅✨
+                </div>
+                <div class="b dark" style="bottom:30px;right:4px;max-width:95px;font-size:7.5px">
+                    …初めて…<br>マジでフラれた…<br>しかもダメ出し付き…💀
+                </div>
+                <div class="sfx" style="bottom:5px;left:5px;font-size:14px;color:#6c5ce7">ﾎﾟﾛﾎﾟﾛ…</div>
+                <div class="n" style="bottom:3px;left:3px">※病院制覇の夢、指導医で終了</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="series">😎 チャラ研修医リョウ</span>
+            <span class="lesson">👩‍⚕️ 大人の女には勝てなかった件</span>
+        </div>
+    </div>
+</body>
+</html>
