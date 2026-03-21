@@ -53,7 +53,6 @@
             text-align: center; margin-top: 24px; padding: 16px;
             font-size: 12px; color: #bbb;
         }
-        .footer a { color: #e84393; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -61,70 +60,57 @@
         <h1>💗 ゆるふわ女医みなみ</h1>
         <p>茶髪ポニテの女医みなみ先生のドタバタ日常4コマ</p>
     </div>
-    <div class="grid">
-        <a class="ep-card" href="yurufuwa_ep1.html">
-            <iframe src="yurufuwa_ep1.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第1話</span><div class="ep-title">距離感バグってる外来</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep2.html">
-            <iframe src="yurufuwa_ep2.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第2話</span><div class="ep-title">当直中のカップ麺の背徳感</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep3.html">
-            <iframe src="yurufuwa_ep3.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第3話</span><div class="ep-title">健康診断でまさかの…💦</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep4.html">
-            <iframe src="yurufuwa_ep4.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第4話</span><div class="ep-title">夜勤明けのシャワー事件💦</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep5.html">
-            <iframe src="yurufuwa_ep5.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第5話</span><div class="ep-title">病院忘年会のドレス事件👗</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep6.html">
-            <iframe src="yurufuwa_ep6.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第6話</span><div class="ep-title">朝のコーヒー大惨事☕💦</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep7.html">
-            <iframe src="yurufuwa_ep7.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第7話</span><div class="ep-title">患者さんに告白された!?💌</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep8.html">
-            <iframe src="yurufuwa_ep8.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第8話</span><div class="ep-title">雨の日のスケスケ白衣事件☔💦</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep9.html">
-            <iframe src="yurufuwa_ep9.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第9話</span><div class="ep-title">当直室の置き手紙💌</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep10.html">
-            <iframe src="yurufuwa_ep10.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第10話</span><div class="ep-title">当直コール地獄📱💀</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep11.html">
-            <iframe src="yurufuwa_ep11.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第11話</span><div class="ep-title">指導医のヤバい距離感💍</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep12.html">
-            <iframe src="yurufuwa_ep12.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第12話</span><div class="ep-title">スマホの通知📱💔</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep13.html">
-            <iframe src="yurufuwa_ep13.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第13話</span><div class="ep-title">合コンの問診タイム🍷💊</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_ep14.html">
-            <iframe src="yurufuwa_ep14.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">第14話</span><div class="ep-title">初めてのお泊り🏠💕</div></div>
-        </a>
-        <a class="ep-card" href="yurufuwa_happen.html">
-            <iframe src="yurufuwa_happen.html" scrolling="no"></iframe>
-            <div class="ep-info"><span class="ep-num">番外編</span><div class="ep-title">ハプニング編</div></div>
-        </a>
-    </div>
+    <div class="grid" id="ep-grid"></div>
     <div class="footer">
         💗 ゆるふわ女医みなみ ｜ AI生成4コマ漫画
     </div>
+    <script>
+    /**
+     * ★ 投稿済みエピソードだけここに追加 ★
+     * 投稿したら番号を追加するだけ！
+     * 例: [1, 2, 3] → 第1話〜第3話だけ表示
+     * 番外編は 'happen' を追加
+     */
+    const POSTED_EPISODES = [];
+
+    // 全エピソード情報
+    const ALL_EPISODES = [
+        { ep: 1, label: '第1話', title: '距離感バグってる外来', file: 'yurufuwa_ep1.html' },
+        { ep: 2, label: '第2話', title: '当直中のカップ麺の背徳感', file: 'yurufuwa_ep2.html' },
+        { ep: 3, label: '第3話', title: '健康診断でまさかの…💦', file: 'yurufuwa_ep3.html' },
+        { ep: 4, label: '第4話', title: '夜勤明けのシャワー事件💦', file: 'yurufuwa_ep4.html' },
+        { ep: 5, label: '第5話', title: '病院忘年会のドレス事件👗', file: 'yurufuwa_ep5.html' },
+        { ep: 6, label: '第6話', title: '朝のコーヒー大惨事☕💦', file: 'yurufuwa_ep6.html' },
+        { ep: 7, label: '第7話', title: '患者さんに告白された!?💌', file: 'yurufuwa_ep7.html' },
+        { ep: 8, label: '第8話', title: '雨の日のスケスケ白衣事件☔💦', file: 'yurufuwa_ep8.html' },
+        { ep: 9, label: '第9話', title: '当直室の置き手紙💌', file: 'yurufuwa_ep9.html' },
+        { ep: 10, label: '第10話', title: '当直コール地獄📱💀', file: 'yurufuwa_ep10.html' },
+        { ep: 11, label: '第11話', title: '指導医のヤバい距離感💍', file: 'yurufuwa_ep11.html' },
+        { ep: 12, label: '第12話', title: 'スマホの通知📱💔', file: 'yurufuwa_ep12.html' },
+        { ep: 13, label: '第13話', title: '合コンの問診タイム🍷💊', file: 'yurufuwa_ep13.html' },
+        { ep: 14, label: '第14話', title: '初めてのお泊り🏠💕', file: 'yurufuwa_ep14.html' },
+        { ep: 'happen', label: '番外編', title: 'ハプニング編', file: 'yurufuwa_happen.html' },
+    ];
+
+    // 投稿済みだけフィルタして表示
+    const grid = document.getElementById('ep-grid');
+    const toShow = POSTED_EPISODES.length > 0
+        ? ALL_EPISODES.filter(e => POSTED_EPISODES.includes(e.ep))
+        : ALL_EPISODES; // 空の場合は全部表示（初期テスト用）
+
+    toShow.forEach(ep => {
+        const card = document.createElement('a');
+        card.className = 'ep-card';
+        card.href = ep.file;
+        card.innerHTML = `
+            <iframe src="${ep.file}" scrolling="no"></iframe>
+            <div class="ep-info">
+                <span class="ep-num">${ep.label}</span>
+                <div class="ep-title">${ep.title}</div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+    </script>
 </body>
 </html>
