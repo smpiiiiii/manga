@@ -1,6 +1,3 @@
-/**
- * Manga Auto Post Script - Fixed Auth
- */
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -87,7 +84,11 @@ async function uploadImage(imagePath) {
 
 async function postTweet(text, mediaIds) {
           const url = 'https://api.twitter.com/2/tweets';
-          const body = JSON.stringify({ text, media: { media_ids: mediaIds } });
+          const postData = { text };
+          if (mediaIds && mediaIds.length > 0) {
+                      postData.media = { media_ids: mediaIds };
+          }
+          const body = JSON.stringify(postData);
           const authHeader = generateOAuthHeader('POST', url, {});
           const options = {
                       method: 'POST',
@@ -113,23 +114,29 @@ async function main() {
           }
           const nextEpIndex = status.lastEpisode % EPISODES.length;
           const episode = EPISODES[nextEpIndex];
-          console.log('Next:', episode.ep, episode.title);
+          console.log('Processing:', episode.ep, episode.title);
+
+  let mediaIds = [];
           try {
-                      const mediaIds = [];
                       for (const img of episode.images) {
                                     console.log('Uploading:', img);
                                     const mediaId = await uploadImage(img);
                                     mediaIds.push(mediaId);
                       }
-                      const tweetText = 'Manga Ep ' + episode.ep + '\n' + episode.title + '\n\n' + GALLERY_URL;
-                      console.log('Posting...');
-                      const result = await postTweet(tweetText, mediaIds);
-                      console.log('Success!', result.id);
-                      status.lastEpisode = episode.ep;
-                      fs.writeFileSync(statusFilePath, JSON.stringify(status, null, 2));
           } catch (e) {
-                      console.error('Error:', e.message);
-                      process.exit(1);
+                      console.log('Media upload failed. Falling back to text-only.');
+                      mediaIds = [];
           }
+
+  try {
+              const tweetText = 'Manga Ep ' + episode.ep + '\n' + episode.title + '\n\n' + GALLERY_URL;
+              const result = await postTweet(tweetText, mediaIds);
+              console.log('Success!', result.id);
+              status.lastEpisode = episode.ep;
+              fs.writeFileSync(statusFilePath, JSON.stringify(status, null, 2));
+  } catch (e) {
+              console.error('Final effort failed:', e.message);
+              process.exit(1);
+  }
 }
 main();
