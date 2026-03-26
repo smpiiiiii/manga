@@ -98,19 +98,16 @@ async function uploadImage(imagePath) {
   const imageData = fs.readFileSync(imagePath);
   const base64 = imageData.toString('base64');
   const url = 'https://upload.twitter.com/1.1/media/upload.json';
-  const params = { media_data: base64 };
-  const boundary = 'boundary' + crypto.randomBytes(8).toString('hex');
-  
-  let body = '';
-  body += `--${boundary}\r\n`;
-  body += `Content-Disposition: form-data; name="media_data"\r\n\r\n`;
-  body += `${base64}\r\n`;
-  body += `--${boundary}--\r\n`;
 
+  // application/x-www-form-urlencoded形式で送信
+  const body = `media_data=${encodeURIComponent(base64)}`;
+
+  // OAuth署名（media_dataは署名に含めない - 大きすぎるため）
   const authHeader = generateOAuthHeader('POST', url, {});
   const headers = {
     'Authorization': authHeader,
-    'Content-Type': `multipart/form-data; boundary=${boundary}`,
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Length': Buffer.byteLength(body),
   };
 
   const res = await httpRequest('POST', url, headers, body);
