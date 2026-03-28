@@ -17,7 +17,10 @@ jobs:
       - name: Node.jsをセットアップ
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+
+      - name: 依存関係をインストール
+        run: npm install twitter-api-v2
 
       - name: 自動投稿を実行
         env:
@@ -31,6 +34,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add post_history.json
-          git diff --staged --quiet || git commit -m "update post history"
-          git push
+          git add post_status.json || true
+          git diff --staged --quiet || git commit -m "update post status"
+          git push || true

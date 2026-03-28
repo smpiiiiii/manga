@@ -6,8 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
-const https = require('https');
+const { TwitterApi } = require('twitter-api-v2');
 
 // X API設定（GitHub Secretsから取得）
 const API_KEY = process.env.X_API_KEY;
@@ -41,107 +40,13 @@ const EPISODES = [
 // 投稿状態ファイルパス
 const STATUS_FILE = path.join(__dirname, '..', 'post_status.json');
 
-// ===== OAuth 1.0a 署名生成 =====
-function percentEncode(str) {
-  return encodeURIComponent(str)
-    .replace(/!/g, '%21')
-    .replace(/'/g, '%27')
-    .replace(/\(/g, '%28')
-    .replace(/\)/g, '%29')
-    .replace(/\*/g, '%2A');
-}
-
-function generateOAuthHeader(method, url, extraParams = {}) {
-  const oauthParams = {
-    oauth_consumer_key: API_KEY,
-    oauth_nonce: crypto.randomBytes(16).toString('hex'),
-    oauth_signature_method: 'HMAC-SHA1',
-    oauth_timestamp: Math.floor(Date.now() / 1000).toString(),
-    oauth_token: ACCESS_TOKEN,
-    oauth_version: '1.0',
-  };
-  const allParams = { ...oauthParams, ...extraParams };
-  const paramString = Object.keys(allParams).sort()
-    .map(k => `${percentEncode(k)}=${percentEncode(allParams[k].toString())}`)
-    .join('&');
-  const signatureBase = `${method.toUpperCase()}&${percentEncode(url)}&${percentEncode(paramString)}`;
-  const signingKey = `${percentEncode(API_SECRET)}&${percentEncode(ACCESS_SECRET)}`;
-  const signature = crypto.createHmac('sha1', signingKey).update(signatureBase).digest('base64');
-  oauthParams.oauth_signature = signature;
-  return 'OAuth ' + Object.keys(oauthParams).sort()
-    .map(k => `${percentEncode(k)}="${percentEncode(oauthParams[k])}"`)
-    .join(', ');
-}
-
-// ===== HTTPリクエスト =====
-function httpRequest(method, url, headers, body = null) {
-  return new Promise((resolve, reject) => {
-    const urlObj = new URL(url);
-    const options = {
-      hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
-      method,
-      headers,
-    };
-    const req = https.request(options, res => {
-      const chunks = [];
-      res.on('data', chunk => chunks.push(chunk));
-      res.on('end', () => {
-        const data = Buffer.concat(chunks).toString();
-        try { resolve({ status: res.statusCode, data: JSON.parse(data) }); }
-        catch { resolve({ status: res.statusCode, data }); }
-      });
-    });
-    req.on('error', reject);
-    if (body) req.write(body);
-    req.end();
-  });
-}
-
-// ===== 画像アップロード（v1.1 media/upload） =====
-async function uploadImage(imagePath) {
-  const imageData = fs.readFileSync(imagePath);
-  const base64 = imageData.toString('base64');
-  const url = 'https://upload.twitter.com/1.1/media/upload.json';
-
-  // application/x-www-form-urlencoded形式で送信
-  const body = `media_data=${encodeURIComponent(base64)}`;
-
-  // OAuth署名（media_dataは署名に含めない - 大きすぎるため）
-  const authHeader = generateOAuthHeader('POST', url, {});
-  const headers = {
-    'Authorization': authHeader,
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Content-Length': Buffer.byteLength(body),
-  };
-
-  const res = await httpRequest('POST', url, headers, body);
-  if (res.status !== 200 && res.status !== 201) {
-    throw new Error(`画像アップロード失敗 [${res.status}]: ${JSON.stringify(res.data)}`);
-  }
-  return res.data.media_id_string;
-}
-
-// ===== ツイート投稿（v2） =====
-async function postTweet(text, mediaIds = []) {
-  const url = 'https://api.twitter.com/2/tweets';
-  const body = { text };
-  if (mediaIds.length > 0) {
-    body.media = { media_ids: mediaIds };
-  }
-  const jsonBody = JSON.stringify(body);
-  const authHeader = generateOAuthHeader('POST', url);
-  const headers = {
-    'Authorization': authHeader,
-    'Content-Type': 'application/json',
-    'Content-Length': Buffer.byteLength(jsonBody),
-  };
-  const res = await httpRequest('POST', url, headers, jsonBody);
-  if (res.status !== 200 && res.status !== 201) {
-    throw new Error(`投稿失敗 [${res.status}]: ${JSON.stringify(res.data)}`);
-  }
-  return res.data;
-}
+// ===== X APIクライアント（twitter-api-v2ライブラリ使用） =====
+const client = new TwitterApi({
+  appKey: API_KEY,
+  appSecret: API_SECRET,
+  accessToken: ACCESS_TOKEN,
+  accessSecret: ACCESS_SECRET,
+});
 
 // ===== 投稿状態管理 =====
 function loadStatus() {
@@ -187,6 +92,19 @@ async function main() {
 
   console.log('🔑 API認証情報: OK');
 
+  // APIキーの先頭5文字を表示（デバッグ用）
+  console.log(`🔑 API_KEY: ${API_KEY.substring(0, 5)}...`);
+  console.log(`🔑 ACCESS_TOKEN: ${ACCESS_TOKEN.substring(0, 10)}...`);
+
+  // API接続テスト
+  try {
+    const me = await client.v2.me();
+    console.log(`✅ API接続成功! ユーザー: @${me.data.username}`);
+  } catch (err) {
+    console.error(`❌ API接続失敗: ${err.message}`);
+    process.exit(1);
+  }
+
   const mangaDir = path.resolve(__dirname, '..');
   const status = loadStatus();
   const nextIdx = status.lastEpisode % EPISODES.length;
@@ -207,7 +125,7 @@ async function main() {
     for (const imgPath of existingImages.slice(0, 4)) {
       console.log(`⬆️ アップロード中: ${path.basename(imgPath)}`);
       try {
-        const mediaId = await uploadImage(imgPath);
+        const mediaId = await client.v1.uploadMedia(imgPath);
         mediaIds.push(mediaId);
         console.log(`✅ アップロード完了: ${mediaId}`);
       } catch (err) {
@@ -228,8 +146,12 @@ async function main() {
 
   // 投稿
   try {
-    const result = await postTweet(text, mediaIds);
-    console.log(`🎉 投稿成功！ Tweet ID: ${result?.id || 'unknown'}`);
+    const tweetData = { text };
+    if (mediaIds.length > 0) {
+      tweetData.media = { media_ids: mediaIds };
+    }
+    const result = await client.v2.tweet(tweetData);
+    console.log(`🎉 投稿成功！ Tweet ID: ${result.data.id}`);
 
     // 状態更新
     status.lastEpisode = episode.ep;
@@ -237,6 +159,9 @@ async function main() {
     console.log(`📋 状態更新完了 (次回: 第${(episode.ep % EPISODES.length) + 1}話)`);
   } catch (err) {
     console.error(`❌ 投稿エラー: ${err.message}`);
+    if (err.data) {
+      console.error(`📋 詳細: ${JSON.stringify(err.data)}`);
+    }
     process.exit(1);
   }
 }
