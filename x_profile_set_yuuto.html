@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X プロフィールセット - 研修医ユウトの女遊び日記</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box }
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: #0a0a1a; color: #e7e9ea;
+            min-height: 100vh; padding: 16px;
+            display: flex; flex-direction: column; align-items: center; gap: 24px
+        }
+        h1 { color: #a29bfe; font-size: 20px; text-align: center }
+        .section { width: 500px; max-width: 100%; background: #151520; border-radius: 16px; padding: 16px; border: 1px solid #2a2040 }
+        .section h2 { color: #a29bfe; font-size: 14px; margin-bottom: 12px; }
+        .section img { width: 100%; border-radius: 12px; margin-bottom: 8px }
+        .profile-icon img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #6c5ce7 }
+        .label { font-size: 11px; color: #666; margin-bottom: 4px }
+        .save-hint { font-size: 11px; color: #a29bfe; text-align: center; margin-top: 4px }
+        .profile-text {
+            background: #1a1030; border-radius: 12px; padding: 12px;
+            font-size: 13px; line-height: 1.6; white-space: pre-wrap;
+            border: 1px solid #2a2040
+        }
+        .profile-text .name { font-size: 16px; font-weight: 900; color: #fff }
+        .profile-text .handle { color: #666; font-size: 13px }
+        .copy-btn {
+            background: #6c5ce7; color: #fff; border: none;
+            padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            font-weight: 700; cursor: pointer; margin-top: 8px;
+            font-family: inherit
+        }
+        .copy-btn:active { background: #5a4bd6 }
+        .dl-btn {
+            display: inline-block; background: #6c5ce7; color: #fff;
+            padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            font-weight: 700; text-decoration: none; margin-top: 8px;
+            font-family: inherit; text-align: center
+        }
+        .dl-btn:active { background: #5a4bd6 }
+        @media (max-width: 520px) {
+            .section { border-radius: 12px; padding: 12px }
+            .profile-text { font-size: 12px }
+        }
+    </style>
+</head>
+<body>
+    <h1>🖤 X プロフィールセット - ユウト版</h1>
+
+    <!-- プロフ画像 -->
+    <div class="section profile-icon" style="text-align:center">
+        <h2>📷 プロフィール画像（400×400推奨）</h2>
+        <img src="x_profile_yuuto.png">
+        <div class="save-hint">💡 長押し or 右クリックで保存してXに設定</div>
+    </div>
+
+    <!-- ヘッダー画像 -->
+    <div class="section">
+        <h2>🖼️ ヘッダー画像（1500×500推奨）</h2>
+        <img src="x_header_yuuto.png">
+        <div class="save-hint">💡 長押し or 右クリックで保存してXに設定</div>
+    </div>
+
+    <!-- プロフィール文 -->
+    <div class="section">
+        <h2>✍️ プロフィール文（コピペ用）</h2>
+        <div class="profile-text" id="profileText">
+<span class="name">研修医ユウトの女遊び日記🖤</span>
+<span class="handle">@yurufuwa_minami</span>
+
+🖤 有能研修医ユウト(26)の病院恋愛4コマ
+🌙 ナース・薬剤師・事務…全員落とす
+💊 AIで描く大人の医療マンガ
+
+📌 毎日21時投稿｜スクショ&RTどうぞ♡
+🥂 寡黙系イケメン×病院の女性たち
+
+「バレない男の流儀」
+それが研修医ユウトのルール🖤
+
+#研修医ユウトの女遊び日記 #医療マンガ #AI漫画
+        </div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('profileText').innerText).then(()=>this.textContent='✅ コピーしました！')">📋 プロフィール文をコピー</button>
+    </div>
+
+    <!-- ハッシュタグ案 -->
+    <div class="section">
+        <h2>🏷️ 投稿用ハッシュタグ</h2>
+        <div class="profile-text" style="font-size:12px" id="hashtagText">
+#研修医ユウトの女遊び日記
+#医療マンガ
+#AI漫画
+#研修医あるある
+#病院恋愛
+#大人の恋愛
+#4コマ漫画
+#マンガ
+        </div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('hashtagText').innerText).then(()=>this.textContent='✅ コピーしました！')">📋 ハッシュタグをコピー</button>
+    </div>
+</body>
+</html>

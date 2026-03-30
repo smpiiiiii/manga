@@ -1,5 +1,5 @@
 /**
- * ゆるふわ女医みなみ 自動投稿スクリプト
+ * 研修医ユウトの女遊び日記 自動投稿スクリプト
  * GitHub Actionsから毎日21時に実行される
  * 次に投稿すべきエピソードを自動判定し、X（Twitter）に投稿する
  */
@@ -19,22 +19,14 @@ const GALLERY_URL = 'https://smpiiiiii.github.io/manga/gallery.html';
 
 // 投稿対象のエピソード一覧（順番に投稿される）
 const EPISODES = [
-  { ep: 1, title: '距離感バグってる外来', images: ['yf1a.png','yf1b.png','yf1c.png','yf1d.png'], tags: ['外来回'] },
-  { ep: 2, title: '当直中のカップ麺の背徳感', images: ['yf2a.png','yf2b.png','yf2c.png','yf2d.png'], tags: ['当直回'] },
-  { ep: 3, title: '健康診断でまさかの…💦', images: ['yf3a.png','yf3b.png','yf3c.png','yf3d.png'], tags: ['健診回'] },
-  { ep: 4, title: '夜勤明けのシャワー事件💦', images: ['yf4a.png','yf4b.png','yf4c.png','yf4d.png'], tags: ['当直回'] },
-  { ep: 5, title: '病院忘年会のドレス事件👗', images: ['yf5a.png','yf5b.png','yf5c.png','yf5d.png'], tags: ['忘年会回'] },
-  { ep: 6, title: '朝のコーヒー大惨事☕💦', images: ['yf6a.png','yf6b.png','yf6c.png','yf6d.png'], tags: ['日常回'] },
-  { ep: 7, title: '患者さんに告白された!?💌', images: ['yf7a.png','yf7b.png','yf7c.png','yf7d.png'], tags: ['外来回'] },
-  { ep: 8, title: '雨の日のスケスケ白衣事件☔💦', images: ['yf8a.png','yf8b.png','yf8c.png','yf8d.png'], tags: ['日常回'] },
-  { ep: 9, title: '当直室の置き手紙💌', images: ['yf9a.png','yf9b.png','yf9c.png','yf9d.png'], tags: ['当直回'] },
-  { ep: 10, title: '当直コール地獄📱💀', images: ['yf10a.png','yf10b.png','yf10c.png','yf10d.png'], tags: ['当直回'] },
-  { ep: 11, title: '指導医のヤバい距離感💍', images: ['yf11a.png','yf11b.png','yf11c.png','yf11d.png'], tags: ['日常回'] },
-  { ep: 12, title: 'スマホの通知📱💔', images: ['yf12a.png','yf12b.png','yf12c.png','yf12d.png'], tags: ['日常回'] },
-  { ep: 13, title: '合コンの問診タイム🍷💊', images: ['yf13a.png','yf13b.png','yf13c.png','yf13d.png'], tags: ['合コン回'] },
-  { ep: 14, title: '初めてのお泊り🏠💕', images: ['yf14a.png','yf14b.png','yf14c.png','yf14d.png'], tags: ['恋愛回'] },
-  { ep: 15, title: 'お泊まり翌日の首元の秘密🤫', images: ['yf15a.png','yf15b.png','yf15c.png','yf15d.png'], tags: ['恋愛回'] },
-  { ep: 16, title: '白衣のポケットの秘密🍫', images: ['yf16a.png','yf16b.png','yf16c.png','yf16d.png'], tags: ['ドジっ子回'] },
+  { ep: 1, title: '夜勤明けのナースと🌙', images: ['yuuto1a.png','yuuto1b.png','yuuto1c.png','yuuto1d.png'], tags: ['大人'] },
+  { ep: 2, title: '薬剤師との知的な夜💊', images: ['yuuto2a.png','yuuto2b.png','yuuto2c.png','yuuto2d.png'], tags: ['大人'] },
+  { ep: 3, title: '事務の子との週末☕', images: ['yuuto3a.png','yuuto3b.png','yuuto3c.png','yuuto3d.png'], tags: ['大人'] },
+  { ep: 4, title: '同期との当直明け🌅', images: ['yuuto4a.png','yuuto4b.png','yuuto4c.png','yuuto4d.png'], tags: ['大人'] },
+  { ep: 5, title: '指導医との大人の夜🥂', images: ['yuuto5a.png','yuuto5b.png','yuuto5c.png','yuuto5d.png'], tags: ['大人'] },
+  { ep: 6, title: '人妻ナースの秘密💍', images: ['yuuto6a.png','yuuto6b.png','yuuto6c.png','yuuto6d.png'], tags: ['禁断'] },
+  { ep: 7, title: '患者の娘さん🏥', images: ['yuuto7a.png','yuuto7b.png','yuuto7c.png','yuuto7d.png'], tags: ['禁断'] },
+  { ep: 8, title: '同窓会で無双🥂', images: ['yuuto8a.png','yuuto8b.png','yuuto8c.png','yuuto8d.png'], tags: ['大人'] },
 ];
 
 // 投稿状態ファイルパス
@@ -62,15 +54,16 @@ function saveStatus(status) {
 function generateText(episode) {
   const hashtags = [
     '#4コマ漫画',
-    '#ゆるふわ女医みなみ',
+    '#研修医ユウトの女遊び日記',
     '#マンガ',
     '#漫画',
     '#医療マンガ',
+    '#病院恋愛',
     ...episode.tags.map(t => `#${t}`),
   ].join(' ');
 
   return [
-    `🩺 ゆるふわ女医みなみ 第${episode.ep}話`,
+    `🖤 研修医ユウトの女遊び日記 第${episode.ep}話`,
     `「${episode.title}」`,
     ``,
     hashtags,
