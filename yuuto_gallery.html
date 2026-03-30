@@ -3,39 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>有能研修医ユウト - 投稿済みギャラリー</title>
+<title>研修医ユウトの女遊び日記 - 過去作ギャラリー</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box }
 body { background: #0a0a1a; color: #fff; font-family: 'Zen Maru Gothic', sans-serif; padding: 12px; min-height: 100vh }
-h1 { font-size: 20px; text-align: center; margin: 12px 0; background: linear-gradient(135deg, #4bb8ff, #6c5ce7, #a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900 }
-.subtitle { text-align: center; font-size: 11px; color: #888; margin-bottom: 24px }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px }
-.card { background: #1a1a2e; border-radius: 14px; overflow: hidden; text-decoration: none; display: block; color: #fff; border: 1px solid #2a2a4a; transition: transform .2s, box-shadow .2s }
-.card:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(75,184,255,.3); border-color: #4bb8ff }
-.card .title-bar { padding: 10px 12px; background: linear-gradient(135deg, #1a2a4e, #2a1a3e); border-bottom: 1px solid #333; display: flex; align-items: center; gap: 8px }
-.card .ep-badge { font-size: 10px; color: #fff; background: linear-gradient(135deg, #6c5ce7, #4bb8ff); padding: 3px 8px; border-radius: 8px; font-weight: 900; white-space: nowrap; flex-shrink: 0 }
+h1 { font-size: 20px; text-align: center; margin: 12px 0; background: linear-gradient(135deg, #6c5ce7, #a29bfe, #dda0dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900 }
+.subtitle { text-align: center; font-size: 11px; color: #666; margin-bottom: 16px }
+.empty { text-align: center; color: #555; font-size: 13px; margin: 40px 0; padding: 20px }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; max-width: 520px; margin-left: auto; margin-right: auto }
+.card { background: #151520; border-radius: 14px; overflow: hidden; text-decoration: none; display: block; color: #fff; border: 1px solid #2a2040; transition: transform .2s, box-shadow .2s }
+.card:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(108,92,231,.3); border-color: #6c5ce7 }
+.card:active { transform: scale(.97) }
+.card .title-bar { padding: 10px 12px; background: linear-gradient(135deg, #1a1030, #0d0d2e); border-bottom: 1px solid #2a2040; display: flex; align-items: center; gap: 8px }
+.card .ep-badge { font-size: 10px; color: #fff; background: linear-gradient(135deg, #6c5ce7, #a29bfe); padding: 3px 8px; border-radius: 8px; font-weight: 900; white-space: nowrap; flex-shrink: 0 }
 .card .ep-title { font-size: 13px; font-weight: 900; line-height: 1.3; color: #fff }
 .card .info { padding: 8px 12px }
+.card p { font-size: 10px; color: #999; line-height: 1.3 }
 .tag { display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 6px; font-weight: 700; margin-right: 3px; color: #fff }
-.blue { background: #6c5ce7 }
-.empty { text-align: center; padding: 60px 20px; color: #555; font-size: 14px }
-.empty .icon { font-size: 48px; margin-bottom: 16px }
-.footer { text-align: center; font-size: 10px; color: #555; margin: 20px 0; padding: 12px }
-.footer span { color: #4bb8ff }
+.purple { background: #6c5ce7 } .red { background: #e74c3c } .blue { background: #3498db } .pink { background: #e84393 }
+.footer { text-align: center; font-size: 10px; color: #333; margin: 20px 0; padding: 12px }
+.footer span { color: #6c5ce7 }
+.follow-btn { display: block; text-align: center; margin: 16px auto; background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 24px; font-weight: 900; font-size: 14px; max-width: 300px; transition: transform .2s }
+.follow-btn:hover { transform: scale(1.05) }
 </style>
 </head>
 <body>
-<h1>🩺 有能研修医ユウト 投稿済みギャラリー</h1>
-<div class="subtitle">Xに投稿された作品が新しい順に並んでいます</div>
+
+<h1>🖤 研修医ユウトの女遊び日記</h1>
+<div class="subtitle">投稿済みエピソード一覧｜毎日21時更新</div>
+
+<a class="follow-btn" href="https://x.com/yurufuwa_minami" target="_blank">🖤 Xをフォローして最新話をチェック</a>
+
+<!-- GALLERY_START -->
 <div class="grid">
+</div>
+<!-- GALLERY_END -->
 
+<div class="empty" id="emptyMsg">
+🌙 まだエピソードが投稿されていません<br>
+毎日21時に新エピソードが公開されます
 </div>
 
-<div class="empty">
-<div class="icon">📖</div>
-まだ投稿された作品はありません。<br>投稿されると自動的にここに追加されます！
+<div class="footer">
+    <span>🖤</span> 研修医ユウトの女遊び日記 <span>🖤</span><br>
+    AIで描く大人の医療マンガ
 </div>
-<div class="footer"><span>✨</span> AI Generated Manga Collection <span>✨</span></div>
+
+<script>
+// カードが1つでもあれば空メッセージを非表示
+if (document.querySelectorAll('.card').length > 0) {
+    document.getElementById('emptyMsg').style.display = 'none';
+}
+</script>
 </body>
 </html>
