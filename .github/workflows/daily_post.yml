@@ -20,7 +20,12 @@ jobs:
           node-version: '22'
 
       - name: 依存関係をインストール
-        run: npm install twitter-api-v2
+        run: npm install twitter-api-v2 puppeteer
+
+      - name: 日本語フォントをインストール
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra
 
       - name: 自動投稿を実行
         env:
