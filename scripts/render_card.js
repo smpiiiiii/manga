@@ -23,36 +23,65 @@ async function renderCard(htmlFile, outputFile) {
 
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
   });
 
   try {
     const page = await browser.newPage();
 
-    // カードの幅500pxに合わせたビューポート
-    await page.setViewport({ width: 520, height: 800, deviceScaleFactor: 2 });
+    // カード幅500px + 余白。高さはカード全体が入るように大きめに
+    await page.setViewport({ width: 520, height: 1200, deviceScaleFactor: 2 });
 
     // ローカルHTMLファイルを開く
-    await page.goto(`file://${htmlPath}`, { waitUntil: 'networkidle0', timeout: 30000 });
+    const fileUrl = `file://${htmlPath.replace(/\\/g, '/')}`;
+    console.log(`🌐 URL: ${fileUrl}`);
+    await page.goto(fileUrl, { waitUntil: 'load', timeout: 30000 });
+
+    // 全画像の読み込みを待機
+    await page.evaluate(async () => {
+      const images = Array.from(document.querySelectorAll('img'));
+      await Promise.all(images.map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.addEventListener('load', resolve);
+          img.addEventListener('error', resolve);
+        });
+      }));
+    });
 
     // フォントの読み込みを待つ
     await page.evaluateHandle('document.fonts.ready');
-    
-    // 少し待機（画像の読み込み）
-    await new Promise(r => setTimeout(r, 2000));
 
-    // カード要素のスクリーンショットを取得
-    const cardElement = await page.$('.card');
-    if (!cardElement) {
+    // 追加待機（レンダリング安定化）
+    await new Promise(r => setTimeout(r, 3000));
+
+    // カード要素のサイズを取得してログ出力
+    const cardBox = await page.evaluate(() => {
+      const card = document.querySelector('.card');
+      if (!card) return null;
+      const rect = card.getBoundingClientRect();
+      return { width: rect.width, height: rect.height, top: rect.top, left: rect.left };
+    });
+    console.log(`📐 カードサイズ: ${JSON.stringify(cardBox)}`);
+
+    if (!cardBox) {
       throw new Error('カード要素(.card)が見つかりません');
     }
 
+    // パネル数を確認
+    const cellCount = await page.evaluate(() => document.querySelectorAll('.cell').length);
+    console.log(`🖼️ パネル数: ${cellCount}`);
+
+    // カード要素のスクリーンショットを取得
+    const cardElement = await page.$('.card');
     await cardElement.screenshot({
       path: outputFile,
       type: 'png',
     });
 
-    console.log(`📸 レンダリング完了: ${htmlFile} → ${path.basename(outputFile)}`);
+    // 出力ファイルサイズの確認
+    const stat = fs.statSync(outputFile);
+    console.log(`📸 レンダリング完了: ${htmlFile} → ${path.basename(outputFile)} (${Math.round(stat.size/1024)}KB)`);
     return outputFile;
   } finally {
     await browser.close();
