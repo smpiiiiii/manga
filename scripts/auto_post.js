@@ -121,7 +121,14 @@ async function main() {
 
   const mangaDir = path.resolve(__dirname, '..');
   const status = loadStatus();
-  const nextIdx = status.lastEpisode % EPISODES.length;
+
+  // 全話投稿済みなら新作待ちでスキップ
+  if (status.lastEpisode >= EPISODES.length) {
+    console.log(`📭 全${EPISODES.length}話投稿済み。新作が追加されるまでスキップします`);
+    process.exit(0);
+  }
+
+  const nextIdx = status.lastEpisode;
   const episode = EPISODES[nextIdx];
 
   console.log(`📖 次の投稿: 第${episode.ep}話「${episode.title}」`);
