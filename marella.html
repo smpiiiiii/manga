@@ -10,8 +10,9 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
-      width: 1080px;
-      height: 1080px;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       background: #0a0a0a;
       font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
@@ -47,9 +48,9 @@
 
     .brand-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 88px;
+      font-size: clamp(36px, 12vw, 88px);
       font-weight: 300;
-      letter-spacing: 28px;
+      letter-spacing: clamp(8px, 3vw, 28px);
       color: #d4c5a9;
       text-transform: uppercase;
       opacity: 0;
@@ -66,9 +67,9 @@
 
     .brand-tagline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
+      font-size: clamp(10px, 2.5vw, 18px);
       font-weight: 300;
-      letter-spacing: 12px;
+      letter-spacing: clamp(4px, 1.5vw, 12px);
       color: rgba(200, 170, 120, 0.6);
       font-style: italic;
       opacity: 0;
@@ -85,9 +86,9 @@
 
     .renewal-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 72px;
+      font-size: clamp(28px, 9vw, 72px);
       font-weight: 300;
-      letter-spacing: 18px;
+      letter-spacing: clamp(6px, 2vw, 18px);
       color: #2a2520;
       opacity: 0;
       animation: fadeInScale 1.5s ease-out 5.5s forwards;
@@ -95,9 +96,9 @@
 
     .renewal-sub {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
+      font-size: clamp(11px, 2.5vw, 20px);
       font-weight: 400;
-      letter-spacing: 8px;
+      letter-spacing: clamp(3px, 1vw, 8px);
       color: #8a7d6b;
       opacity: 0;
       animation: fadeIn 1.2s ease-out 6.2s forwards;
@@ -112,9 +113,9 @@
 
     .date-badge {
       font-family: 'Montserrat', sans-serif;
-      font-size: 52px;
+      font-size: clamp(28px, 8vw, 52px);
       font-weight: 200;
-      letter-spacing: 6px;
+      letter-spacing: clamp(3px, 1vw, 6px);
       color: #2a2520;
       opacity: 0;
       animation: fadeInUp 1.2s ease-out 6.8s forwards;
@@ -180,7 +181,7 @@
       z-index: 10;
       text-align: center;
       background: rgba(245, 240, 234, 0.92);
-      padding: 30px 60px;
+      padding: clamp(15px, 4vw, 30px) clamp(25px, 6vw, 60px);
       backdrop-filter: blur(4px);
       opacity: 0;
       animation: fadeIn 1s ease-out 12s forwards;
@@ -188,9 +189,9 @@
 
     .grid-overlay h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
+      font-size: clamp(16px, 4vw, 28px);
       font-weight: 300;
-      letter-spacing: 10px;
+      letter-spacing: clamp(4px, 1.5vw, 10px);
       color: #2a2520;
     }
 
@@ -248,17 +249,17 @@
 
     .fs-text {
       position: absolute;
-      bottom: 60px; left: 60px;
+      bottom: clamp(20px, 6vw, 60px); left: clamp(20px, 6vw, 60px);
       z-index: 3;
       opacity: 0;
     }
 
     .fs-text h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: clamp(18px, 5vw, 32px);
       font-weight: 300;
       color: #f5f0ea;
-      letter-spacing: 8px;
+      letter-spacing: clamp(3px, 1vw, 8px);
     }
 
     .fs-text p {
@@ -297,9 +298,9 @@
 
     .end-brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 80px;
+      font-size: clamp(32px, 10vw, 80px);
       font-weight: 300;
-      letter-spacing: 24px;
+      letter-spacing: clamp(8px, 3vw, 24px);
       color: #d4c5a9;
       opacity: 0;
       animation: fadeIn 2s ease-out 25s forwards;
@@ -315,9 +316,9 @@
 
     .end-renewal {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 36px;
+      font-size: clamp(16px, 5vw, 36px);
       font-weight: 300;
-      letter-spacing: 14px;
+      letter-spacing: clamp(4px, 1.5vw, 14px);
       color: #d4c5a9;
       opacity: 0;
       animation: fadeIn 1.5s ease-out 26.5s forwards;
@@ -325,9 +326,9 @@
 
     .end-date {
       font-family: 'Montserrat', sans-serif;
-      font-size: 60px;
+      font-size: clamp(32px, 9vw, 60px);
       font-weight: 200;
-      letter-spacing: 8px;
+      letter-spacing: clamp(3px, 1vw, 8px);
       color: #f5f0ea;
       opacity: 0;
       animation: fadeInUp 1.5s ease-out 27s forwards;
