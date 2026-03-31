@@ -28,6 +28,8 @@ const EPISODES = [
   { ep: 6, title: '人妻ナースの秘密💍', htmlFile: 'yuuto_ep6.html', tags: ['禁断'] },
   { ep: 7, title: '患者の娘さん🏥', htmlFile: 'yuuto_ep7.html', tags: ['禁断'] },
   { ep: 8, title: '同窓会で無双🥂', htmlFile: 'yuuto_ep8.html', tags: ['大人'] },
+  { ep: 9, title: '研修最終日の告白ラッシュ💌', htmlFile: 'yuuto_ep9.html', tags: ['大人'] },
+  { ep: 10, title: '合コンで女医と遭遇🍻', htmlFile: 'yuuto_ep10.html', tags: ['大人'] },
 ];
 
 // 投稿状態ファイルパス
