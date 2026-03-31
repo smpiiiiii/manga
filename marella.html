@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARELLA - Renewal Open</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&family=Noto+Sans+JP:wght@100;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === リセット & ベース === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      background: #0a0a0a;
+      font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    }
+
+    /* === シーン共通 === */
+    .scene {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    /* === シーン1: オープニング（ブランドロゴ） === */
+    .scene-1 {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a18 50%, #0a0a0a 100%);
+      animation: scene1 5s ease-in-out forwards;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .scene-1::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, rgba(200, 170, 120, 0.08) 0%, transparent 70%);
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 88px;
+      font-weight: 300;
+      letter-spacing: 28px;
+      color: #d4c5a9;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeInUp 2s ease-out 0.8s forwards;
+      text-shadow: 0 0 40px rgba(212, 197, 169, 0.15);
+    }
+
+    .brand-line {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c8aa78, transparent);
+      animation: expandLine 1.8s ease-out 1.5s forwards;
+    }
+
+    .brand-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 12px;
+      color: rgba(200, 170, 120, 0.6);
+      font-style: italic;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out 2.2s forwards;
+    }
+
+    /* === シーン2: RENEWAL OPEN テキスト === */
+    .scene-2 {
+      background: #f5f0ea;
+      animation: scene2 5s ease-in-out 4.5s forwards;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .renewal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 300;
+      letter-spacing: 18px;
+      color: #2a2520;
+      opacity: 0;
+      animation: fadeInScale 1.5s ease-out 5.5s forwards;
+    }
+
+    .renewal-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 8px;
+      color: #8a7d6b;
+      opacity: 0;
+      animation: fadeIn 1.2s ease-out 6.2s forwards;
+    }
+
+    .renewal-line-h {
+      width: 0;
+      height: 1px;
+      background: #c8aa78;
+      animation: expandLine 1.5s ease-out 5.8s forwards;
+    }
+
+    .date-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 52px;
+      font-weight: 200;
+      letter-spacing: 6px;
+      color: #2a2520;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out 6.8s forwards;
+    }
+
+    .date-badge span {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      vertical-align: middle;
+      margin-left: 8px;
+      color: #8a7d6b;
+    }
+
+    /* === シーン3: 写真スライドショー（グリッド） === */
+    .scene-3 {
+      background: #f5f0ea;
+      animation: scene3 7s ease-in-out 9s forwards;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      width: 100%;
+      height: 100%;
+      gap: 4px;
+      padding: 4px;
+    }
+
+    .photo-cell {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.15);
+      animation: photoReveal 2s ease-out forwards;
+    }
+
+    .photo-cell:nth-child(1) img { animation-delay: 9.8s; }
+    .photo-cell:nth-child(2) img { animation-delay: 10.3s; }
+    .photo-cell:nth-child(3) img { animation-delay: 10.8s; }
+    .photo-cell:nth-child(4) img { animation-delay: 11.3s; }
+
+    .photo-cell::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(200, 170, 120, 0.1) 0%, transparent 50%);
+    }
+
+    .grid-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      background: rgba(245, 240, 234, 0.92);
+      padding: 30px 60px;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      animation: fadeIn 1s ease-out 12s forwards;
+    }
+
+    .grid-overlay h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 10px;
+      color: #2a2520;
+    }
+
+    .grid-overlay p {
+      font-size: 12px;
+      letter-spacing: 6px;
+      color: #8a7d6b;
+      margin-top: 8px;
+      font-weight: 300;
+    }
+
+    /* === シーン4: フルスクリーン写真スライド === */
+    .scene-4 {
+      background: #0a0a0a;
+      animation: scene4 8s ease-in-out 16s forwards;
+    }
+
+    .fullscreen-slides {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .fs-slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0;
+    }
+
+    .fs-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85) contrast(1.05);
+    }
+
+    .fs-slide:nth-child(1) {
+      animation: kenBurns1 4s ease-in-out 16.5s forwards;
+    }
+    .fs-slide:nth-child(2) {
+      animation: kenBurns2 4s ease-in-out 18.5s forwards;
+    }
+    .fs-slide:nth-child(3) {
+      animation: kenBurns3 4s ease-in-out 20.5s forwards;
+    }
+
+    .fs-slide-overlay {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 40%;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.7), transparent);
+      z-index: 2;
+    }
+
+    .fs-text {
+      position: absolute;
+      bottom: 60px; left: 60px;
+      z-index: 3;
+      opacity: 0;
+    }
+
+    .fs-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: #f5f0ea;
+      letter-spacing: 8px;
+    }
+
+    .fs-text p {
+      font-size: 13px;
+      color: rgba(245, 240, 234, 0.6);
+      letter-spacing: 4px;
+      font-weight: 200;
+      margin-top: 8px;
+    }
+
+    .fs-slide:nth-child(1) .fs-text {
+      animation: fadeInUp 1.5s ease-out 17s forwards;
+    }
+    .fs-slide:nth-child(2) .fs-text {
+      animation: fadeInUp 1.5s ease-out 19s forwards;
+    }
+    .fs-slide:nth-child(3) .fs-text {
+      animation: fadeInUp 1.5s ease-out 21s forwards;
+    }
+
+    /* === シーン5: エンディング === */
+    .scene-5 {
+      background: linear-gradient(135deg, #1a1814 0%, #2a2520 50%, #1a1814 100%);
+      animation: scene5 8s ease-in-out 24s forwards;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .scene-5::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, rgba(200, 170, 120, 0.1) 0%, transparent 60%);
+    }
+
+    .end-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 300;
+      letter-spacing: 24px;
+      color: #d4c5a9;
+      opacity: 0;
+      animation: fadeIn 2s ease-out 25s forwards;
+      text-shadow: 0 0 60px rgba(212, 197, 169, 0.15);
+    }
+
+    .end-line {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c8aa78, transparent);
+      animation: expandLine 2s ease-out 25.8s forwards;
+    }
+
+    .end-renewal {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      letter-spacing: 14px;
+      color: #d4c5a9;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out 26.5s forwards;
+    }
+
+    .end-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 60px;
+      font-weight: 200;
+      letter-spacing: 8px;
+      color: #f5f0ea;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease-out 27s forwards;
+    }
+
+    .end-date small {
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      vertical-align: middle;
+      margin-left: 12px;
+      color: #c8aa78;
+    }
+
+    .end-info {
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out 28s forwards;
+    }
+
+    .end-info p {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      color: rgba(212, 197, 169, 0.6);
+      line-height: 2;
+    }
+
+    /* === 装飾パーティクル === */
+    .particles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(200, 170, 120, 0.4);
+      border-radius: 50%;
+      animation: particleFloat linear infinite;
+    }
+
+    /* === 金のフレーム装飾 === */
+    .frame-border {
+      position: fixed;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    .frame-top, .frame-bottom {
+      left: 30px; right: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200, 170, 120, 0.3), transparent);
+    }
+    .frame-top { top: 30px; }
+    .frame-bottom { bottom: 30px; }
+    
+    .frame-left, .frame-right {
+      top: 30px; bottom: 30px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(200, 170, 120, 0.3), transparent);
+    }
+    .frame-left { left: 30px; }
+    .frame-right { right: 30px; }
+
+    /* === キーフレームアニメーション === */
+    @keyframes scene1 {
+      0%   { opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes scene2 {
+      0%   { opacity: 0; }
+      8%   { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes scene3 {
+      0%   { opacity: 0; }
+      6%   { opacity: 1; }
+      88%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes scene4 {
+      0%   { opacity: 0; }
+      5%   { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes scene5 {
+      0%   { opacity: 0; }
+      10%  { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes expandLine {
+      to { width: 200px; }
+    }
+
+    @keyframes photoReveal {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes kenBurns1 {
+      0%   { opacity: 0; transform: scale(1); }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.08); }
+    }
+
+    @keyframes kenBurns2 {
+      0%   { opacity: 0; transform: scale(1.05); }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; transform: scale(1); }
+    }
+
+    @keyframes kenBurns3 {
+      0%   { opacity: 0; transform: scale(1); }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.1); }
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-20px) translateX(40px);
+        opacity: 0;
+      }
+    }
+
+    /* === リプレイボタン === */
+    .replay-btn {
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      z-index: 9999;
+      background: rgba(200, 170, 120, 0.15);
+      border: 1px solid rgba(200, 170, 120, 0.4);
+      color: #d4c5a9;
+      padding: 12px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 30s forwards;
+      transition: background 0.3s;
+    }
+
+    .replay-btn:hover {
+      background: rgba(200, 170, 120, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 金のフレーム装飾 -->
+  <div class="frame-border frame-top"></div>
+  <div class="frame-border frame-bottom"></div>
+  <div class="frame-border frame-left"></div>
+  <div class="frame-border frame-right"></div>
+
+  <!-- パーティクル -->
+  <div class="particles" id="particles"></div>
+
+  <!-- シーン1: ブランドロゴ オープニング -->
+  <div class="scene scene-1" id="scene1">
+    <div class="brand-name">MARELLA</div>
+    <div class="brand-line"></div>
+    <div class="brand-tagline">Italian Elegance Since 1976</div>
+  </div>
+
+  <!-- シーン2: RENEWAL OPEN -->
+  <div class="scene scene-2" id="scene2">
+    <div class="renewal-sub">— NEW CHAPTER —</div>
+    <div class="renewal-line-h"></div>
+    <div class="renewal-text">RENEWAL OPEN</div>
+    <div class="date-badge">4.10<span>THU</span></div>
+  </div>
+
+  <!-- シーン3: 4枚グリッド -->
+  <div class="scene scene-3" id="scene3">
+    <div class="photo-grid">
+      <div class="photo-cell">
+        <img src="marella-images/media__1774970102022.jpg" alt="コーディネート">
+      </div>
+      <div class="photo-cell">
+        <img src="marella-images/media__1774970054709.jpg" alt="コレクション">
+      </div>
+      <div class="photo-cell">
+        <img src="marella-images/media__1774970077748.jpg" alt="コレクション">
+      </div>
+      <div class="photo-cell">
+        <img src="marella-images/media__1774970022214.jpg" alt="コレクション">
+      </div>
+    </div>
+    <div class="grid-overlay">
+      <h2>NEW COLLECTION</h2>
+      <p>SPRING / SUMMER 2026</p>
+    </div>
+  </div>
+
+  <!-- シーン4: フルスクリーンスライド -->
+  <div class="scene scene-4" id="scene4">
+    <div class="fullscreen-slides">
+      <div class="fs-slide">
+        <img src="marella-images/media__1774970422971.jpg" alt="ディテール">
+        <div class="fs-slide-overlay"></div>
+        <div class="fs-text">
+          <h3>TIMELESS DETAIL</h3>
+          <p>CRAFTED IN ITALY</p>
+        </div>
+      </div>
+      <div class="fs-slide">
+        <img src="marella-images/media__1774970460861.jpg" alt="スタイリング">
+        <div class="fs-slide-overlay"></div>
+        <div class="fs-text">
+          <h3>EFFORTLESS STYLE</h3>
+          <p>CONTEMPORARY ELEGANCE</p>
+        </div>
+      </div>
+      <div class="fs-slide">
+        <img src="marella-images/media__1774970482759.jpg" alt="デニム">
+        <div class="fs-slide-overlay"></div>
+        <div class="fs-text">
+          <h3>NEW ARRIVALS</h3>
+          <p>DISCOVER THE COLLECTION</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- シーン5: エンディング -->
+  <div class="scene scene-5" id="scene5">
+    <div class="end-brand">MARELLA</div>
+    <div class="end-line"></div>
+    <div class="end-renewal">RENEWAL OPEN</div>
+    <div class="end-date">4.10<small>THU</small></div>
+    <div class="end-info">
+      <p>新しくなったMARELLAで</p>
+      <p>イタリアの美をお届けします</p>
+    </div>
+  </div>
+
+  <!-- リプレイボタン -->
+  <button class="replay-btn" onclick="location.reload()">▶ REPLAY</button>
+
+  <script>
+    // パーティクル生成
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const count = 20;
+      
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (8 + Math.random() * 12) + 's';
+        particle.style.animationDelay = (Math.random() * 30) + 's';
+        particle.style.width = (1 + Math.random() * 3) + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.opacity = 0.1 + Math.random() * 0.3;
+        container.appendChild(particle);
+      }
+    }
+    
+    createParticles();
+  </script>
+</body>
+</html>
