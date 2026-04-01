@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ユウト - プロモーション動画</title>
+  <style>
+    body {margin:0;padding:0;overflow:hidden;background:#0a0a0a;display:flex;justify-content:center;align-items:center;}
+    .slide {position:absolute;width:100vw;height:100vh;opacity:0;object-fit:cover;}
+    @keyframes fadeInOut1 {0%{opacity:0;}5%{opacity:1;}30%{opacity:1;}35%{opacity:0;}}
+    @keyframes fadeInOut2 {0%{opacity:0;}35%{opacity:0;}40%{opacity:1;}65%{opacity:1;}70%{opacity:0;}}
+    @keyframes fadeInOut3 {0%{opacity:0;}70%{opacity:0;}75%{opacity:1;}95%{opacity:1;}100%{opacity:0;}}
+    @keyframes fadeInOut4 {0%{opacity:0;}95%{opacity:0;}100%{opacity:1;}}
+    #img1 {animation: fadeInOut1 20s linear infinite;}
+    #img2 {animation: fadeInOut2 20s linear infinite;}
+    #img3 {animation: fadeInOut3 20s linear infinite;}
+    #img4 {animation: fadeInOut4 20s linear infinite;}
+  </style>
+</head>
+<body>
+  <img id="img1" class="slide" src="yuuto10a.png" alt="シーン1">
+  <img id="img2" class="slide" src="yuuto10b.png" alt="シーン2">
+  <img id="img3" class="slide" src="yuuto10c.png" alt="シーン3">
+  <img id="img4" class="slide" src="yuuto10d.png" alt="シーン4">
+</body>
+</html>
