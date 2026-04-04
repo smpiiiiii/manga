@@ -1,11 +1,11 @@
 name: 毎日21時にマンガ投稿
 
 on:
-  schedule:
-    # 毎日12:00 UTC = 日本時間21:00
-    - cron: '0 12 * * *'
+  # schedule:
+  #   # 毎日12:00 UTC = 日本時間21:00（垢バンにつき一時停止）
+  #   - cron: '0 12 * * *'
   workflow_dispatch:
-    # 手動実行も可能
+    # 手動実行のみ（再開時にscheduleのコメントを外す）
 
 jobs:
   post-manga:
